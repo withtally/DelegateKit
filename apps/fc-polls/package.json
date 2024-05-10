@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "tsc"
   },
   "dependencies": {
     "@farcaster/hub-nodejs": "^0.11.11",
