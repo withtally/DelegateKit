@@ -20,26 +20,31 @@ Track our progress on [Charmverse](https://app.charmverse.io/op-grants/delegatek
 To get started with DelegateKit, follow these steps:
 
 1. Clone the repository:
+
    ```
    git clone https://github.com/withtally/delegatekit.git
    ```
 
 2. Install the necessary dependencies:
+
    ```
    cd delegatekit
    npm install
    ```
 
 3. Set up your environment variables:
+
    - Create a `.env` file in the root directory.
    - Add the required environment variables (e.g., API keys, contract addresses).
 
 4. Deploy the DelegateKit smart contracts:
+
    ```
    npm run deploy
    ```
 
 5. Start the DelegateKit backend:
+
    ```
    npm run start
    ```
@@ -72,6 +77,5 @@ If you have any questions, suggestions, or feedback, please reach out to us at:
 
 - Twitter: [@tallyxyz](https://twitter.com/tallyxyz)
 - Farcaster: [Dawson](https://warpcast.com/daws)
-
 
 We appreciate your interest in DelegateKit and look forward to building a more accessible and transparent governance experience together!

@@ -2,8 +2,8 @@
 
 import { kv } from "@vercel/kv";
 import { revalidatePath } from "next/cache";
-import { Poll, POLL_EXPIRY } from "./types";
 import { redirect } from "next/navigation";
+import { Poll, POLL_EXPIRY } from "./types";
 
 export async function savePoll(poll: Poll, formData: FormData) {
   let newPoll = {

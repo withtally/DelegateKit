@@ -1,10 +1,10 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import sharp from "sharp";
 import { Poll } from "@/app/types";
 import { kv } from "@vercel/kv";
-import satori from "satori";
-import { join } from "path";
 import * as fs from "fs";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { join } from "path";
+import satori from "satori";
+import sharp from "sharp";
 
 const fontPath = join(process.cwd(), "Roboto-Regular.ttf");
 let fontData = fs.readFileSync(fontPath);
