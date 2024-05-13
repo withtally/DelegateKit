@@ -84,6 +84,7 @@ export default async function handler(
           {pollData.options.map((opt, index) => {
             return (
               <div
+                key={opt.text}
                 style={{
                   backgroundColor: showResults ? "#007bff" : "",
                   color: "#fff",

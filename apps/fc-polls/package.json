@@ -5,7 +5,7 @@
     "lint": "next lint",
     "build": "next build",
     "start": "next start",
-    "test": "tsc"
+    "test": "concurrently \"npm:lint\" \"npm:build\""
   },
   "dependencies": {
     "@farcaster/hub-nodejs": "^0.11.11",
@@ -29,6 +29,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "eslint": "8.57.0",
     "eslint-config-next": "14.2.3",
     "typescript-eslint": "^7.8.0"
