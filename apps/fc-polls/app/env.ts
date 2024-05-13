@@ -1,3 +1,4 @@
+/* eslint-disable no-process-env */
 import { z } from "zod";
 const VERCEL_URL = process.env.VERCEL_URL;
 console.log({
