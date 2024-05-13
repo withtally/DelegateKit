@@ -1,0 +1,29 @@
+{
+  "name": "delegatekit",
+  "version": "0.0.0",
+  "description": "DelegateKit is a powerful tool designed to enhance Optimism governance participation by leveraging the Farcaster Social Graph. Our mission is to position Farcaster as the hub of DAO participation, offering a seamless and accessible governance experience across the Superchain ecosystem.",
+  "private": true,
+  "prettier": {
+    "plugins": [
+      "prettier-plugin-organize-imports"
+    ]
+  },
+  "lint-staged": {
+    "*": [
+      "prettier --ignore-unknown --write"
+    ]
+  },
+  "scripts": {
+    "prepare": "husky || true",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "prettier-plugin-organize-imports": "^3.2.4"
+  }
+}
