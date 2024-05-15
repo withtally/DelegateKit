@@ -6,7 +6,7 @@ import Head from "next/head";
 import { env } from "../../env";
 
 async function getPoll(id: string): Promise<Poll> {
-  let nullPoll = {
+  const nullPoll = {
     id: "",
     title: "No poll found",
     option1: "",
@@ -21,7 +21,7 @@ async function getPoll(id: string): Promise<Poll> {
   };
 
   try {
-    let poll: Poll | null = await kv.hgetall(`poll:${id}`);
+    const poll: Poll | null = await kv.hgetall(`poll:${id}`);
 
     if (!poll) {
       return nullPoll;

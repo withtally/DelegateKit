@@ -7,7 +7,7 @@ import satori from "satori";
 import sharp from "sharp";
 
 const fontPath = join(process.cwd(), "Roboto-Regular.ttf");
-let fontData = fs.readFileSync(fontPath);
+const fontData = fs.readFileSync(fontPath);
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,7 +20,7 @@ export default async function handler(
       return res.status(400).send("Missing poll ID");
     }
 
-    let poll: Poll | null = await kv.hgetall(`poll:${pollId}`);
+    const poll: Poll | null = await kv.hgetall(`poll:${pollId}`);
 
     if (!poll) {
       return res.status(400).send("Missing poll ID");
@@ -50,7 +50,7 @@ export default async function handler(
         const percentOfTotal = totalVotes
           ? Math.round((votes / totalVotes) * 100)
           : 0;
-        let text = showResults
+        const text = showResults
           ? `${percentOfTotal}%: ${option} (${votes} votes)`
           : `${index + 1}. ${option}`;
         return { option, votes, text, percentOfTotal };

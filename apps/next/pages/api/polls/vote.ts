@@ -33,7 +33,7 @@ export default async function handler(
         }
 
         // Also validate the frame url matches the expected url
-        let urlBuffer = validatedMessage?.data?.frameActionBody?.url || [];
+        const urlBuffer = validatedMessage?.data?.frameActionBody?.url || [];
         const urlString = Buffer.from(urlBuffer).toString("utf-8");
         if (validatedMessage && !urlString.startsWith(env.HOST)) {
           return res.status(400).send(`Invalid frame url: ${urlBuffer}`);
@@ -68,7 +68,7 @@ export default async function handler(
       voted = voted || !!voteExists;
 
       if (fid > 0 && buttonId > 0 && buttonId < 5 && !results && !voted) {
-        let multi = kv.multi();
+        const multi = kv.multi();
         multi.hincrby(`poll:${pollId}`, `votes${buttonId}`, 1);
         multi.sadd(`poll:${pollId}:voted`, fid);
         multi.expire(`poll:${pollId}`, POLL_EXPIRY);
@@ -76,7 +76,7 @@ export default async function handler(
         await multi.exec();
       }
 
-      let poll: Poll | null = await kv.hgetall(`poll:${pollId}`);
+      const poll: Poll | null = await kv.hgetall(`poll:${pollId}`);
 
       if (!poll) {
         return res.status(400).send("Missing poll ID");

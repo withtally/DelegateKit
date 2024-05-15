@@ -2,6 +2,7 @@
   "extends": "next/core-web-vitals",
   "plugins": ["@typescript-eslint"],
   "rules": {
-    "no-process-env": "error"
+    "no-process-env": "error",
+    "prefer-const": "error"
   }
 }
