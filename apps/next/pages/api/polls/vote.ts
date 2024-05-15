@@ -1,9 +1,9 @@
-import { POLL_EXPIRY, Poll } from "@/app/types";
+import { POLL_EXPIRY, Poll } from "@/app/polls/types";
 import { Message, getSSLHubRpcClient } from "@farcaster/hub-nodejs";
 import { kv } from "@vercel/kv";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
-import { env } from "../../app/env";
+import { env } from "../../../app/env";
 
 const client = getSSLHubRpcClient(env.HUB_URL);
 
@@ -80,7 +80,7 @@ export default async function handler(
       if (!poll) {
         return res.status(400).send("Missing poll ID");
       }
-      const imageUrl = `${env.HOST}/api/image?id=${poll.id}&results=${
+      const imageUrl = `${env.HOST}/api/polls/image?id=${poll.id}&results=${
         results ? "false" : "true"
       }&date=${Date.now()}${fid > 0 ? `&fid=${fid}` : ""}`;
       let button1Text = "View Results";
@@ -103,7 +103,7 @@ export default async function handler(
           <meta property="og:image" content="${imageUrl}">
           <meta name="fc:frame" content="vNext">
           <meta name="fc:frame:image" content="${imageUrl}">
-          <meta name="fc:frame:post_url" content="${env.HOST}/api/vote?id=${
+          <meta name="fc:frame:post_url" content="${env.HOST}/api/polls/vote?id=${
             poll.id
           }&voted=true&results=${results ? "false" : "true"}">
           <meta name="fc:frame:button:1" content="${button1Text}">
