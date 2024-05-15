@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { PollCreateForm } from "./form";
+import { PollCreateForm } from "./polls/form";
 
 export let metadata = {
   title: "DelegateKit Polls",
