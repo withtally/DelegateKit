@@ -22,3 +22,11 @@ export const env = {
     })
     .parse(process.env.HUB_URL),
 } as const;
+
+console.log({
+  URL: VERCEL_HOST,
+  VERCEL_ENV,
+  HOST: env.HOST,
+  VERCEL_URL: process.env.VERCEL_URL,
+  VERCEL_PROJECT_PRODUCTION_URL: process.env.VERCEL_PROJECT_PRODUCTION_URL,
+});

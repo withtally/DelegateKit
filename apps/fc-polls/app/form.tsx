@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useOptimistic, useRef, useState, useTransition } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { redirectToPolls, savePoll, votePoll } from "../actions";
+import { redirectToPolls, savePoll, votePoll } from "./actions";
 import { Poll } from "./types";
 
 type PollState = {
@@ -175,7 +175,7 @@ function PollResults({ poll }: { poll: Poll }) {
   return (
     <div className="mb-4">
       <img
-        src={`/api/polls/image?id=${poll.id}&results=true&date=${Date.now()}`}
+        src={`/api/image?id=${poll.id}&results=true&date=${Date.now()}`}
         alt="poll results"
       />
     </div>

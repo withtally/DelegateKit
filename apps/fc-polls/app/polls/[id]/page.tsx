@@ -1,5 +1,5 @@
-import { PollVoteForm } from "@/app/polls/form";
-import { Poll } from "@/app/polls/types";
+import { PollVoteForm } from "@/app/form";
+import { Poll } from "@/app/types";
 import { kv } from "@vercel/kv";
 import { Metadata, ResolvingMetadata } from "next";
 import Head from "next/head";
@@ -49,8 +49,8 @@ export async function generateMetadata(
 
   const fcMetadata: Record<string, string> = {
     "fc:frame": "vNext",
-    "fc:frame:post_url": `${env.HOST}/api/polls/vote?id=${id}`,
-    "fc:frame:image": `${env.HOST}/api/polls/image?id=${id}`,
+    "fc:frame:post_url": `${env.HOST}/api/vote?id=${id}`,
+    "fc:frame:image": `${env.HOST}/api/image?id=${id}`,
   };
   [poll.option1, poll.option2, poll.option3, poll.option4]
     .filter((o) => o !== "")
@@ -62,7 +62,7 @@ export async function generateMetadata(
     title: poll.title,
     openGraph: {
       title: poll.title,
-      images: [`/api/polls/image?id=${id}`],
+      images: [`/api/image?id=${id}`],
     },
     other: {
       ...fcMetadata,

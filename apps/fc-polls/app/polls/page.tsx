@@ -1,4 +1,4 @@
-import { Poll } from "@/app/polls/types";
+import { Poll } from "@/app/types";
 import { kv } from "@vercel/kv";
 import Link from "next/link";
 
