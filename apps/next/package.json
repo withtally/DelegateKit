@@ -1,4 +1,5 @@
 {
+  "name": "delegatekit.next",
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
