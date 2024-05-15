@@ -53,6 +53,7 @@ export default async function handler(
       }
 
       // Clicked create poll
+      console.log({ voted, results, buttonId });
       if ((results || voted) && buttonId === 2) {
         return res
           .status(302)
