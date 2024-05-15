@@ -6,7 +6,8 @@
     "lint": "next lint",
     "build": "next build",
     "start": "next start",
-    "test": "concurrently \"npm:lint\" \"npm:build\""
+    "vitest": "vitest",
+    "test": "concurrently \"npm:lint\" \"npm:build\" \"npm:vitest -- --run\""
   },
   "dependencies": {
     "@farcaster/hub-nodejs": "^0.11.11",
@@ -27,12 +28,15 @@
     "tailwindcss": "3.4.1",
     "typescript": "5.3.3",
     "uuid": "^9.0.1",
-    "valibot": "^0.30.0"
+    "valibot": "^0.30.0",
+    "viem": "^2.10.5"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
+    "dotenv": "^16.4.5",
     "eslint": "8.57.0",
     "eslint-config-next": "14.2.3",
-    "typescript-eslint": "^7.8.0"
+    "typescript-eslint": "^7.8.0",
+    "vitest": "^1.6.0"
   }
 }
