@@ -28,7 +28,6 @@ export default async function handler(
           Buffer.from(req.body?.trustedData?.messageBytes || "", "hex"),
         );
         const result = await client.validateMessage(frameMessage);
-        console.log({ result });
         if (result && result.isOk() && result.value.valid) {
           validatedMessage = result.value.message;
         }
@@ -55,10 +54,8 @@ export default async function handler(
         buttonId = z.number().parse(req.body?.untrustedData?.buttonIndex);
         fid = z.number().parse(req.body?.untrustedData?.fid);
       }
-      console.log({ buttonId, fid });
 
       // Clicked create poll
-      console.log({ voted, results, buttonId });
       if ((results || voted) && buttonId === 2) {
         return res
           .status(302)
