@@ -1,13 +1,8 @@
 {
+  "name": "delegatekit",
+  "version": "0.0.0",
+  "description": "DelegateKit is a powerful tool designed to enhance Optimism governance participation by leveraging the Farcaster Social Graph. Our mission is to position Farcaster as the hub of DAO participation, offering a seamless and accessible governance experience across the Superchain ecosystem.",
   "private": true,
-  "scripts": {
-    "dev": "next dev --turbo",
-    "lint": "next lint",
-    "build": "next build",
-    "start": "next start",
-    "test": "concurrently \"npm:lint\" \"npm:build\"",
-    "prepare": "husky || true"
-  },
   "prettier": {
     "plugins": [
       "prettier-plugin-organize-imports"
@@ -18,35 +13,18 @@
       "prettier --ignore-unknown --write"
     ]
   },
-  "dependencies": {
-    "@farcaster/hub-nodejs": "^0.11.11",
-    "@types/node": "20.11.0",
-    "@types/react": "18.2.47",
-    "@types/react-dom": "18.2.18",
-    "@types/uuid": "9.0.7",
-    "@vercel/kv": "^1.0.1",
-    "autoprefixer": "10.4.16",
-    "clsx": "^2.1.0",
-    "geist": "^1.2.1",
-    "next": "^14.2.3",
-    "postcss": "^8.4.33",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "satori": "^0.10.11",
-    "sharp": "^0.33.2",
-    "tailwindcss": "3.4.1",
-    "typescript": "5.3.3",
-    "uuid": "^9.0.1",
-    "zod": "^3.23.8"
+  "scripts": {
+    "prepare": "husky || true",
+    "dev": "cd apps/next && npm run dev",
+    "test": "cd apps/next && npm run test"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "concurrently": "^8.2.2",
-    "eslint": "8.57.0",
-    "eslint-config-next": "14.2.3",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
-    "prettier-plugin-organize-imports": "^3.2.4",
-    "typescript-eslint": "^7.8.0"
+    "prettier-plugin-organize-imports": "^3.2.4"
   }
 }
