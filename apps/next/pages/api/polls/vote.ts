@@ -2,7 +2,7 @@ import { POLL_EXPIRY, Poll } from "@/app/polls/types";
 import { Message, getSSLHubRpcClient } from "@farcaster/hub-nodejs";
 import { kv } from "@vercel/kv";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { z } from "zod";
+import * as v from "valibot";
 import { env } from "../../../app/env";
 
 const client = getSSLHubRpcClient(env.HUB_URL);
@@ -46,13 +46,14 @@ export default async function handler(
         fid = 0;
       // If HUB_URL is not provided, don't validate and fall back to untrusted data
       if (client) {
-        buttonId = z
-          .number()
-          .parse(validatedMessage?.data?.frameActionBody?.buttonIndex);
-        fid = z.number().parse(validatedMessage?.data?.fid);
+        buttonId = v.parse(
+          v.number(),
+          validatedMessage?.data?.frameActionBody?.buttonIndex,
+        );
+        fid = v.parse(v.number(), validatedMessage?.data?.fid);
       } else {
-        buttonId = z.number().parse(req.body?.untrustedData?.buttonIndex);
-        fid = z.number().parse(req.body?.untrustedData?.fid);
+        buttonId = v.parse(v.number(), req.body?.untrustedData?.buttonIndex);
+        fid = v.parse(v.number(), req.body?.untrustedData?.fid);
       }
 
       // Clicked create poll
