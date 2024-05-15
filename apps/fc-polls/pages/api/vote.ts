@@ -2,6 +2,7 @@ import { POLL_EXPIRY, Poll } from "@/app/types";
 import { Message, getSSLHubRpcClient } from "@farcaster/hub-nodejs";
 import { kv } from "@vercel/kv";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { z } from "zod";
 import { env } from "../../app/env";
 
 const client = getSSLHubRpcClient(env.HUB_URL);
@@ -26,7 +27,8 @@ export default async function handler(
         const frameMessage = Message.decode(
           Buffer.from(req.body?.trustedData?.messageBytes || "", "hex"),
         );
-        const result = await client?.validateMessage(frameMessage);
+        const result = await client.validateMessage(frameMessage);
+        console.log({ result });
         if (result && result.isOk() && result.value.valid) {
           validatedMessage = result.value.message;
         }
@@ -45,14 +47,18 @@ export default async function handler(
         fid = 0;
       // If HUB_URL is not provided, don't validate and fall back to untrusted data
       if (client) {
-        buttonId = validatedMessage?.data?.frameActionBody?.buttonIndex || 0;
-        fid = validatedMessage?.data?.fid || 0;
+        buttonId = z
+          .number()
+          .parse(validatedMessage?.data?.frameActionBody?.buttonIndex);
+        fid = z.number().parse(validatedMessage?.data?.fid);
       } else {
-        buttonId = req.body?.untrustedData?.buttonIndex || 0;
-        fid = req.body?.untrustedData?.fid || 0;
+        buttonId = z.number().parse(req.body?.untrustedData?.buttonIndex);
+        fid = z.number().parse(req.body?.untrustedData?.fid);
       }
+      console.log({ buttonId, fid });
 
       // Clicked create poll
+      console.log({ voted, results, buttonId });
       if ((results || voted) && buttonId === 2) {
         return res
           .status(302)
