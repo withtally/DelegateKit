@@ -78,7 +78,7 @@ export class TallyAPI {
     const proposal = proposals[0];
     return {
       title: proposal.title.replace("# ", ""),
-      status: proposal.statusChanges[proposal.statusChanges.length - 1].type,
+      status: proposal.status[proposal.status.length - 1].type,
     };
   }
   public static async resolveENS(ens: string): Promise<Address> {

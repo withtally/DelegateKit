@@ -29,7 +29,7 @@ test("Fetches delegate", async () => {
   );
 });
 
-test("Fetches proposals", async () => {
+test.only("Fetches proposals", async () => {
   // https://www.tally.xyz/gov/arbitrum/proposal/38070839538623347085766954167338451189998347523518753197890888828931691912919
   const governorIds = [
     "eip155:42161:0x789fC99093B09aD01C34DC7251D0C89ce743e5a4",

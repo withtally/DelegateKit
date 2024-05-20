@@ -250,7 +250,7 @@ export class TallyAPIFetcher {
     proposals: v.array(
       v.object({
         title: v.string(),
-        statusChanges: v.array(
+        status: v.array(
           v.object({
             type: v.string(),
           }),
@@ -258,17 +258,14 @@ export class TallyAPIFetcher {
       }),
     ),
   });
-  public static async fetchProposals({
-    governanceIds,
-    proposalIds,
-    chainId,
-  }: {
+  public static async fetchProposals(variables: {
     governanceIds: ReadonlyArray<string>;
     proposalIds: ReadonlyArray<string>;
     chainId: string;
   }): Promise<
     DeepReadonly<Output<typeof TallyAPIFetcher.proposalsSchema>>["proposals"]
   > {
+    console.dir(variables);
     const data = await TallyAPIFetcher.apiFetch({
       query: `query ProposalsMetadata(
         $chainId: ChainID!
@@ -281,16 +278,10 @@ export class TallyAPIFetcher {
           proposalIds: $proposalIds
         ) {
           title
-          statusChanges {
-            type
-          }
+          status
         }
       }`,
-      variables: {
-        governanceIds,
-        proposalIds,
-        chainId,
-      },
+      variables,
     }).then((res) => v.parse(this.proposalsSchema, res));
 
     return data.proposals;
