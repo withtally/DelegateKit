@@ -3,6 +3,7 @@ import Head from "next/head";
 import { isAddress } from "viem";
 import { z } from "zod";
 import { publicEnv } from "../../app/next-public-env";
+import { routes } from "../../app/routes";
 
 type ServerHydratedProps = {
   address: string;
@@ -10,7 +11,7 @@ type ServerHydratedProps = {
 
 export default function Home(props: ServerHydratedProps) {
   const { address } = props;
-  const imgSrc = `${publicEnv.NEXT_PUBLIC_HOST}/api/delegates/images/1?address=${address}`;
+  const imgSrc = routes.v1.api.delegates.images["1"].buildUrl(address);
   const framePostUrl = `${publicEnv.NEXT_PUBLIC_HOST}/api/delegates/frame-2?address=${address}&currentIndex=1`;
   return (
     <Head>
@@ -31,7 +32,7 @@ export default function Home(props: ServerHydratedProps) {
       <meta name="fc:frame:button:3:action" content="link" />
       <meta
         name="fc:frame:button:3:target"
-        content={`https://www.tally.xyz/profile/${address}`}
+        content={`https://www.tally.xyz/gov/optimism/delegate/${address}`}
       />
     </Head>
   );
