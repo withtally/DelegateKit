@@ -1,8 +1,8 @@
 import { NextApiRequest } from "next";
 import { ImageResponse } from "next/og";
 import { z } from "zod";
+import DelegateImageContainer from "../../../../api/delegates/DelegateImageContainer";
 import { fetchDelegateData } from "../../../../app/delegates/fetchers";
-import { routes } from "../../../../app/routes";
 
 export const runtime = "edge";
 
@@ -12,37 +12,7 @@ export default async function Frame2(req: NextApiRequest) {
   const delegateData = await fetchDelegateData(address);
   return new ImageResponse(
     (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-          width: "100%",
-          background: "white",
-          padding: "50px",
-        }}
-      >
-        <span>
-          <img
-            src={routes.images.op}
-            alt="op logo"
-            width="50px"
-            height="50px"
-            style={{ position: "absolute", left: "60px", top: "60px" }}
-          />
-          <img
-            src={routes.images.tally}
-            alt="tally logo"
-            width="50px"
-            height="50px"
-            style={{
-              position: "absolute",
-              left: "120px",
-              top: "60px",
-              borderRadius: "5px",
-            }}
-          />
-        </span>
+      <DelegateImageContainer>
         <div
           style={{
             display: "flex",
@@ -93,7 +63,7 @@ export default async function Frame2(req: NextApiRequest) {
             </span>
           </div>
         </div>
-      </div>
+      </DelegateImageContainer>
     ),
     {
       width: 1146,
