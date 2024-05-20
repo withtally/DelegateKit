@@ -2,7 +2,7 @@ import { NextApiRequest } from "next";
 import { ImageResponse } from "next/og";
 import * as v from "valibot";
 import { fetchDelegateData } from "../../../../app/delegates/fetchers";
-import { publicEnv } from "../../../../app/next-public-env";
+import { routes } from "../../../../app/routes";
 
 export const runtime = "edge";
 
@@ -24,14 +24,14 @@ export default async function Frame1(req: NextApiRequest) {
       >
         <span>
           <img
-            src={`${publicEnv.NEXT_PUBLIC_HOST}/images/op.png`}
+            src={routes.images.op}
             alt="op logo"
             width="50px"
             height="50px"
             style={{ position: "absolute", left: "60px", top: "60px" }}
           />
           <img
-            src={`${publicEnv.NEXT_PUBLIC_HOST}/images/tally.jpg`}
+            src={routes.images.tally}
             alt="tally logo"
             width="50px"
             height="50px"
