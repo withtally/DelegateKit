@@ -13,55 +13,44 @@ export default async function Frame2(req: NextApiRequest) {
   return new ImageResponse(
     (
       <DelegateImageContainer>
+        <img
+          src={delegateData.imgSrc}
+          style={{
+            borderRadius: "50%",
+            height: "160px",
+            width: "160px",
+            marginRight: "40px",
+          }}
+          alt="profile"
+        />
         <div
           style={{
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontFamily: "sans-serif",
-            height: "100%",
-            width: "100%",
+            flexDirection: "column",
+            maxWidth: "520px",
+            fontSize: "20px",
           }}
         >
-          <img
-            src={delegateData.imgSrc}
-            style={{
-              borderRadius: "50%",
-              height: "160px",
-              width: "160px",
-              marginRight: "40px",
-            }}
-            alt="profile"
-          />
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              maxWidth: "520px",
-              fontSize: "20px",
-            }}
-          >
-            <span>
-              Proposals Voted:
-              {delegateData.proposalsVoted}
-            </span>
-            <span>
-              For / Against / Abstain:
-              {delegateData.forAbstainAgainst}
-            </span>
-            <span>
-              Recent Activity:
-              {delegateData.recentActivity}
-            </span>
-            <span>
-              Proposals Created:
-              {delegateData.proposalsCreated}
-            </span>
-            <span>
-              Delegated From:
-              {delegateData.delegatedFrom}
-            </span>
-          </div>
+          <span>
+            Proposals Voted:
+            {delegateData.proposalsVoted}
+          </span>
+          <span>
+            For / Against / Abstain:
+            {delegateData.forAbstainAgainst}
+          </span>
+          <span>
+            Recent Activity:
+            {delegateData.recentActivity}
+          </span>
+          <span>
+            Proposals Created:
+            {delegateData.proposalsCreated}
+          </span>
+          <span>
+            Delegated From:
+            {delegateData.delegatedFrom}
+          </span>
         </div>
       </DelegateImageContainer>
     ),

@@ -13,38 +13,27 @@ export default async function Frame2(req: NextApiRequest) {
   return new ImageResponse(
     (
       <DelegateImageContainer>
+        <img
+          src={delegateData.imgSrc}
+          style={{
+            borderRadius: "50%",
+            height: "160px",
+            width: "160px",
+            marginRight: "40px",
+          }}
+          alt="profile"
+        />
         <div
           style={{
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontFamily: "sans-serif",
-            height: "100%",
-            width: "100%",
+            flexDirection: "column",
+            maxWidth: "520px",
           }}
         >
-          <img
-            src={delegateData.imgSrc}
-            style={{
-              borderRadius: "50%",
-              height: "160px",
-              width: "160px",
-              marginRight: "40px",
-            }}
-            alt="profile"
-          />
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              maxWidth: "520px",
-            }}
-          >
-            <h3 style={{ fontSize: "20px" }}>
-              {/* TODO only truncate to 200 if it's longer than 200 */}
-              {delegateData.description.slice(0, 340)}...
-            </h3>
-          </div>
+          <h3 style={{ fontSize: "20px" }}>
+            {/* TODO only truncate to 200 if it's longer than 200 */}
+            {delegateData.description.slice(0, 340)}...
+          </h3>
         </div>
       </DelegateImageContainer>
     ),

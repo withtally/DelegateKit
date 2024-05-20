@@ -13,30 +13,19 @@ export default async function Frame1(req: NextApiRequest) {
   return new ImageResponse(
     (
       <DelegateImageContainer>
-        <div
+        <img
+          src={delegateData.imgSrc}
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontFamily: "sans-serif",
-            height: "100%",
-            width: "100%",
+            borderRadius: "50%",
+            height: "160px",
+            width: "160px",
+            marginRight: "40px",
           }}
-        >
-          <img
-            src={delegateData.imgSrc}
-            style={{
-              borderRadius: "50%",
-              height: "160px",
-              width: "160px",
-              marginRight: "40px",
-            }}
-            alt="profile"
-          />
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <h1 style={{ fontSize: "48px" }}>{delegateData.address}</h1>
-            <h3 style={{ fontSize: "30px" }}>{delegateData.delegatedOP}</h3>
-          </div>
+          alt="profile"
+        />
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <h1 style={{ fontSize: "48px" }}>{delegateData.address}</h1>
+          <h3 style={{ fontSize: "30px" }}>{delegateData.delegatedOP}</h3>
         </div>
       </DelegateImageContainer>
     ),
