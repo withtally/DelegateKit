@@ -1,9 +1,10 @@
 import { Client } from "pg";
 
-// six-second timeout
-const DEFAULT_TIMEOUT = 9_000;
+const DEFAULT_TIMEOUT = 5_000;
 const pgClient = new Client({
+  // eslint-disable-next-line no-process-env
   user: process.env.PGUSER || "postgres",
+  // eslint-disable-next-line no-process-env
   password: process.env.PGPASSWORD || "postgres",
   statement_timeout: DEFAULT_TIMEOUT, // number of milliseconds before a statement in query will time out, default is no timeout
   query_timeout: DEFAULT_TIMEOUT, // number of milliseconds before a query call will timeout, default is no timeout

@@ -3,7 +3,7 @@ import { z } from "zod";
 
 import { DelegateData, delegateDataSchema } from "../../OPDelegate.types";
 import { Postgres } from "../../database/Postgres";
-import { fetchRenderedHtml } from "../PlaywrightHelper";
+import { fetchRenderedHtml } from "../browser-automation";
 
 export class OPDelegate {
   readonly #ethereumAddress: string;

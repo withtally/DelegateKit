@@ -1,14 +1,21 @@
-import { webkit } from "playwright";
+import puppeteer from "puppeteer-core";
+
 export const fetchRenderedHtml = async (url: string): Promise<string> => {
+  const browser = await puppeteer.connect({});
+
+  const page = await browser.newPage();
+  await page.goto(url);
+
+  // return res.status(200).send(await page.pdf())
   // Launch the browser (in this case, 'firefox' for faster installation)
   //   const browser = await firefox.launch({ headless: false });
-  const browser = await webkit.launch();
+  // const browser = await webkit.launch();
 
   // Create a new browser context
-  const context = await browser.newContext();
+  // const context = await browser.newContext();
 
   // Create a new page
-  const page = await context.newPage();
+  // const page = await context.newPage();
   // Navigate to the desired URL
   await page.goto(url);
 

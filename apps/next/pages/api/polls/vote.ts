@@ -4,6 +4,7 @@ import { kv } from "@vercel/kv";
 import type { NextApiRequest, NextApiResponse } from "next";
 import * as v from "valibot";
 import { env } from "../../../app/env";
+import { publicEnv } from "../../../app/next-public-env";
 
 const client = getSSLHubRpcClient(env.HUB_URL);
 
@@ -35,7 +36,10 @@ export default async function handler(
         // Also validate the frame url matches the expected url
         const urlBuffer = validatedMessage?.data?.frameActionBody?.url || [];
         const urlString = Buffer.from(urlBuffer).toString("utf-8");
-        if (validatedMessage && !urlString.startsWith(env.HOST)) {
+        if (
+          validatedMessage &&
+          !urlString.startsWith(publicEnv.NEXT_PUBLIC_HOST)
+        ) {
           return res.status(400).send(`Invalid frame url: ${urlBuffer}`);
         }
       } catch (e) {
@@ -60,7 +64,7 @@ export default async function handler(
       if ((results || voted) && buttonId === 2) {
         return res
           .status(302)
-          .setHeader("Location", env.HOST)
+          .setHeader("Location", publicEnv.NEXT_PUBLIC_HOST)
           .send("Redirecting to create poll");
       }
 
@@ -81,7 +85,7 @@ export default async function handler(
       if (!poll) {
         return res.status(400).send("Missing poll ID");
       }
-      const imageUrl = `${env.HOST}/api/polls/image?id=${poll.id}&results=${
+      const imageUrl = `${publicEnv.NEXT_PUBLIC_HOST}/api/polls/image?id=${poll.id}&results=${
         results ? "false" : "true"
       }&date=${Date.now()}${fid > 0 ? `&fid=${fid}` : ""}`;
       let button1Text = "View Results";
@@ -104,7 +108,7 @@ export default async function handler(
           <meta property="og:image" content="${imageUrl}">
           <meta name="fc:frame" content="vNext">
           <meta name="fc:frame:image" content="${imageUrl}">
-          <meta name="fc:frame:post_url" content="${env.HOST}/api/polls/vote?id=${
+          <meta name="fc:frame:post_url" content="${publicEnv.NEXT_PUBLIC_HOST}/api/polls/vote?id=${
             poll.id
           }&voted=true&results=${results ? "false" : "true"}">
           <meta name="fc:frame:button:1" content="${button1Text}">
