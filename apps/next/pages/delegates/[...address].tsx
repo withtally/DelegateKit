@@ -12,7 +12,7 @@ type ServerHydratedProps = {
 export default function Home(props: ServerHydratedProps) {
   const { address } = props;
   const imgSrc = routes.v1.api.delegates.images["1"].buildUrl(address);
-  const framePostUrl = `${publicEnv.NEXT_PUBLIC_HOST}/api/delegates/frame-2?address=${address}&currentIndex=1`;
+  const framePostUrl = `${publicEnv.NEXT_PUBLIC_HOST}/api/delegates/generate-frame?address=${address}&currentIndex=1`;
   return (
     <Head>
       <meta name="fc:frame" content="vNext" />
