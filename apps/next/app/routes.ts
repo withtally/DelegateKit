@@ -11,12 +11,12 @@ export const routes = {
         images: {
           "1": {
             buildUrl: (address: string) =>
-              `${publicEnv.NEXT_PUBLIC_HOST}/api/delegates/images/1?address=${address}`,
+              `${publicEnv.NEXT_PUBLIC_HOST}/api/optimism/delegates/images/1?address=${address}`,
           },
         },
         address: {
           buildUrl: (address: string) =>
-            `${publicEnv.NEXT_PUBLIC_HOST}/api/delegates/${address}`,
+            `${publicEnv.NEXT_PUBLIC_HOST}/api/optimism/delegates/${address}`,
         },
       },
     },

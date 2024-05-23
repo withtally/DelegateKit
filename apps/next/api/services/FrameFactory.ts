@@ -3,10 +3,14 @@ export class DelegateFrameFactory {
   #templateHtml: string;
   #baseUrl: string;
   #address: string;
+  #computeFrameImageSrc(frameIndex: number) {
+    return `${this.#baseUrl}/api/optimism/delegates/images/${frameIndex}?address=${this.#address}`;
+  }
+
   constructor(baseUrl: string, address: string) {
     this.#address = address;
     this.#baseUrl = baseUrl;
-    this.#framePostUrl = `${baseUrl}/api/delegates/generate-frame?address=${address}`;
+    this.#framePostUrl = `${baseUrl}/api/optimism/delegates/generate-frame?address=${address}`;
 
     this.#templateHtml = `<!DOCTYPE html>
 		  <html>
@@ -29,7 +33,7 @@ export class DelegateFrameFactory {
   }
 
   get frame1() {
-    const frameImageSrc = `${this.#baseUrl}/api/delegates/images/1?address=${this.#address}`;
+    const frameImageSrc = this.#computeFrameImageSrc(1);
     return this.#templateHtml.replace(
       "{{dynamicContent}}",
       `
@@ -55,7 +59,7 @@ export class DelegateFrameFactory {
     );
   }
   get frame2() {
-    const frameImageSrc = `${this.#baseUrl}/api/delegates/images/2?address=${this.#address}`;
+    const frameImageSrc = this.#computeFrameImageSrc(2);
     return this.#templateHtml.replace(
       "{{dynamicContent}}",
       `
@@ -77,7 +81,7 @@ export class DelegateFrameFactory {
   }
 
   get frame3() {
-    const frameImageSrc = `${this.#baseUrl}/api/delegates/images/3?address=${this.#address}`;
+    const frameImageSrc = this.#computeFrameImageSrc(3);
     return this.#templateHtml.replace(
       "{{dynamicContent}}",
       `

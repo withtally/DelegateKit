@@ -2,8 +2,8 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import { isAddress } from "viem";
 import { z } from "zod";
-import { publicEnv } from "../../app/next-public-env";
-import { routes } from "../../app/routes";
+import { publicEnv } from "../../../app/next-public-env";
+import { routes } from "../../../app/routes";
 
 type ServerHydratedProps = {
   address: string;
@@ -12,7 +12,7 @@ type ServerHydratedProps = {
 export default function Home(props: ServerHydratedProps) {
   const { address } = props;
   const imgSrc = routes.v1.api.delegates.images["1"].buildUrl(address);
-  const framePostUrl = `${publicEnv.NEXT_PUBLIC_HOST}/api/delegates/generate-frame?address=${address}&currentIndex=1`;
+  const framePostUrl = `${publicEnv.NEXT_PUBLIC_HOST}/api/optimism/delegates/generate-frame?address=${address}&currentIndex=1`;
   return (
     <Head>
       <meta name="fc:frame" content="vNext" />

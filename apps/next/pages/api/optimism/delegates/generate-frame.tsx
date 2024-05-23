@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
-import { DelegateFrameFactory } from "../../../api/services/FrameFactory";
-import { publicEnv } from "../../../app/next-public-env";
+import { DelegateFrameFactory } from "../../../../api/services/FrameFactory";
+import { publicEnv } from "../../../../app/next-public-env";
 
 export default async function generateFrame(
   req: NextApiRequest,

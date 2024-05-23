@@ -1,8 +1,8 @@
 import { NextApiRequest } from "next";
 import { ImageResponse } from "next/og";
 import * as v from "valibot";
-import DelegateImageContainer from "../../../../api/delegates/DelegateImageContainer";
-import { fetchDelegateData } from "../../../../app/delegates/fetchers";
+import DelegateImageContainer from "../../../../../api/delegates/DelegateImageContainer";
+import { fetchDelegateData } from "../../../../../app/delegates/fetchers";
 
 export const runtime = "edge";
 
