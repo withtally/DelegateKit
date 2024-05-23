@@ -74,9 +74,7 @@ export const getStaticProps: GetStaticProps<ServerHydratedProps> = async ({
   params,
 }) => {
   try {
-    const address: string = addressSchema
-      .parse(params?.address?.[0])
-      .toLowerCase();
+    const address: string = addressSchema.parse(params?.address).toLowerCase();
     return { props: { address } };
   } catch {
     return { notFound: true };
