@@ -18,7 +18,7 @@ export function PollCreateForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [state, mutate] = useOptimistic(
     { pending: false },
-    function createReducer(state, newPoll: PollState) {
+    function createReducer(_, newPoll: PollState) {
       if (newPoll.newPoll) {
         return {
           pending: newPoll.pending,
@@ -198,8 +198,8 @@ export function PollVoteForm({
   const [isPending, startTransition] = useTransition();
   const [state, mutate] = useOptimistic(
     { showResults: viewResults },
-    function createReducer({ showResults }, state: PollState) {
-      if (state.voted || viewResults) {
+    function createReducer({ showResults }, pollState: PollState) {
+      if (pollState.voted || viewResults) {
         return {
           showResults: true,
         };

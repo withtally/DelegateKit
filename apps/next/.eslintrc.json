@@ -3,6 +3,7 @@
   "plugins": ["@typescript-eslint"],
   "rules": {
     "no-process-env": "error",
-    "prefer-const": "error"
+    "prefer-const": "error",
+    "no-shadow": "error"
   }
 }

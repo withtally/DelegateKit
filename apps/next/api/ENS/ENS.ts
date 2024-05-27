@@ -1,11 +1,6 @@
-import { Address, createPublicClient, http, isAddress } from "viem";
-import { mainnet } from "viem/chains";
+import { Address, isAddress } from "viem";
 import { normalize } from "viem/ens";
-
-export const publicClient = createPublicClient({
-  chain: mainnet,
-  transport: http(),
-});
+import { publicMainnetClient } from "../viem";
 
 export class ENS {
   public static isENS(address: string): boolean {
@@ -13,7 +8,7 @@ export class ENS {
   }
   public static async resolve(address: string): Promise<Address> {
     if (this.isENS(address)) {
-      const ensAddress = await publicClient.getEnsAddress({
+      const ensAddress = await publicMainnetClient.getEnsAddress({
         name: normalize(address),
       });
       return ensAddress ? ensAddress : (address as Address);
