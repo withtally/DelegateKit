@@ -15,4 +15,14 @@ export class ENS {
     }
     return address as Address;
   }
+
+  public static async getENSAvatar(ensName: string): Promise<string | null> {
+    try {
+      const avatar = await publicMainnetClient.getEnsAvatar({ name: ensName });
+      return avatar;
+    } catch (error) {
+      console.error("Error fetching ENS avatar:", error);
+      return null;
+    }
+  }
 }

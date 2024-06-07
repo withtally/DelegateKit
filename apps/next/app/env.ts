@@ -6,4 +6,5 @@ export const env = {
     v.string([v.regex(/^(?!http)/, 'HUB_URL must not start with "http"')]),
     process.env.HUB_URL,
   ),
+  AGORA_API_KEY: v.parse(v.string(), process.env.AGORA_API_KEY),
 } as const;

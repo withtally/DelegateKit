@@ -1,5 +1,5 @@
 import { Address } from "viem";
-import { expect, test } from "vitest";
+import { assert, expect, test } from "vitest";
 import { ENS } from "./ENS";
 
 test("isENS should return true for non-address strings", () => {
@@ -18,4 +18,14 @@ test("should resolve valid ENS name", async () => {
 
   const result = await ENS.resolve("lefteris.eth");
   expect(result).toBe(resolvedAddress);
+});
+
+// resolving ENS images not working currently
+test("finds ENS avatar images properly", async (t) => {
+  const address = "lindajxie.eth";
+  const imageSrc = await ENS.getENSAvatar(address);
+  assert.equal(
+    imageSrc,
+    "https://cryptocoven.s3.amazonaws.com/54986ff127ad77379a722350c2331e55.png",
+  );
 });

@@ -3,6 +3,7 @@ export class DelegateFrameFactory {
   #templateHtml: string;
   #baseUrl: string;
   #address: string;
+  #dynamicContent = "{{dynamicContent}}";
   #computeFrameImageSrc(frameIndex: number) {
     return `${this.#baseUrl}/api/optimism/delegates/images/${frameIndex}?address=${this.#address}`;
   }
@@ -13,29 +14,28 @@ export class DelegateFrameFactory {
     this.#framePostUrl = `${baseUrl}/api/optimism/delegates/generate-frame?address=${address}`;
 
     this.#templateHtml = `<!DOCTYPE html>
-		  <html>
-		  <head>
-			<meta name="fc:frame" content="vNext" />
-			<meta name="fc:frame:image:aspect_ratio" content="1.91:1" />
+		<html>
+		<head>
+		<meta name="fc:frame" content="vNext" />
+		<meta name="fc:frame:image:aspect_ratio" content="1.91:1" />
 
-			{{dynamicContent}}
+		{{dynamicContent}}
 
-
-			  <meta name="fc:frame:button:3" content="Delegate" />
-			  <meta name="fc:frame:button:3:action" content="link" />
-			  <meta
-			  name="fc:frame:button:3:target"
-			  content="https://www.tally.xyz/profile/${this.#address}"
-			  />
-		  </head>
-		  </html
-		  `;
+		<meta name="fc:frame:button:3" content="Delegate" />
+		<meta name="fc:frame:button:3:action" content="link" />
+		<meta
+		name="fc:frame:button:3:target"
+		content="https://www.tally.xyz/profile/${this.#address}"
+		/>
+		</head>
+		</html
+		`;
   }
 
   get frame1() {
     const frameImageSrc = this.#computeFrameImageSrc(1);
     return this.#templateHtml.replace(
-      "{{dynamicContent}}",
+      this.#dynamicContent,
       `
 	  <meta property="og:image" content="${frameImageSrc}" />
 
@@ -61,7 +61,7 @@ export class DelegateFrameFactory {
   get frame2() {
     const frameImageSrc = this.#computeFrameImageSrc(2);
     return this.#templateHtml.replace(
-      "{{dynamicContent}}",
+      this.#dynamicContent,
       `
 	  <meta property="og:image" content="${frameImageSrc}" />
 
@@ -83,7 +83,7 @@ export class DelegateFrameFactory {
   get frame3() {
     const frameImageSrc = this.#computeFrameImageSrc(3);
     return this.#templateHtml.replace(
-      "{{dynamicContent}}",
+      this.#dynamicContent,
       `
 	  <meta property="og:image" content="${frameImageSrc}" />
 

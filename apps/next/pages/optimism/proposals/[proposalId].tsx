@@ -52,7 +52,7 @@ export const getStaticProps: GetStaticProps<ServerHydratedProps> = async ({
       params?.proposalId,
     ).toLowerCase();
     const governorSlug: string = parse(string(), params?.governorSlug);
-    throw new Error("proposal fetching not implmented");
+    throw new Error("proposal fetching not implemented");
 
     // return { props };
   } catch (err) {

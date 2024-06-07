@@ -13,6 +13,7 @@ export default async function generateFrame(
     .int()
     .parse(req.body.untrustedData.buttonIndex);
 
+  console.dir({ query: req.query });
   const currentIndex = z.string().parse(req.query.currentIndex);
 
   const address = z.string().parse(req.query.address);

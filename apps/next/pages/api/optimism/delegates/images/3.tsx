@@ -2,6 +2,7 @@ import { NextApiRequest } from "next";
 import { ImageResponse } from "next/og";
 import { z } from "zod";
 import DelegateImageContainer from "../../../../../api/delegates/DelegateImageContainer";
+import { fetchAddressImage } from "../../../../../app/delegates/fetch-address-image";
 import { fetchDelegateData } from "../../../../../app/delegates/fetchers";
 
 export const runtime = "edge";
@@ -9,12 +10,15 @@ export const runtime = "edge";
 export default async function Frame2(req: NextApiRequest) {
   const url = new URL(z.string().url().parse(req.url));
   const address = z.string().parse(url.searchParams.get("address"));
-  const delegateData = await fetchDelegateData(address);
+  const [delegateData, delegateImage] = await Promise.all([
+    fetchDelegateData(address),
+    fetchAddressImage(address),
+  ]);
   return new ImageResponse(
     (
       <DelegateImageContainer>
         <img
-          src={delegateData.imgSrc}
+          src={delegateImage}
           style={{
             borderRadius: "50%",
             height: "160px",
@@ -31,25 +35,18 @@ export default async function Frame2(req: NextApiRequest) {
             fontSize: "20px",
           }}
         >
+          <span>Proposals Voted: {delegateData.proposalsVotedOn}</span>
           <span>
-            Proposals Voted:
-            {delegateData.proposalsVoted}
+            For / Against / Abstain: {delegateData.votedFor} /{" "}
+            {delegateData.votedAbstain} / {delegateData.votedAbstain}
           </span>
-          <span>
-            For / Against / Abstain:
-            {delegateData.forAbstainAgainst}
-          </span>
-          <span>
+          {/* <span>
             Recent Activity:
-            {delegateData.recentActivity}
-          </span>
+            {delegateData.votingParticipation}
+          </span> */}
+          <span>Proposals Created: {delegateData.proposalsCreated}</span>
           <span>
-            Proposals Created:
-            {delegateData.proposalsCreated}
-          </span>
-          <span>
-            Delegated From:
-            {delegateData.delegatedFrom}
+            Delegated From: {delegateData.numOfDelegators.toLocaleString()}
           </span>
         </div>
       </DelegateImageContainer>

@@ -6,17 +6,15 @@ test("fetches delegate data for lefteris.eth", async (t) => {
   const address = "lefteris.eth";
   const delegate = new OPDelegate(address);
   const data = await delegate.fetchAgoraData();
-  assert.equal(
-    data.imgSrc,
-    "https://s.gravatar.com/avatar/9c124c1f38e3df30d0c582beec001257?s=420",
-  );
-  assert.equal(data.address, address);
-  assert.equal(
-    data.description.includes("I have considerable experience"),
-    true,
-  );
+  // assert.equal(
+  // Agora API has not yet implemented statement pulling
+  // https://t.me/c/1969840540/143
+  // assert.equal(
+  //   data.statement?.includes("I have considerable experience"),
+  //   true,
+  // );
 
-  assert.equal(has1MOPOrMore(data.delegatedOP), true);
+  assert.equal(has1MOPOrMore(data.votingPower), true);
 });
 
 /**
@@ -26,30 +24,16 @@ test("fetches delegate data for lefteris.eth", async (t) => {
  * // returns true for all
  */
 function has1MOPOrMore(amountString: string): boolean {
-  const oneMillionOPRegex = /^(\d+(?:\.\d+)?M) OP$/;
-  return oneMillionOPRegex.test(amountString);
+  return BigInt(amountString) > 1000000000000000000000000n;
 }
 
 // delegate does NOT have profile photo set
 test("fetches delegate data for 0x3d2d722b443a5cae8e41877bb7cd649f3650937c", async (t) => {
   const address = "0x3d2d722b443a5cae8e41877bb7cd649f3650937c";
-  const abbreviatedAddress = "0x3d...937c";
   const delegate = new OPDelegate(address);
   const data = await delegate.fetchAgoraData();
 
-  assert.equal(data.imgSrc.includes(".svg"), true);
-  assert.equal(data.address, abbreviatedAddress);
-  assert.equal(data.description.includes("We are the PoolCollective"), true);
-  assert.equal(has1MOPOrMore(data.delegatedOP), true);
-});
-
-// resolving ENS images not working currently
-test.skip("finds ENS avatar images properly", async (t) => {
-  const address = "lindajxie.eth";
-  const delegate = new OPDelegate(address);
-  const data = await delegate.fetchAgoraData();
-  assert.equal(
-    data.imgSrc,
-    "https://cryptocoven.s3.amazonaws.com/54986ff127ad77379a722350c2331e55.png",
-  );
+  assert.equal(data.address, address);
+  // assert.equal(data.statement?.includes("We are the PoolCollective"), true);
+  assert.equal(has1MOPOrMore(data.votingPower), true);
 });
