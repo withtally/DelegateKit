@@ -7,4 +7,5 @@ export const env = {
     process.env.HUB_URL,
   ),
   AGORA_API_KEY: v.parse(v.string(), process.env.AGORA_API_KEY),
+  OP_RPC_URL: v.parse(v.string(), process.env.OP_RPC_URL),
 } as const;

@@ -1,23 +1,24 @@
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { parse, string } from "valibot";
+import { Proposal, ProposalStatus } from "../../../api/Proposal/Proposal";
 import { publicEnv } from "../../../app/next-public-env";
 
 type ServerHydratedProps = {
   governorSlug: string;
   proposalId: string;
   proposal: {
-    status: string;
+    status: ProposalStatus;
   };
 };
 
 const ProposalFrame1: NextPage<ServerHydratedProps> = (props) => {
   const { proposalId, governorSlug, proposal } = props;
-  const imgSrc = `${publicEnv.NEXT_PUBLIC_HOST}/api/proposal/image/frame-1?proposalId=${proposalId}&governorSlug=${governorSlug}`;
+  const imgSrc = `${publicEnv.NEXT_PUBLIC_HOST}/api/optimism/proposals/images/1?proposalId=${proposalId}&governorSlug=${governorSlug}`;
   // const framePostUrl = `${BASE_URL}/api/proposal/generate-frame?proposalId=${proposalId}&currentIndex=1&governorSlug=${governorSlug}`;
   const proposalUrl = `https://vote.optimism.io/proposals/${proposalId}`;
 
-  const actionText = proposal.status === "ACTIVE" ? "Vote" : "View Proposal";
+  const actionText = proposal.status === "active" ? "Vote" : "View Proposal";
   return (
     <Head>
       <meta name="fc:frame" content="vNext" />
@@ -47,14 +48,17 @@ export const getStaticProps: GetStaticProps<ServerHydratedProps> = async ({
   params,
 }) => {
   try {
-    const proposalId: string = parse(
-      string(),
-      params?.proposalId,
-    ).toLowerCase();
-    const governorSlug: string = parse(string(), params?.governorSlug);
-    throw new Error("proposal fetching not implemented");
+    const proposalId = parse(string(), params?.proposalId).toLowerCase();
+    const proposalStatus = await Proposal.fetchProposalStatus(proposalId);
 
-    // return { props };
+    const props = {
+      governorSlug: "optimism",
+      proposalId,
+      proposal: {
+        status: proposalStatus,
+      },
+    };
+    return { props };
   } catch (err) {
     console.error(err);
     return { notFound: true };
