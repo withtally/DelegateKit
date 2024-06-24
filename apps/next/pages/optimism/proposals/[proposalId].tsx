@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import { parse, string } from "valibot";
 import { Proposal, ProposalStatus } from "../../../api/Proposal/Proposal";
@@ -33,20 +33,9 @@ const ProposalFrame1: NextPage<ServerHydratedProps> = (props) => {
     </Head>
   );
 };
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: "blocking",
-  };
-}
-
-/**
- * getStaticProps is a hack used to ensure the first render has proposalId found.
- * If we rely only on the useRouter hook in the component, the first render will not find proposalId
- */
-export const getStaticProps: GetStaticProps<ServerHydratedProps> = async ({
-  params,
-}) => {
+export const getServerSideProps: GetServerSideProps<
+  ServerHydratedProps
+> = async ({ params }) => {
   try {
     const proposalId = parse(string(), params?.proposalId).toLowerCase();
     const proposalStatus = await Proposal.fetchProposalStatus(proposalId);

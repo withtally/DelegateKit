@@ -9,4 +9,5 @@ export const env = {
   AGORA_API_KEY: v.parse(v.string(), process.env.AGORA_API_KEY),
   OP_RPC_URL: v.parse(v.string(), process.env.OP_RPC_URL),
   TALLY_API_KEY: v.parse(v.string(), process.env.TALLY_API_KEY),
+  PONDER_API_URL: v.parse(v.string(), process.env.PONDER_API_URL),
 } as const;

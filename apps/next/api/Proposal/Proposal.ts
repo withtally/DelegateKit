@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { env } from "../../app/env";
 import { RPC } from "../RPC/RPC";
 import { OPGovernor } from "../services/OPGovernor/OPGovernor";
 
@@ -26,7 +27,7 @@ const apiResponseSchema = z.object({
     executed: z.boolean(),
   }),
 });
-const PONDER_API_URL = "http://localhost:42069/";
+const PONDER_API_URL = env.PONDER_API_URL;
 export class Proposal {
   public static fetchProposal = async (proposalId: string) => {
     const proposal = await fetch(PONDER_API_URL, {
