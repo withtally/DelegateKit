@@ -1,19 +1,25 @@
 import { NextApiRequest } from "next";
 import { ImageResponse } from "next/og";
+import { Address } from "viem";
 import { z } from "zod";
+import { TallyAPI } from "../../../../../api/TallyAPI/TallyAPI";
 import DelegateImageContainer from "../../../../../api/delegates/DelegateImageContainer";
 import { fetchAddressImage } from "../../../../../app/delegates/fetch-address-image";
-import { fetchDelegateData } from "../../../../../app/delegates/fetchers";
 
 export const runtime = "edge";
 
 export default async function Frame2(req: NextApiRequest) {
   const url = new URL(z.string().url().parse(req.url));
-  const address = z.string().parse(url.searchParams.get("address"));
-  const [delegateData, delegateImage] = await Promise.all([
-    fetchDelegateData(address),
+  const address = z
+    .string()
+    .startsWith("0x")
+    .parse(url.searchParams.get("address")) as Address;
+  const tallyAPI = new TallyAPI("optimism");
+  const [delegateStatement, delegateImage] = await Promise.all([
+    tallyAPI.fetchStatementSummary(address),
     fetchAddressImage(address),
   ]);
+  const shortenedStatement = delegateStatement?.slice(0, 340);
   return new ImageResponse(
     (
       <DelegateImageContainer>
@@ -36,7 +42,7 @@ export default async function Frame2(req: NextApiRequest) {
         >
           <h3 style={{ fontSize: "20px" }}>
             {/* TODO only truncate to 200 if it's longer than 200 */}
-            {delegateData.statement?.slice(0, 340)}...
+            {shortenedStatement}...
           </h3>
         </div>
       </DelegateImageContainer>
