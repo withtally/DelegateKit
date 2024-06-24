@@ -79,3 +79,9 @@ If you have any questions, suggestions, or feedback, please reach out to us at:
 - Farcaster: [Dawson](https://warpcast.com/daws)
 
 We appreciate your interest in DelegateKit and look forward to building a more accessible and transparent governance experience together!
+
+### Frames
+
+- `/optimism/delegates/lefteris.eth`
+- `/optimism/proposals/0004537769538885163906898768401836322976193114338273264147746088063279656611139`
+- `/polls/52e29c73-b3a1-416f-a92b-6e7141f2a484`
