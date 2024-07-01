@@ -17,5 +17,3 @@ export const publicEnv = {
     ? `https://${VERCEL_HOST}`
     : v.parse(v.string([v.url()]), process.env.NEXT_PUBLIC_HOST),
 } as const;
-
-console.dir({ publicEnv });
