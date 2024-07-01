@@ -1,7 +1,5 @@
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
-import * as v from "valibot";
-import { parse, string } from "valibot";
 import { Proposal, ProposalStatus } from "../../../api/Proposal/Proposal";
 import { publicEnv } from "../../../app/next-public-env";
 
@@ -38,15 +36,15 @@ export const getServerSideProps: GetServerSideProps<
   ServerHydratedProps
 > = async ({ params }) => {
   try {
-    const proposalId = parse(v.optional(string()), params?.proposalId);
-    if (!proposalId) {
+    const proposalId = params?.proposalId;
+    if (typeof proposalId !== "string") {
       // nextjs build runs this function with no props, so we need to return notFound
       return { notFound: true };
     }
     const proposalStatus = await Proposal.fetchProposalStatus(proposalId);
     const props = {
       governorSlug: "optimism",
-      proposalId,
+      proposalId: proposalId.toLowerCase(),
       proposal: {
         status: proposalStatus,
       },
