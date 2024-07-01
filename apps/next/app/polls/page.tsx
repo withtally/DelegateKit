@@ -6,7 +6,7 @@ const SEVEN_DAYS_IN_MS = 1000 * 60 * 60 * 24 * 7;
 
 async function getPolls() {
   try {
-    let pollIds = await kv.zrange(
+    const pollIds = await kv.zrange(
       "polls_by_date",
       Date.now(),
       Date.now() - SEVEN_DAYS_IN_MS,
@@ -17,12 +17,12 @@ async function getPolls() {
       return [];
     }
 
-    let multi = kv.multi();
+    const multi = kv.multi();
     pollIds.forEach((id) => {
       multi.hgetall(`poll:${id}`);
     });
 
-    let items: Poll[] = await multi.exec();
+    const items: Poll[] = await multi.exec();
     return items.map((item) => {
       return { ...item };
     });

@@ -2,8 +2,9 @@ import { POLL_EXPIRY, Poll } from "@/app/polls/types";
 import { Message, getSSLHubRpcClient } from "@farcaster/hub-nodejs";
 import { kv } from "@vercel/kv";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { z } from "zod";
+import * as v from "valibot";
 import { env } from "../../../app/env";
+import { publicEnv } from "../../../app/next-public-env";
 
 const client = getSSLHubRpcClient(env.HUB_URL);
 
@@ -33,9 +34,12 @@ export default async function handler(
         }
 
         // Also validate the frame url matches the expected url
-        let urlBuffer = validatedMessage?.data?.frameActionBody?.url || [];
+        const urlBuffer = validatedMessage?.data?.frameActionBody?.url || [];
         const urlString = Buffer.from(urlBuffer).toString("utf-8");
-        if (validatedMessage && !urlString.startsWith(env.HOST)) {
+        if (
+          validatedMessage &&
+          !urlString.startsWith(publicEnv.NEXT_PUBLIC_HOST)
+        ) {
           return res.status(400).send(`Invalid frame url: ${urlBuffer}`);
         }
       } catch (e) {
@@ -46,20 +50,21 @@ export default async function handler(
         fid = 0;
       // If HUB_URL is not provided, don't validate and fall back to untrusted data
       if (client) {
-        buttonId = z
-          .number()
-          .parse(validatedMessage?.data?.frameActionBody?.buttonIndex);
-        fid = z.number().parse(validatedMessage?.data?.fid);
+        buttonId = v.parse(
+          v.number(),
+          validatedMessage?.data?.frameActionBody?.buttonIndex,
+        );
+        fid = v.parse(v.number(), validatedMessage?.data?.fid);
       } else {
-        buttonId = z.number().parse(req.body?.untrustedData?.buttonIndex);
-        fid = z.number().parse(req.body?.untrustedData?.fid);
+        buttonId = v.parse(v.number(), req.body?.untrustedData?.buttonIndex);
+        fid = v.parse(v.number(), req.body?.untrustedData?.fid);
       }
 
       // Clicked create poll
       if ((results || voted) && buttonId === 2) {
         return res
           .status(302)
-          .setHeader("Location", env.HOST)
+          .setHeader("Location", publicEnv.NEXT_PUBLIC_HOST)
           .send("Redirecting to create poll");
       }
 
@@ -67,7 +72,7 @@ export default async function handler(
       voted = voted || !!voteExists;
 
       if (fid > 0 && buttonId > 0 && buttonId < 5 && !results && !voted) {
-        let multi = kv.multi();
+        const multi = kv.multi();
         multi.hincrby(`poll:${pollId}`, `votes${buttonId}`, 1);
         multi.sadd(`poll:${pollId}:voted`, fid);
         multi.expire(`poll:${pollId}`, POLL_EXPIRY);
@@ -75,12 +80,12 @@ export default async function handler(
         await multi.exec();
       }
 
-      let poll: Poll | null = await kv.hgetall(`poll:${pollId}`);
+      const poll: Poll | null = await kv.hgetall(`poll:${pollId}`);
 
       if (!poll) {
         return res.status(400).send("Missing poll ID");
       }
-      const imageUrl = `${env.HOST}/api/polls/image?id=${poll.id}&results=${
+      const imageUrl = `${publicEnv.NEXT_PUBLIC_HOST}/api/polls/image?id=${poll.id}&results=${
         results ? "false" : "true"
       }&date=${Date.now()}${fid > 0 ? `&fid=${fid}` : ""}`;
       let button1Text = "View Results";
@@ -103,7 +108,7 @@ export default async function handler(
           <meta property="og:image" content="${imageUrl}">
           <meta name="fc:frame" content="vNext">
           <meta name="fc:frame:image" content="${imageUrl}">
-          <meta name="fc:frame:post_url" content="${env.HOST}/api/polls/vote?id=${
+          <meta name="fc:frame:post_url" content="${publicEnv.NEXT_PUBLIC_HOST}/api/polls/vote?id=${
             poll.id
           }&voted=true&results=${results ? "false" : "true"}">
           <meta name="fc:frame:button:1" content="${button1Text}">

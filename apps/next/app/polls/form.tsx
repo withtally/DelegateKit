@@ -15,10 +15,10 @@ type PollState = {
 };
 
 export function PollCreateForm() {
-  let formRef = useRef<HTMLFormElement>(null);
-  let [state, mutate] = useOptimistic(
+  const formRef = useRef<HTMLFormElement>(null);
+  const [state, mutate] = useOptimistic(
     { pending: false },
-    function createReducer(state, newPoll: PollState) {
+    function createReducer(_, newPoll: PollState) {
       if (newPoll.newPoll) {
         return {
           pending: newPoll.pending,
@@ -31,7 +31,7 @@ export function PollCreateForm() {
     },
   );
 
-  let pollStub = {
+  const pollStub = {
     id: uuidv4(),
     created_at: new Date().getTime(),
     title: "",
@@ -44,9 +44,9 @@ export function PollCreateForm() {
     votes3: 0,
     votes4: 0,
   };
-  let saveWithNewPoll = savePoll.bind(null, pollStub);
+  const saveWithNewPoll = savePoll.bind(null, pollStub);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  let [isPending, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
 
   return (
     <>
@@ -57,8 +57,8 @@ export function PollCreateForm() {
           action={saveWithNewPoll}
           onSubmit={(event) => {
             event.preventDefault();
-            let formData = new FormData(event.currentTarget);
-            let newPoll = {
+            const formData = new FormData(event.currentTarget);
+            const newPoll = {
               ...pollStub,
               title: formData.get("title") as string,
               option1: formData.get("option1") as string,
@@ -193,13 +193,13 @@ export function PollVoteForm({
   const router = useRouter();
   const searchParams = useSearchParams();
   viewResults = true; // Only allow voting via the api
-  let formRef = useRef<HTMLFormElement>(null);
-  let voteOnPoll = votePoll.bind(null, poll);
-  let [isPending, startTransition] = useTransition();
-  let [state, mutate] = useOptimistic(
+  const formRef = useRef<HTMLFormElement>(null);
+  const voteOnPoll = votePoll.bind(null, poll);
+  const [isPending, startTransition] = useTransition();
+  const [state, mutate] = useOptimistic(
     { showResults: viewResults },
-    function createReducer({ showResults }, state: PollState) {
-      if (state.voted || viewResults) {
+    function createReducer({ showResults }, pollState: PollState) {
+      if (pollState.voted || viewResults) {
         return {
           showResults: true,
         };
@@ -224,8 +224,8 @@ export function PollVoteForm({
         action={() => voteOnPoll(selectedOption)}
         onSubmit={(event) => {
           event.preventDefault();
-          let formData = new FormData(event.currentTarget);
-          let newPoll = {
+          const formData = new FormData(event.currentTarget);
+          const newPoll = {
             ...poll,
           };
 

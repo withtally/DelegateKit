@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { PollCreateForm } from "./polls/form";
 
-export let metadata = {
+export const metadata = {
   title: "DelegateKit Polls",
   description: "Ask your followers what they think",
 };

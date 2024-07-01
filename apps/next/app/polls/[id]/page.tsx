@@ -3,10 +3,10 @@ import { Poll } from "@/app/polls/types";
 import { kv } from "@vercel/kv";
 import { Metadata, ResolvingMetadata } from "next";
 import Head from "next/head";
-import { env } from "../../env";
+import { publicEnv } from "../../next-public-env";
 
 async function getPoll(id: string): Promise<Poll> {
-  let nullPoll = {
+  const nullPoll = {
     id: "",
     title: "No poll found",
     option1: "",
@@ -21,7 +21,7 @@ async function getPoll(id: string): Promise<Poll> {
   };
 
   try {
-    let poll: Poll | null = await kv.hgetall(`poll:${id}`);
+    const poll: Poll | null = await kv.hgetall(`poll:${id}`);
 
     if (!poll) {
       return nullPoll;
@@ -49,8 +49,8 @@ export async function generateMetadata(
 
   const fcMetadata: Record<string, string> = {
     "fc:frame": "vNext",
-    "fc:frame:post_url": `${env.HOST}/api/polls/vote?id=${id}`,
-    "fc:frame:image": `${env.HOST}/api/polls/image?id=${id}`,
+    "fc:frame:post_url": `${publicEnv.NEXT_PUBLIC_HOST}/api/polls/vote?id=${id}`,
+    "fc:frame:image": `${publicEnv.NEXT_PUBLIC_HOST}/api/polls/image?id=${id}`,
   };
   [poll.option1, poll.option2, poll.option3, poll.option4]
     .filter((o) => o !== "")
@@ -67,7 +67,7 @@ export async function generateMetadata(
     other: {
       ...fcMetadata,
     },
-    metadataBase: new URL(env.HOST),
+    metadataBase: new URL(publicEnv.NEXT_PUBLIC_HOST),
   };
 }
 function getMeta(poll: Poll) {
