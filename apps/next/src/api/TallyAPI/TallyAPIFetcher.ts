@@ -11,7 +11,7 @@ import {
   union,
 } from "valibot";
 import { Address } from "viem";
-import { env } from "../../app/env";
+import { env } from "../../../app/env";
 import { ENS } from "../ENS/ENS";
 
 const TALLY_API_KEY = env.TALLY_API_KEY;

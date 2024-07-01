@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import * as v from "valibot";
-import { OPDelegate } from "../../../../api/services/OPDelegate/OPDelegate";
+import { OPDelegate } from "../../../../src/api/services/OPDelegate/OPDelegate";
 
 export default async function handler(
   req: NextApiRequest,

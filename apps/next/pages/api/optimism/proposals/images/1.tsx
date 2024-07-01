@@ -2,9 +2,9 @@ import type { NextApiRequest } from "next";
 import { ImageResponse } from "next/og";
 import * as v from "valibot";
 import { parse, string } from "valibot";
-import { Proposal } from "../../../../../api/Proposal/Proposal";
-import { ProposalFrameContainer } from "../../../../../api/proposals/ProposalFrameContainer";
 import { routes } from "../../../../../app/routes";
+import { Proposal } from "../../../../../src/api/Proposal/Proposal";
+import { ProposalFrameContainer } from "../../../../../src/api/proposals/ProposalFrameContainer";
 
 export const runtime = "edge";
 

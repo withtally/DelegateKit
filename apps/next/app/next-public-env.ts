@@ -11,8 +11,11 @@ const VERCEL_HOST =
     : VERCEL_ENV === "preview"
       ? VERCEL_BRANCH_URL
       : null;
+
 export const publicEnv = {
   NEXT_PUBLIC_HOST: VERCEL_HOST
     ? `https://${VERCEL_HOST}`
     : v.parse(v.string([v.url()]), process.env.NEXT_PUBLIC_HOST),
 } as const;
+
+console.dir({ publicEnv });

@@ -1,7 +1,7 @@
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
-import { Proposal, ProposalStatus } from "../../../api/Proposal/Proposal";
 import { publicEnv } from "../../../app/next-public-env";
+import { Proposal, ProposalStatus } from "../../../src/api/Proposal/Proposal";
 
 type ServerHydratedProps = {
   governorSlug: string;

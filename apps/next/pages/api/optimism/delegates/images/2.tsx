@@ -2,9 +2,9 @@ import { NextApiRequest } from "next";
 import { ImageResponse } from "next/og";
 import { Address } from "viem";
 import { z } from "zod";
-import { TallyAPI } from "../../../../../api/TallyAPI/TallyAPI";
-import DelegateImageContainer from "../../../../../api/delegates/DelegateImageContainer";
 import { fetchAddressImage } from "../../../../../app/delegates/fetch-address-image";
+import { TallyAPI } from "../../../../../src/api/TallyAPI/TallyAPI";
+import DelegateImageContainer from "../../../../../src/api/delegates/DelegateImageContainer";
 
 export const runtime = "edge";
 

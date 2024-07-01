@@ -1,6 +1,6 @@
 import path from "path";
 import { z } from "zod";
-import { env } from "../../../app/env";
+import { env } from "../../../../app/env";
 
 export class AgoraAPI {
   #apiFetch = (pathname: string) => {

@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { routes } from "../../app/routes";
+import { routes } from "../../../app/routes";
 
 export default function DelegateImageContainer({
   children,

@@ -1,9 +1,9 @@
 import { NextApiRequest } from "next";
 import { ImageResponse } from "next/og";
 import { z } from "zod";
-import DelegateImageContainer from "../../../../../api/delegates/DelegateImageContainer";
 import { fetchAddressImage } from "../../../../../app/delegates/fetch-address-image";
 import { fetchDelegateData } from "../../../../../app/delegates/fetchers";
+import DelegateImageContainer from "../../../../../src/api/delegates/DelegateImageContainer";
 
 export const runtime = "edge";
 

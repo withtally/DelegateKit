@@ -1,4 +1,4 @@
-import { AgoraAPI } from "../../api/services/AgoraAPI/AgoraAPI";
+import { AgoraAPI } from "../../src/api/services/AgoraAPI/AgoraAPI";
 import { routes } from "../routes";
 
 /**

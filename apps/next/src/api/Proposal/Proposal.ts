@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { env } from "../../app/env";
+import { env } from "../../../app/env";
 import { RPC } from "../RPC/RPC";
 import { OPGovernor } from "../services/OPGovernor/OPGovernor";
 
