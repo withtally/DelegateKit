@@ -32,6 +32,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@farcaster/auth-kit": "^0.3.1",
     "concurrently": "^8.2.2",
     "dotenv": "^16.4.5",
     "eslint": "8.57.0",
