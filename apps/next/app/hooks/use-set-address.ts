@@ -1,4 +1,3 @@
-"use client";
 import { useProfile } from "@farcaster/auth-kit";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { useEffect } from "react";
@@ -13,7 +12,6 @@ export const useSetAddress = () => {
   const [verifiedAddresses, setVerifiedAddresses] = useLocalStorage<
     ReadonlyArray<Address>
   >("verifiedAddresses", []);
-  console.log(`verifications: ${profile?.verifications}`);
   useEffect(() => {
     if (!Array.isArray(profile?.verifications)) return;
     const { verifications } = profile;
