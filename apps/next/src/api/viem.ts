@@ -4,7 +4,7 @@ import { env } from "../../app/env";
 
 export const publicMainnetClient = createPublicClient({
   chain: mainnet,
-  transport: http(),
+  transport: http("https://free-eth-node.com/api/eth"),
 });
 
 export const publicOPClient = createPublicClient({

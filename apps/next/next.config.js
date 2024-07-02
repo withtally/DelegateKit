@@ -1,4 +1,8 @@
 module.exports = {
+  webpack(conf) {
+    conf.resolve.fallback = { wagmi: false };
+    return conf;
+  },
   images: {
     remotePatterns: [
       {
