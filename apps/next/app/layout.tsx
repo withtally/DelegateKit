@@ -1,17 +1,11 @@
-"use client";
-import { AuthKitProvider, SignInButton } from "@farcaster/auth-kit";
-import "@farcaster/auth-kit/styles.css";
 import { GeistSans } from "geist/font/sans";
+import dynamic from "next/dynamic";
 import "./globals.css";
-import { publicEnv } from "./next-public-env";
 
-const domain = publicEnv.NEXT_PUBLIC_HOST;
-const config = {
-  relay: "https://relay.farcaster.xyz",
-  rpcUrl: "https://mainnet.optimism.io",
-  domain: domain.replace(/^https:\/\//, ""),
-  siweUri: domain,
-};
+const HeaderWithNoSSR = dynamic(() => import("./components/Header/Header"), {
+  ssr: false,
+});
+
 export default function RootLayout({
   children,
 }: {
@@ -20,11 +14,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={GeistSans.variable}>
       <body>
-        <AuthKitProvider config={config}>
-          {" "}
-          <SignInButton />
-          {children}
-        </AuthKitProvider>
+        <HeaderWithNoSSR />
+        <div className="px-40 py-20">{children}</div>
       </body>
     </html>
   );
