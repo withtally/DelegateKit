@@ -1,3 +1,4 @@
+import "@farcaster/auth-kit/styles.css";
 import { GeistSans } from "geist/font/sans";
 import dynamic from "next/dynamic";
 import "./globals.css";
