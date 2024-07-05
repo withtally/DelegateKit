@@ -15,6 +15,7 @@ export const useSetAddress = () => {
   useEffect(() => {
     if (!Array.isArray(profile?.verifications)) return;
     const { verifications } = profile;
+    // keep only eth address verifications
     const ethereumVerifications = verifications.filter((verification) =>
       isAddress(verification),
     );

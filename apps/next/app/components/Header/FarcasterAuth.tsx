@@ -21,7 +21,9 @@ const FarcasterAuth = () => {
 
   return (
     <>
-      <SignInButton />
+      <div className="py-5">
+        <SignInButton />
+      </div>
       {address && (
         <>
           Selected address:
