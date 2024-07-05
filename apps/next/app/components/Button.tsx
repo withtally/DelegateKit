@@ -1,5 +1,33 @@
-import { PropsWithChildren } from "react";
+import {
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  PropsWithChildren,
+} from "react";
 
-export const Button = ({ children }: PropsWithChildren) => {
-  return <button className=" py-2 px-4 rounded-full">{children}</button>;
+type ButtonProps = {
+  primary?: boolean;
+  secondary?: boolean;
+  customClasses?: Array<string>;
+} & PropsWithChildren &
+  DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
+export const Button = ({
+  children,
+  primary,
+  secondary,
+  customClasses,
+  ...rest
+}: ButtonProps) => {
+  if (!secondary) {
+    primary = true;
+  }
+  const sharedClasses = ["py-2.5", "px-6", "rounded-full", "shadow-md", "m-2"];
+  if (primary) {
+    sharedClasses.push("bg-purple", "text-white");
+  }
+  sharedClasses.push(...(customClasses || []));
+  return (
+    <button className={sharedClasses.join(" ")} {...rest}>
+      {children}
+    </button>
+  );
 };

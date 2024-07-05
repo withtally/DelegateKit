@@ -7,6 +7,12 @@ export const routes = {
   v1: {
     api: {
       delegates: {
+        frame: {
+          "1": {
+            buildUrl: (address: string) =>
+              `${publicEnv.NEXT_PUBLIC_HOST}/optimism/delegates/${address}`,
+          },
+        },
         images: {
           "1": {
             buildUrl: (address: string) =>

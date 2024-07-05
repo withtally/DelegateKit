@@ -1,2 +1,2 @@
-export const frameWidth = 320;
-export const frameHeight = 320;
+export const frameWidth = 600;
+export const frameHeight = 600;

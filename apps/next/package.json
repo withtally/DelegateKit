@@ -20,6 +20,7 @@
     "addreth": "^2.0.0",
     "autoprefixer": "10.4.16",
     "clsx": "^2.1.0",
+    "copy-to-clipboard": "^3.3.3",
     "geist": "^1.2.1",
     "next": "^14.2.4",
     "postcss": "^8.4.33",
