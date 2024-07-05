@@ -23,7 +23,7 @@ const ProposalFrame1: NextPage<ServerHydratedProps> = (props) => {
       <meta name="fc:frame" content="vNext" />
 
       <meta name="fc:frame:image" content={imgSrc} />
-      <meta name="fc:frame:image:aspect_ratio" content="1.91:1" />
+      <meta name="fc:frame:image:aspect_ratio" content="1:1" />
       <meta property="og:image" content={imgSrc} />
 
       <meta name="fc:frame:button:1" content={actionText} />

@@ -17,7 +17,7 @@ export class DelegateFrameFactory {
 		<html>
 		<head>
 		<meta name="fc:frame" content="vNext" />
-		<meta name="fc:frame:image:aspect_ratio" content="1.91:1" />
+		<meta name="fc:frame:image:aspect_ratio" content="1:1" />
 
 		{{dynamicContent}}
 

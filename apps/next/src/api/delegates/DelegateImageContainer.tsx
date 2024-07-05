@@ -23,18 +23,6 @@ export default function DelegateImageContainer({
           height="50px"
           style={{ position: "absolute", left: "60px", top: "60px" }}
         />
-        <img
-          src={routes.images.tally}
-          alt="tally logo"
-          width="50px"
-          height="50px"
-          style={{
-            position: "absolute",
-            left: "120px",
-            top: "60px",
-            borderRadius: "5px",
-          }}
-        />
       </span>
       <div
         style={{

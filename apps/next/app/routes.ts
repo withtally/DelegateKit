@@ -3,7 +3,6 @@ import { publicEnv } from "./next-public-env";
 export const routes = {
   images: {
     op: `${publicEnv.NEXT_PUBLIC_HOST}/images/op.png`,
-    tally: `${publicEnv.NEXT_PUBLIC_HOST}/images/tally.jpg`,
   },
   v1: {
     api: {
