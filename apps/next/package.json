@@ -2,7 +2,7 @@
   "name": "delegatekit.next",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "lint": "next lint",
     "build": "next build",
     "start": "next start",
