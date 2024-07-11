@@ -1,4 +1,4 @@
-import { Poll } from "@/app/polls/types";
+import { Poll } from "@/app/polls/new/types";
 import { kv } from "@vercel/kv";
 import Link from "next/link";
 
@@ -52,7 +52,7 @@ export default async function Page() {
         </div>
         <Link href="/">
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Create Poll
+            Polls
           </button>
         </Link>
       </main>

@@ -2,7 +2,7 @@ import { NextApiRequest } from "next";
 import { ImageResponse } from "next/og";
 import { Address } from "viem";
 import { z } from "zod";
-import { fetchAddressImage } from "../../../../../app/delegate/fetch-address-image";
+import { fetchAddressImage } from "../../../../../app/delegates/[address]/fetch-address-image";
 import { TallyAPI } from "../../../../../src/api/TallyAPI/TallyAPI";
 import DelegateImageContainer from "../../../../../src/api/delegates/DelegateImageContainer";
 import { frameHeight, frameWidth } from "../../../frame-config";

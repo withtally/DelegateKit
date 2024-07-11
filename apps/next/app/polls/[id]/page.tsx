@@ -1,5 +1,5 @@
-import { PollVoteForm } from "@/app/polls/form";
-import { Poll } from "@/app/polls/types";
+import { PollVoteForm } from "@/app/polls/new/form";
+import { Poll } from "@/app/polls/new/types";
 import { kv } from "@vercel/kv";
 import { Metadata, ResolvingMetadata } from "next";
 import Head from "next/head";

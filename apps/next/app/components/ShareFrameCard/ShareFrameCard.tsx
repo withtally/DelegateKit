@@ -1,5 +1,6 @@
 import copy from "copy-to-clipboard";
 import { PropsWithChildren } from "react";
+import { frameHeight, frameWidth } from "../../../pages/api/frame-config";
 import { Button } from "../Button";
 
 type ShareFrameProps = {
@@ -8,8 +9,13 @@ type ShareFrameProps = {
 } & PropsWithChildren;
 export const ShareFrameCard = ({ frameUrl, frameImgSrc }: ShareFrameProps) => {
   return (
-    <div>
-      <img src={frameImgSrc} alt="frame" width={320} height={320} />
+    <>
+      <img
+        src={frameImgSrc}
+        alt="frame"
+        width={frameWidth}
+        height={frameHeight}
+      />
       {/* footer */}
       <div className="flex">
         <Button secondary customClasses={["px-2.5"]}>
@@ -57,6 +63,6 @@ export const ShareFrameCard = ({ frameUrl, frameImgSrc }: ShareFrameProps) => {
         </Button>
         <Button>Share on Warpcast</Button>
       </div>
-    </div>
+    </>
   );
 };

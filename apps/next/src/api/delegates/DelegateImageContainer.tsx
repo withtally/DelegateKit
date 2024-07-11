@@ -1,4 +1,5 @@
 import { PropsWithChildren } from "react";
+import { frameHeight } from "../../../pages/api/frame-config";
 
 export default function DelegateImageContainer({
   children,
@@ -11,7 +12,7 @@ export default function DelegateImageContainer({
         // alignItems: "center",
         // justifyContent: "center",
         fontFamily: "sans-serif",
-        height: "100%",
+        height: frameHeight,
         width: "100%",
         backgroundColor: "white",
       }}

@@ -1,4 +1,4 @@
-import { POLL_EXPIRY, Poll } from "@/app/polls/types";
+import { POLL_EXPIRY, Poll } from "@/app/polls/new/types";
 import { Message, getSSLHubRpcClient } from "@farcaster/hub-nodejs";
 import { kv } from "@vercel/kv";
 import type { NextApiRequest, NextApiResponse } from "next";

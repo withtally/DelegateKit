@@ -1,8 +1,8 @@
 import { NextApiRequest } from "next";
 import { ImageResponse } from "next/og";
 import { z } from "zod";
-import { fetchAddressImage } from "../../../../../app/delegate/fetch-address-image";
-import { fetchDelegateData } from "../../../../../app/delegate/fetchers";
+import { fetchAddressImage } from "../../../../../app/delegates/[address]/fetch-address-image";
+import { fetchDelegateData } from "../../../../../app/delegates/[address]/fetchers";
 import DelegateImageContainer from "../../../../../src/api/delegates/DelegateImageContainer";
 import { frameHeight, frameWidth } from "../../../frame-config";
 
