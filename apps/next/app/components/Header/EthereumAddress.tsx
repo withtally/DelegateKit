@@ -16,7 +16,11 @@ export const EthereumAddress = () => {
     <Link href="/settings" className="flex items-center">
       <div className="flex items-center space-x-3 pl-3">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={addressImage} alt={"Ethereum address avatar"} />
+        <img
+          src={addressImage}
+          alt={"Ethereum address avatar"}
+          style={{ borderRadius: "3px" }}
+        />
         <code>{printableAddress}</code>
       </div>
     </Link>
