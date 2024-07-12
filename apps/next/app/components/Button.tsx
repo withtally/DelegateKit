@@ -20,7 +20,7 @@ export const Button = ({
   if (!secondary) {
     primary = true;
   }
-  const sharedClasses = ["py-2.5", "px-6", "rounded-full", "shadow-md", "m-2"];
+  const sharedClasses = ["py-2.5", "px-6", "rounded-full", "shadow-md"];
   if (primary) {
     sharedClasses.push("bg-purple", "text-white");
   }

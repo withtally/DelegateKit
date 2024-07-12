@@ -1,9 +1,10 @@
 "use client";
 
-import clsx from "clsx";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useOptimistic, useRef, useState, useTransition } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { Button } from "../../components/Button";
+import PlusIcon from "./PlusIcon";
 import { redirectToPolls, savePoll, votePoll } from "./actions";
 import { Poll } from "./types";
 
@@ -86,7 +87,7 @@ export function PollCreateForm() {
             aria-label="Poll Title"
             className="pl-3 pr-28 py-3 mt-1 text-lg block w-full border border-gray-200 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-300"
             maxLength={150}
-            placeholder="Title..."
+            placeholder="Poll Title"
             required
             type="text"
             name="title"
@@ -119,24 +120,26 @@ export function PollCreateForm() {
           />
           <input
             aria-label="Option 4"
-            className="pl-3 pr-28 py-3 mt-1 text-lg block w-full border border-gray-200 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-300"
+            className="pl-3 pr-28 py-3 mt-1 text-lg block w-full border border-gray-200 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-300 mb-4"
             maxLength={150}
             placeholder="Option 4 (optional)"
             type="text"
             name="option4"
           />
-          <div className={"pt-2 flex justify-end"}>
-            <button
-              className={clsx(
-                "flex items-center p-1 justify-center px-4 h-10 text-lg border bg-blue-500 text-white rounded-md w-24 focus:outline-none focus:ring focus:ring-blue-300 hover:bg-blue-700 focus:bg-blue-700",
-                state.pending && "bg-gray-700 cursor-not-allowed",
-              )}
-              type="submit"
-              disabled={state.pending}
-            >
-              Create
-            </button>
-          </div>
+          <Button
+            type="submit"
+            disabled={state.pending}
+            customClasses={[
+              "w-full",
+              "flex",
+              "justify-center",
+              "items-center",
+              "gap-2",
+            ]}
+          >
+            <PlusIcon />
+            Create Poll
+          </Button>
         </form>
       </div>
       <div className="w-full"></div>

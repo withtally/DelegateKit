@@ -30,7 +30,7 @@ export function PollHeader() {
   const pollHistoryHref = "/polls/history";
   const pathname = usePathname();
   return (
-    <div className="flex  items-center justify-center flex-1 px-4 sm:px-20">
+    <div className="flex  items-center justify-center flex-1 px-4 sm:px-20 border-b-2">
       <PollElement href={newPollHref}>
         <NewPollIcon isActive={pathname === newPollHref} />
         <span>New poll</span>
