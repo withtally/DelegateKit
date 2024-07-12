@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PropsWithChildren } from "react";
+import NewPollIcon from "./icons/NewPoll";
+import PollHistoryIcon from "./icons/PollHistoryIcon";
 
 type PollElementProps = { href: string } & PropsWithChildren;
 function PollElement({ href, children }: PollElementProps) {
@@ -13,7 +15,8 @@ function PollElement({ href, children }: PollElementProps) {
       style={{
         display: "flex",
         alignItems: "center",
-        padding: "8px 12px",
+        padding: "8px 24px",
+        gap: "6px",
         borderRadius: "7px",
         ...(isActive ? { color: "black" } : { color: "grey" }),
       }}
@@ -23,10 +26,19 @@ function PollElement({ href, children }: PollElementProps) {
   );
 }
 export function PollHeader() {
+  const newPollHref = "/polls/new";
+  const pollHistoryHref = "/polls/history";
+  const pathname = usePathname();
   return (
     <div className="flex  items-center justify-center flex-1 px-4 sm:px-20">
-      <PollElement href="/polls/new">New poll</PollElement>
-      <PollElement href="/polls/history">Poll history</PollElement>
+      <PollElement href={newPollHref}>
+        <NewPollIcon isActive={pathname === newPollHref} />
+        <span>New poll</span>
+      </PollElement>
+      <PollElement href={pollHistoryHref}>
+        <PollHistoryIcon isActive={pathname === pollHistoryHref} />
+        <span>Poll history</span>
+      </PollElement>
     </div>
   );
 }
