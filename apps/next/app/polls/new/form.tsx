@@ -4,7 +4,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useOptimistic, useRef, useState, useTransition } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Button } from "../../components/Button";
+import { useAddress } from "../../hooks/use-address";
 import PlusIcon from "./PlusIcon";
+import { PrivatePollSelector } from "./PrivatePollSelector";
 import { redirectToPolls, savePoll, votePoll } from "./actions";
 import { Poll } from "./types";
 
@@ -15,8 +17,9 @@ type PollState = {
   voted?: boolean;
 };
 
-export function PollCreateForm() {
+export default function PollCreateForm() {
   const formRef = useRef<HTMLFormElement>(null);
+  const { address } = useAddress();
   const [state, mutate] = useOptimistic(
     { pending: false },
     function createReducer(_, newPoll: PollState) {
@@ -32,22 +35,28 @@ export function PollCreateForm() {
     },
   );
 
-  const pollStub = {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isPending, startTransition] = useTransition();
+  const [isPrivate, setIsPrivate] = useState(false);
+  if (!address) {
+    return null;
+  }
+  const pollStub: Poll = {
     id: uuidv4(),
+    creatorEthAddress: address,
     created_at: new Date().getTime(),
     title: "",
     option1: "",
     option2: "",
     option3: "",
     option4: "",
+    isPrivate: false,
     votes1: 0,
     votes2: 0,
     votes3: 0,
     votes4: 0,
   };
   const saveWithNewPoll = savePoll.bind(null, pollStub);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isPending, startTransition] = useTransition();
 
   return (
     <>
@@ -59,13 +68,17 @@ export function PollCreateForm() {
           onSubmit={(event) => {
             event.preventDefault();
             const formData = new FormData(event.currentTarget);
-            const newPoll = {
+            const isPrivateFormResult = formData.get("isPrivate") as
+              | "on"
+              | "off";
+            const newPoll: Poll = {
               ...pollStub,
               title: formData.get("title") as string,
               option1: formData.get("option1") as string,
               option2: formData.get("option2") as string,
               option3: formData.get("option3") as string,
               option4: formData.get("option4") as string,
+              isPrivate: isPrivateFormResult === "on",
               votes1: 0,
               votes2: 0,
               votes3: 0,
@@ -125,6 +138,12 @@ export function PollCreateForm() {
             placeholder="Option 4 (optional)"
             type="text"
             name="option4"
+          />
+          <PrivatePollSelector
+            isPrivate={isPrivate}
+            setIsPrivate={setIsPrivate}
+            name="isPrivate"
+            aria-label="Private Poll"
           />
           <Button
             type="submit"

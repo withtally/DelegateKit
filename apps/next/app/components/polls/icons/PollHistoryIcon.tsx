@@ -8,7 +8,7 @@ export default function PollHistoryIcon({ isActive }: { isActive: boolean }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_4074_3579)">
+      <g clipPath="url(#clip0_4074_3579)">
         <path
           d="M0.501953 4C0.501953 4 0.501953 7.04738 0.501953 9V4Z"
           fill={fillColor}
@@ -21,8 +21,8 @@ export default function PollHistoryIcon({ isActive }: { isActive: boolean }) {
         <path
           d="M0.501953 4C0.501953 4 0.501953 7.04738 0.501953 9M3.00195 3V10M6.50195 2H10.502C11.0542 2 11.502 2.44772 11.502 3V10C11.502 10.5523 11.0542 11 10.502 11H6.50195C5.94967 11 5.50195 10.5523 5.50195 10V3C5.50195 2.44772 5.94967 2 6.50195 2Z"
           stroke={fillColor}
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
       <defs>
