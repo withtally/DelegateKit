@@ -13,7 +13,7 @@ export function PrivatePollSelector({
 >) {
   return (
     <div className="flex items-center justify-center space-x-2 pb-4">
-      <div>Make this a Private poll </div>
+      <div>Hide poll results after voting</div>
       {/* css toggle inspired by https://flowbite.com/docs/forms/toggle/ */}
       <label className="inline-flex items-center cursor-pointer">
         <input
