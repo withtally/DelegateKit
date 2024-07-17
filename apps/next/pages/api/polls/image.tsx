@@ -128,10 +128,17 @@ export default async function handler(
             style={{
               display: "flex",
               flexDirection: "column",
+              paddingLeft: "40px",
+              paddingRight: "40px",
             }}
           >
-            <h2 style={{ textAlign: "center", marginTop: "-40px" }}>
-              {poll.title}
+            <h2
+              style={{
+                textAlign: "center",
+                marginTop: "-40px",
+              }}
+            >
+              {showResults ? "Thank you. here are the results" : poll.title}
             </h2>
             {showResults &&
               pollData.options.map((opt, index) => {
@@ -152,7 +159,6 @@ export default async function handler(
                   </div>
                 );
               })}
-            {/*{showResults ? <h3 style={{color: "darkgray"}}>Total votes: {totalVotes}</h3> : ''}*/}
           </div>
         </div>
       </div>,
