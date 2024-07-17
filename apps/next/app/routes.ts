@@ -3,6 +3,7 @@ import { publicEnv } from "./next-public-env";
 export const routes = {
   images: {
     op: `${publicEnv.NEXT_PUBLIC_HOST}/images/op.png`,
+    chatBubble: `${publicEnv.NEXT_PUBLIC_HOST}/images/chat-red.png`,
   },
   v1: {
     api: {

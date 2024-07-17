@@ -52,6 +52,7 @@ export async function generateMetadata(
 
   const fcMetadata: Record<string, string> = {
     "fc:frame": "vNext",
+    "fc:frame:image:aspect_ratio": "1:1",
     "fc:frame:post_url": `${publicEnv.NEXT_PUBLIC_HOST}/api/polls/vote?id=${id}`,
     "fc:frame:image": `${publicEnv.NEXT_PUBLIC_HOST}/api/polls/image?id=${id}`,
   };

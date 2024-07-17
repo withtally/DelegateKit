@@ -99,7 +99,7 @@ export default function PollCreateForm() {
           <input
             aria-label="Poll Title"
             className="pl-3 pr-28 py-3 mt-1 text-lg block w-full border border-gray-200 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-300"
-            maxLength={150}
+            maxLength={60}
             placeholder="Poll Title"
             required
             type="text"
@@ -108,7 +108,7 @@ export default function PollCreateForm() {
           <input
             aria-label="Option 1"
             className="pl-3 pr-28 py-3 mt-1 text-lg block w-full border border-gray-200 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-300"
-            maxLength={150}
+            maxLength={50}
             placeholder="Option 1"
             required
             type="text"
@@ -117,7 +117,7 @@ export default function PollCreateForm() {
           <input
             aria-label="Option 2"
             className="pl-3 pr-28 py-3 mt-1 text-lg block w-full border border-gray-200 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-300"
-            maxLength={150}
+            maxLength={50}
             placeholder="Option 2"
             required
             type="text"
@@ -126,7 +126,7 @@ export default function PollCreateForm() {
           <input
             aria-label="Option 3"
             className="pl-3 pr-28 py-3 mt-1 text-lg block w-full border border-gray-200 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-300"
-            maxLength={150}
+            maxLength={50}
             placeholder="Option 3 (optional)"
             type="text"
             name="option3"
@@ -134,7 +134,7 @@ export default function PollCreateForm() {
           <input
             aria-label="Option 4"
             className="pl-3 pr-28 py-3 mt-1 text-lg block w-full border border-gray-200 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-300 mb-4"
-            maxLength={150}
+            maxLength={50}
             placeholder="Option 4 (optional)"
             type="text"
             name="option4"
