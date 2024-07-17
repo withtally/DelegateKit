@@ -103,7 +103,7 @@ export default async function handler(
         }}
       >
         <div
-          style={{ position: "absolute", display: "flex", left: 208, top: 60 }}
+          style={{ position: "absolute", display: "flex", left: 180, top: 20 }}
         >
           <StarIcon />
         </div>
@@ -133,24 +133,25 @@ export default async function handler(
             <h2 style={{ textAlign: "center", marginTop: "-40px" }}>
               {poll.title}
             </h2>
-            {pollData.options.map((opt, index) => {
-              return (
-                <div
-                  key={opt.text}
-                  style={{
-                    backgroundColor: showResults ? "#7764FD" : "",
-                    padding: 10,
-                    marginBottom: 10,
-                    borderRadius: 4,
-                    width: `${showResults ? opt.percentOfTotal : 100}%`,
-                    whiteSpace: "nowrap",
-                    overflow: "visible",
-                  }}
-                >
-                  {opt.text}
-                </div>
-              );
-            })}
+            {showResults &&
+              pollData.options.map((opt, index) => {
+                return (
+                  <div
+                    key={opt.text}
+                    style={{
+                      backgroundColor: showResults ? "#7764FD" : "",
+                      padding: 10,
+                      marginBottom: 10,
+                      borderRadius: 4,
+                      width: `${showResults ? opt.percentOfTotal : 100}%`,
+                      whiteSpace: "nowrap",
+                      overflow: "visible",
+                    }}
+                  >
+                    {opt.text}
+                  </div>
+                );
+              })}
             {/*{showResults ? <h3 style={{color: "darkgray"}}>Total votes: {totalVotes}</h3> : ''}*/}
           </div>
         </div>
