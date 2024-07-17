@@ -11,15 +11,33 @@ import { frameHeight, frameWidth } from "../frame-config";
 const fontPath = join(process.cwd(), "Roboto-Regular.ttf");
 const fontData = fs.readFileSync(fontPath);
 
+const StarIcon = () => {
+  return (
+    //  eslint-disable-next-line @next/next/no-img-element
+    <img alt="star" src={routes.images.star} width="40px" height="40px" />
+  );
+};
 const ChatIcon = () => {
   return (
     //  eslint-disable-next-line @next/next/no-img-element
     <img
       alt="chat bubble"
       src={routes.images.chatBubble}
-      width="148"
-      height="148"
+      width="240px"
+      height="240px"
     />
+  );
+};
+const OPSmileIcon = () => {
+  return (
+    //  eslint-disable-next-line @next/next/no-img-element
+    <img alt="smile" src={routes.images.OPsmile} width="140px" height="140px" />
+  );
+};
+const ThumbIcon = () => {
+  return (
+    //  eslint-disable-next-line @next/next/no-img-element
+    <img alt="thumb" src={routes.images.thumb} width="240px" height="240px" />
   );
 };
 
@@ -84,6 +102,21 @@ export default async function handler(
           marginTop: 0,
         }}
       >
+        <div
+          style={{ position: "absolute", display: "flex", left: 208, top: 60 }}
+        >
+          <StarIcon />
+        </div>
+        <div
+          style={{ position: "absolute", display: "flex", left: 50, top: 82 }}
+        >
+          <OPSmileIcon />
+        </div>
+        <div
+          style={{ position: "absolute", display: "flex", right: 30, top: 20 }}
+        >
+          <ThumbIcon />
+        </div>
         <ChatIcon />
 
         <div
@@ -97,7 +130,9 @@ export default async function handler(
               flexDirection: "column",
             }}
           >
-            <h2 style={{ textAlign: "center" }}>{poll.title}</h2>
+            <h2 style={{ textAlign: "center", marginTop: "-40px" }}>
+              {poll.title}
+            </h2>
             {pollData.options.map((opt, index) => {
               return (
                 <div
