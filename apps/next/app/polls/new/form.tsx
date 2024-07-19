@@ -1,10 +1,11 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
 import { useOptimistic, useRef, useState, useTransition } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Button } from "../../components/Button";
+import { ShareFrameCard } from "../../components/ShareFrameCard/ShareFrameCard";
 import { useAddress } from "../../hooks/use-address";
+import { routes } from "../../routes";
 import PlusIcon from "./PlusIcon";
 import { PrivatePollSelector } from "./PrivatePollSelector";
 import { redirectToPolls, savePoll, votePoll } from "./actions";
@@ -193,16 +194,16 @@ function PollOptions({
   );
 }
 
-function PollResults({ poll }: { poll: Poll }) {
-  return (
-    <div className="mb-4">
-      <img
-        src={`/api/polls/image?id=${poll.id}&results=true&date=${Date.now()}`}
-        alt="poll results"
-      />
-    </div>
-  );
-}
+// function PollResults({ poll }: { poll: Poll }) {
+//   return (
+//     <div className="mb-4">
+//       <img
+//         src={`/api/polls/image?id=${poll.id}&results=true&date=${Date.now()}`}
+//         alt="poll results"
+//       />
+//     </div>
+//   );
+// }
 
 export function PollVoteForm({
   poll,
@@ -212,8 +213,6 @@ export function PollVoteForm({
   viewResults?: boolean;
 }) {
   const [selectedOption, setSelectedOption] = useState(-1);
-  const router = useRouter();
-  const searchParams = useSearchParams();
   viewResults = true; // Only allow voting via the api
   const formRef = useRef<HTMLFormElement>(null);
   const voteOnPoll = votePoll.bind(null, poll);
@@ -236,7 +235,11 @@ export function PollVoteForm({
   const handleVote = (index: number) => {
     setSelectedOption(index);
   };
-
+  const frameUrl = routes.v1.api.polls.frame["1"].buildUrl(poll.id);
+  const frameImageSrc = routes.v1.api.polls.images["1"].buildUrl(poll.id);
+  if (state.showResults) {
+    return <ShareFrameCard frameUrl={frameUrl} frameImgSrc={frameImageSrc} />;
+  }
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg p-4 m-4">
       <div className="font-bold text-xl mb-2">{poll.title}</div>
@@ -267,19 +270,8 @@ export function PollVoteForm({
           });
         }}
       >
-        {state.showResults ? (
-          <PollResults poll={poll} />
-        ) : (
-          <PollOptions poll={poll} onChange={handleVote} />
-        )}
-        {state.showResults ? (
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            type="submit"
-          >
-            Back
-          </button>
-        ) : (
+        <PollOptions poll={poll} onChange={handleVote} />
+        {state.showResults ? null : (
           <button
             className={
               "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" +

@@ -122,6 +122,7 @@ export default async function handler(
         <div
           style={{
             display: "flex",
+            color: "#404040",
           }}
         >
           <div

@@ -10,6 +10,21 @@ export const routes = {
   },
   v1: {
     api: {
+      polls: {
+        // delegates: {
+        frame: {
+          "1": {
+            buildUrl: (pollId: string) =>
+              `${publicEnv.NEXT_PUBLIC_HOST}/polls/${pollId}`,
+          },
+        },
+        images: {
+          "1": {
+            buildUrl: (pollId: string) =>
+              `${publicEnv.NEXT_PUBLIC_HOST}/api/polls/image?id=${pollId}`,
+          },
+        },
+      },
       delegates: {
         frame: {
           "1": {

@@ -1,21 +1,18 @@
 import copy from "copy-to-clipboard";
 import { PropsWithChildren } from "react";
-import { frameHeight, frameWidth } from "../../../pages/api/frame-config";
 import { Button } from "../Button";
 
 type ShareFrameProps = {
   frameImgSrc: string;
   frameUrl: string;
 } & PropsWithChildren;
+function shareToWarpcastLink(frameUrl: string) {
+  return `https://warpcast.com/~/compose?text=${frameUrl}`;
+}
 export const ShareFrameCard = ({ frameUrl, frameImgSrc }: ShareFrameProps) => {
   return (
     <>
-      <img
-        src={frameImgSrc}
-        alt="frame"
-        width={frameWidth}
-        height={frameHeight}
-      />
+      <img src={frameImgSrc} alt="frame" width={300} height={300} />
       {/* footer */}
       <div className="flex">
         <Button secondary customClasses={["px-2.5"]}>
@@ -61,7 +58,9 @@ export const ShareFrameCard = ({ frameUrl, frameImgSrc }: ShareFrameProps) => {
             </g>
           </svg>
         </Button>
-        <Button>Share on Warpcast</Button>
+        <a href={shareToWarpcastLink(frameUrl)} target="_blank">
+          <Button>Share on Warpcast</Button>
+        </a>
       </div>
     </>
   );
