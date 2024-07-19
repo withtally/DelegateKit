@@ -11,7 +11,9 @@ export class AgoraAPI {
   #fetchDelegateSchema = z.object({
     address: z.string(),
     citizen: z.boolean(),
-    votingPower: z.string(),
+    votingPower: z.object({
+      total: z.string(),
+    }),
     votingPowerRelativeToVotableSupply: z.number(),
     votingPowerRelativeToQuorum: z.number(),
     proposalsCreated: z.string(),
@@ -26,9 +28,9 @@ export class AgoraAPI {
   });
   public fetchDelegate = async (address: string) => {
     const pathname = `/delegates/${address}`;
-    const data = await this.#apiFetch(pathname).then(
-      this.#fetchDelegateSchema.parse,
-    );
+    const data = await this.#apiFetch(pathname).then((res) => {
+      return this.#fetchDelegateSchema.parse(res);
+    });
     return data;
   };
 }

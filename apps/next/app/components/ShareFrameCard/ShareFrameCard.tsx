@@ -11,10 +11,10 @@ function shareToWarpcastLink(frameUrl: string) {
 }
 export const ShareFrameCard = ({ frameUrl, frameImgSrc }: ShareFrameProps) => {
   return (
-    <>
+    <div className="shadow p-6 flex items-center flex-col">
       <img src={frameImgSrc} alt="frame" width={300} height={300} />
       {/* footer */}
-      <div className="flex">
+      <div className="flex space-x-2">
         <Button secondary customClasses={["px-2.5"]}>
           <svg
             width="20"
@@ -62,6 +62,6 @@ export const ShareFrameCard = ({ frameUrl, frameImgSrc }: ShareFrameProps) => {
           <Button>Share on Warpcast</Button>
         </a>
       </div>
-    </>
+    </div>
   );
 };

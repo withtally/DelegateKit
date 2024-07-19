@@ -19,7 +19,7 @@ export default async function Frame1(req: NextApiRequest) {
       <DelegateImageOnly
         address={address}
         ensAvatar={avatar}
-        votingPower={delegateData.votingPower}
+        votingPower={delegateData.votingPower.total}
       />
     ),
     {

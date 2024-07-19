@@ -16,7 +16,7 @@ export default async function Page(req: { params: { address: string } }) {
         </div>
         <h1 className="text-lg sm:text-2xl font-bold mb-2">{metadata.title}</h1>
         <h2 className="text-md sm:text-xl mx-4">{metadata.description}</h2>
-        <div className="flex flex-wrap items-center justify-around max-w-4xl my-8 sm:w-full bg-white rounded-md shadow-xl h-full border border-gray-100">
+        <div className="p-8">
           <DelegateFrame address={address} />
         </div>
       </main>
