@@ -31,7 +31,7 @@ const ChatIcon = () => {
 const OPSmileIcon = () => {
   return (
     //  eslint-disable-next-line @next/next/no-img-element
-    <img alt="smile" src={routes.images.OPsmile} width="140px" height="140px" />
+    <img alt="smile" src={routes.images.oPsmile} width="140px" height="140px" />
   );
 };
 const ThumbIcon = () => {

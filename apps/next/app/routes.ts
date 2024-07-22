@@ -5,7 +5,7 @@ export const routes = {
     op: `${publicEnv.NEXT_PUBLIC_HOST}/images/op.png`,
     chatBubble: `${publicEnv.NEXT_PUBLIC_HOST}/images/chat-red.png`,
     star: `${publicEnv.NEXT_PUBLIC_HOST}/images/star.png`,
-    OPsmile: `${publicEnv.NEXT_PUBLIC_HOST}/images/op-smile.png`,
+    oPsmile: `${publicEnv.NEXT_PUBLIC_HOST}/images/op-smile.png`,
     thumb: `${publicEnv.NEXT_PUBLIC_HOST}/images/thumb.png`,
   },
   v1: {

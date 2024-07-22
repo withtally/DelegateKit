@@ -14,7 +14,7 @@ const ImageContainer = ({
   return (
     <div
       style={{
-        position: "relative",
+        position: "absolute",
         left,
         top,
         display: "flex",
@@ -53,7 +53,7 @@ export const DelegateImageOnly = ({
         }}
       >
         <div style={{ display: "flex" }}>
-          <ImageContainer size={105} left="97px" top="22px">
+          <ImageContainer size={105} left="180px" top="204px">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={routes.images.op}
@@ -63,7 +63,7 @@ export const DelegateImageOnly = ({
             />
           </ImageContainer>
 
-          <ImageContainer size={150} left="188px" top="0px">
+          <ImageContainer size={150} left="270px" top="180px">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={ensAvatar}
@@ -81,6 +81,11 @@ export const DelegateImageOnly = ({
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            justifyContent: "center",
+            position: "absolute",
+            top: 340,
+            width: "100%",
+            paddingLeft: "140px",
           }}
         >
           <h1 style={{ fontSize: "48px" }}>
@@ -88,7 +93,7 @@ export const DelegateImageOnly = ({
               ? address
               : `${address.slice(0, 6)}...${address.slice(-4)}`}
           </h1>
-          <h3 style={{ fontSize: "30px" }}>
+          <h3 style={{ fontSize: "30px", marginTop: "0px" }}>
             {Math.trunc(
               Number(formatEther(BigInt(votingPower))),
             ).toLocaleString()}{" "}
