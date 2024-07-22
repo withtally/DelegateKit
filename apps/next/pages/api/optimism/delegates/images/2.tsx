@@ -3,6 +3,7 @@ import { ImageResponse } from "next/og";
 import { Address } from "viem";
 import { z } from "zod";
 import { fetchAddressImage } from "../../../../../app/delegates/[address]/fetch-address-image";
+import { routes } from "../../../../../app/routes";
 import { TallyAPI } from "../../../../../src/api/TallyAPI/TallyAPI";
 import DelegateImageContainer from "../../../../../src/api/delegates/DelegateImageContainer";
 import { frameHeight, frameWidth } from "../../../frame-config";
@@ -20,25 +21,63 @@ export default async function Frame2(req: NextApiRequest) {
     tallyAPI.fetchStatementSummary(address),
     fetchAddressImage(address),
   ]);
-  const shortenedStatement = delegateStatement?.slice(0, 340);
+  const shortenedStatement = delegateStatement?.slice(0, 220);
   return new ImageResponse(
     (
       <DelegateImageContainer>
         <img
+          src={routes.images.op}
+          alt="op logo"
+          width="50px"
+          height="50px"
+          style={{
+            position: "relative",
+            left: "56px",
+            top: "66px",
+          }}
+        />
+        <img
           src={delegateImage}
+          width="80px"
+          height="80px"
           style={{
             borderRadius: "50%",
-            height: "160px",
-            width: "160px",
-            marginRight: "40px",
+            height: "80px",
+            width: "80px",
+            position: "relative",
+            left: "100px",
           }}
           alt="profile"
         />
+        <img
+          alt="star"
+          src={routes.images.star}
+          width="40px"
+          height="40px"
+          style={{ position: "absolute", right: "80px", bottom: "100px" }}
+        />
+        <img
+          alt="star"
+          src={routes.images.star}
+          width="20px"
+          height="20px"
+          style={{
+            position: "absolute",
+            right: "280px",
+            top: "130px",
+            transform: `rotate(40deg)`,
+          }}
+        />
         <div
           style={{
+            position: "relative",
+            top: "100px",
+            left: "60px",
             display: "flex",
-            flexDirection: "column",
-            maxWidth: "520px",
+            maxWidth: "80%",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
           }}
         >
           <h3 style={{ fontSize: "20px" }}>
