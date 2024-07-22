@@ -43,6 +43,46 @@ export const DelegateImageOnly = ({
 }) => {
   return (
     <DelegateImageContainer>
+      <img
+        alt="star"
+        src={routes.images.star}
+        width="40px"
+        height="40px"
+        style={{ position: "absolute", left: "100px", top: "100px" }}
+      />
+      <img
+        alt="star"
+        src={routes.images.star}
+        width="20px"
+        height="20px"
+        style={{
+          position: "absolute",
+          right: "280px",
+          top: "130px",
+          transform: `rotate(40deg)`,
+        }}
+      />
+      <img
+        alt="star"
+        src={routes.images.star}
+        width="20px"
+        height="20px"
+        style={{ position: "absolute", right: "80px", bottom: "100px" }}
+      />
+      <img
+        alt="thumb"
+        src={routes.images.thumb}
+        width="240px"
+        height="240px"
+        style={{ position: "absolute", right: "30px", top: "10px" }}
+      />
+      <img
+        alt="smile"
+        src={routes.images.oPsmile}
+        width="120px"
+        height="120px"
+        style={{ position: "absolute", left: "60px", bottom: "20px" }}
+      />
       <div
         className="foreground"
         style={{

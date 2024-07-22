@@ -28,13 +28,13 @@ const ChatIcon = () => {
     />
   );
 };
-const OPSmileIcon = () => {
+export const OPSmileIcon = () => {
   return (
     //  eslint-disable-next-line @next/next/no-img-element
     <img alt="smile" src={routes.images.oPsmile} width="140px" height="140px" />
   );
 };
-const ThumbIcon = () => {
+export const ThumbIcon = () => {
   return (
     //  eslint-disable-next-line @next/next/no-img-element
     <img alt="thumb" src={routes.images.thumb} width="240px" height="240px" />
