@@ -25,6 +25,20 @@ export const routes = {
           },
         },
       },
+      proposals: {
+        frame: {
+          "1": {
+            buildUrl: (proposalId: string) =>
+              `${publicEnv.NEXT_PUBLIC_HOST}/optimism/proposals/${proposalId}`,
+          },
+        },
+        images: {
+          "1": {
+            buildUrl: (proposalId: string) =>
+              `${publicEnv.NEXT_PUBLIC_HOST}/api/optimism/proposals/images/1?proposalId=${proposalId}`,
+          },
+        },
+      },
       delegates: {
         frame: {
           "1": {

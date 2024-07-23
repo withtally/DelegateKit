@@ -101,7 +101,11 @@ const Header = () => {
           >
             <ProfileIcon />
           </HeaderElement>
-          <HeaderElement color="#FF84FF" text="Share Proposal" href="/proposal">
+          <HeaderElement
+            color="#FF84FF"
+            text="Share Proposal"
+            href={`/proposals`}
+          >
             <ProposalIcon />
           </HeaderElement>
         </div>

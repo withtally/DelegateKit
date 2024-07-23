@@ -29,6 +29,7 @@ export class AgoraAPI {
   public fetchDelegate = async (address: string) => {
     const pathname = `/delegates/${address}`;
     const data = await this.#apiFetch(pathname).then((res) => {
+      console.log({ res });
       return this.#fetchDelegateSchema.parse(res);
     });
     return data;
