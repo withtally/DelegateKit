@@ -1,9 +1,10 @@
 import { NextApiRequest } from "next";
 import { ImageResponse } from "next/og";
 import { z } from "zod";
-import { fetchAddressImage } from "../../../../../app/delegates/fetch-address-image";
-import { fetchDelegateData } from "../../../../../app/delegates/fetchers";
+import { fetchAddressImage } from "../../../../../app/delegates/[address]/fetch-address-image";
+import { fetchDelegateData } from "../../../../../app/delegates/[address]/fetchers";
 import DelegateImageContainer from "../../../../../src/api/delegates/DelegateImageContainer";
+import { frameHeight, frameWidth } from "../../../frame-config";
 
 export const runtime = "edge";
 
@@ -52,8 +53,8 @@ export default async function Frame2(req: NextApiRequest) {
       </DelegateImageContainer>
     ),
     {
-      width: 1146,
-      height: 600,
+      width: frameWidth,
+      height: frameHeight,
     },
   );
 }

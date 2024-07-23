@@ -5,6 +5,7 @@ import { parse, string } from "valibot";
 import { routes } from "../../../../../app/routes";
 import { Proposal } from "../../../../../src/api/Proposal/Proposal";
 import { ProposalFrameContainer } from "../../../../../src/api/proposals/ProposalFrameContainer";
+import { frameHeight, frameWidth } from "../../../frame-config";
 
 export const runtime = "edge";
 
@@ -32,8 +33,8 @@ export default async function Frame1(req: NextApiRequest) {
       </ProposalFrameContainer>
     ),
     {
-      width: 1146,
-      height: 600,
+      width: frameWidth,
+      height: frameHeight,
     },
   );
 }

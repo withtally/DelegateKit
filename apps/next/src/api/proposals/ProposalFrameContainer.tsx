@@ -1,8 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import type { ReactNode } from "react";
-import { publicEnv } from "../../../app/next-public-env";
 
-const BASE_URL = publicEnv.NEXT_PUBLIC_HOST;
 export const ProposalFrameContainer: React.FC<{
   children: ReactNode;
   orgImageSrc: string;

@@ -1,9 +1,9 @@
 import { Logo } from "../components/Logo";
-import { PollCreateForm } from "./form";
+import { ProposalsList } from "./ProposalsList";
 
 export const metadata = {
-  title: "DelegateKit Polls",
-  description: "Ask your followers what they think",
+  title: "Proposal Frame Generator",
+  description: "Post a frame to farcaster for a governance proposal",
 };
 
 export default async function Page() {
@@ -15,8 +15,8 @@ export default async function Page() {
         </div>
         <h1 className="text-lg sm:text-2xl font-bold mb-2">{metadata.title}</h1>
         <h2 className="text-md sm:text-xl mx-4">{metadata.description}</h2>
-        <div className="flex flex-wrap items-center justify-around max-w-4xl my-8 sm:w-full bg-white rounded-md shadow-xl h-full border border-gray-100">
-          <PollCreateForm />
+        <div className="p-8">
+          <ProposalsList />
         </div>
       </main>
     </div>

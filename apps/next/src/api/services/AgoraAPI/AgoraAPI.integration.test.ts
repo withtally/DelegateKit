@@ -9,7 +9,9 @@ test("Fetches delegate data", async (t) => {
   assert.deepEqual(delegateData, {
     address: "0xda6d1f091b672c0f9e215eb9fa6b5a84bf2c5e11",
     citizen: false,
-    votingPower: "0",
+    votingPower: {
+      total: "0",
+    },
     votingPowerRelativeToVotableSupply: 0,
     votingPowerRelativeToQuorum: 0,
     proposalsCreated: "0",

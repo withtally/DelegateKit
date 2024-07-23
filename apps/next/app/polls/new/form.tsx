@@ -1,9 +1,13 @@
 "use client";
 
-import clsx from "clsx";
-import { useRouter, useSearchParams } from "next/navigation";
 import { useOptimistic, useRef, useState, useTransition } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { Button } from "../../components/Button";
+import { ShareFrameCard } from "../../components/ShareFrameCard/ShareFrameCard";
+import { useAddress } from "../../hooks/use-address";
+import { routes } from "../../routes";
+import PlusIcon from "./PlusIcon";
+import { PrivatePollSelector } from "./PrivatePollSelector";
 import { redirectToPolls, savePoll, votePoll } from "./actions";
 import { Poll } from "./types";
 
@@ -14,8 +18,9 @@ type PollState = {
   voted?: boolean;
 };
 
-export function PollCreateForm() {
+export default function PollCreateForm() {
   const formRef = useRef<HTMLFormElement>(null);
+  const { address } = useAddress();
   const [state, mutate] = useOptimistic(
     { pending: false },
     function createReducer(_, newPoll: PollState) {
@@ -31,22 +36,28 @@ export function PollCreateForm() {
     },
   );
 
-  const pollStub = {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isPending, startTransition] = useTransition();
+  const [isPrivate, setIsPrivate] = useState(false);
+  if (!address) {
+    return null;
+  }
+  const pollStub: Poll = {
     id: uuidv4(),
+    creatorEthAddress: address,
     created_at: new Date().getTime(),
     title: "",
     option1: "",
     option2: "",
     option3: "",
     option4: "",
+    isPrivate: false,
     votes1: 0,
     votes2: 0,
     votes3: 0,
     votes4: 0,
   };
   const saveWithNewPoll = savePoll.bind(null, pollStub);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isPending, startTransition] = useTransition();
 
   return (
     <>
@@ -58,13 +69,17 @@ export function PollCreateForm() {
           onSubmit={(event) => {
             event.preventDefault();
             const formData = new FormData(event.currentTarget);
-            const newPoll = {
+            const isPrivateFormResult = formData.get("isPrivate") as
+              | "on"
+              | "off";
+            const newPoll: Poll = {
               ...pollStub,
               title: formData.get("title") as string,
               option1: formData.get("option1") as string,
               option2: formData.get("option2") as string,
               option3: formData.get("option3") as string,
               option4: formData.get("option4") as string,
+              isPrivate: isPrivateFormResult === "on",
               votes1: 0,
               votes2: 0,
               votes3: 0,
@@ -85,8 +100,8 @@ export function PollCreateForm() {
           <input
             aria-label="Poll Title"
             className="pl-3 pr-28 py-3 mt-1 text-lg block w-full border border-gray-200 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-300"
-            maxLength={150}
-            placeholder="Title..."
+            maxLength={60}
+            placeholder="Poll Title"
             required
             type="text"
             name="title"
@@ -94,7 +109,7 @@ export function PollCreateForm() {
           <input
             aria-label="Option 1"
             className="pl-3 pr-28 py-3 mt-1 text-lg block w-full border border-gray-200 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-300"
-            maxLength={150}
+            maxLength={50}
             placeholder="Option 1"
             required
             type="text"
@@ -103,7 +118,7 @@ export function PollCreateForm() {
           <input
             aria-label="Option 2"
             className="pl-3 pr-28 py-3 mt-1 text-lg block w-full border border-gray-200 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-300"
-            maxLength={150}
+            maxLength={50}
             placeholder="Option 2"
             required
             type="text"
@@ -112,31 +127,39 @@ export function PollCreateForm() {
           <input
             aria-label="Option 3"
             className="pl-3 pr-28 py-3 mt-1 text-lg block w-full border border-gray-200 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-300"
-            maxLength={150}
+            maxLength={50}
             placeholder="Option 3 (optional)"
             type="text"
             name="option3"
           />
           <input
             aria-label="Option 4"
-            className="pl-3 pr-28 py-3 mt-1 text-lg block w-full border border-gray-200 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-300"
-            maxLength={150}
+            className="pl-3 pr-28 py-3 mt-1 text-lg block w-full border border-gray-200 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-300 mb-4"
+            maxLength={50}
             placeholder="Option 4 (optional)"
             type="text"
             name="option4"
           />
-          <div className={"pt-2 flex justify-end"}>
-            <button
-              className={clsx(
-                "flex items-center p-1 justify-center px-4 h-10 text-lg border bg-blue-500 text-white rounded-md w-24 focus:outline-none focus:ring focus:ring-blue-300 hover:bg-blue-700 focus:bg-blue-700",
-                state.pending && "bg-gray-700 cursor-not-allowed",
-              )}
-              type="submit"
-              disabled={state.pending}
-            >
-              Create
-            </button>
-          </div>
+          <PrivatePollSelector
+            isPrivate={isPrivate}
+            setIsPrivate={setIsPrivate}
+            name="isPrivate"
+            aria-label="Private Poll"
+          />
+          <Button
+            type="submit"
+            disabled={state.pending}
+            customClasses={[
+              "w-full",
+              "flex",
+              "justify-center",
+              "items-center",
+              "gap-2",
+            ]}
+          >
+            <PlusIcon />
+            Create Poll
+          </Button>
         </form>
       </div>
       <div className="w-full"></div>
@@ -171,16 +194,16 @@ function PollOptions({
   );
 }
 
-function PollResults({ poll }: { poll: Poll }) {
-  return (
-    <div className="mb-4">
-      <img
-        src={`/api/polls/image?id=${poll.id}&results=true&date=${Date.now()}`}
-        alt="poll results"
-      />
-    </div>
-  );
-}
+// function PollResults({ poll }: { poll: Poll }) {
+//   return (
+//     <div className="mb-4">
+//       <img
+//         src={`/api/polls/image?id=${poll.id}&results=true&date=${Date.now()}`}
+//         alt="poll results"
+//       />
+//     </div>
+//   );
+// }
 
 export function PollVoteForm({
   poll,
@@ -190,8 +213,6 @@ export function PollVoteForm({
   viewResults?: boolean;
 }) {
   const [selectedOption, setSelectedOption] = useState(-1);
-  const router = useRouter();
-  const searchParams = useSearchParams();
   viewResults = true; // Only allow voting via the api
   const formRef = useRef<HTMLFormElement>(null);
   const voteOnPoll = votePoll.bind(null, poll);
@@ -214,7 +235,11 @@ export function PollVoteForm({
   const handleVote = (index: number) => {
     setSelectedOption(index);
   };
-
+  const frameUrl = routes.v1.api.polls.frame["1"].buildUrl(poll.id);
+  const frameImageSrc = routes.v1.api.polls.images["1"].buildUrl(poll.id);
+  if (state.showResults) {
+    return <ShareFrameCard frameUrl={frameUrl} frameImgSrc={frameImageSrc} />;
+  }
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg p-4 m-4">
       <div className="font-bold text-xl mb-2">{poll.title}</div>
@@ -245,19 +270,8 @@ export function PollVoteForm({
           });
         }}
       >
-        {state.showResults ? (
-          <PollResults poll={poll} />
-        ) : (
-          <PollOptions poll={poll} onChange={handleVote} />
-        )}
-        {state.showResults ? (
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            type="submit"
-          >
-            Back
-          </button>
-        ) : (
+        <PollOptions poll={poll} onChange={handleVote} />
+        {state.showResults ? null : (
           <button
             className={
               "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" +

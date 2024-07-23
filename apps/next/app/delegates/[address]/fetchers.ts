@@ -1,5 +1,5 @@
-import { AgoraAPI } from "../../src/api/services/AgoraAPI/AgoraAPI";
-import { routes } from "../routes";
+import { AgoraAPI } from "../../../src/api/services/AgoraAPI/AgoraAPI";
+import { routes } from "../../routes";
 
 /**
  * Given an eth address or ENS domain, fetch the delegate's data

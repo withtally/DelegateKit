@@ -1,13 +1,45 @@
-import { Poll } from "@/app/polls/types";
+import { Poll } from "@/app/polls/new/types";
 import { kv } from "@vercel/kv";
 import * as fs from "fs";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { join } from "path";
 import satori from "satori";
 import sharp from "sharp";
+import { routes } from "../../../app/routes";
+import { frameHeight, frameWidth } from "../frame-config";
 
 const fontPath = join(process.cwd(), "Roboto-Regular.ttf");
 const fontData = fs.readFileSync(fontPath);
+
+const StarIcon = () => {
+  return (
+    //  eslint-disable-next-line @next/next/no-img-element
+    <img alt="star" src={routes.images.star} width="40px" height="40px" />
+  );
+};
+const ChatIcon = () => {
+  return (
+    //  eslint-disable-next-line @next/next/no-img-element
+    <img
+      alt="chat bubble"
+      src={routes.images.chatBubble}
+      width="240px"
+      height="240px"
+    />
+  );
+};
+export const OPSmileIcon = () => {
+  return (
+    //  eslint-disable-next-line @next/next/no-img-element
+    <img alt="smile" src={routes.images.oPsmile} width="140px" height="140px" />
+  );
+};
+export const ThumbIcon = () => {
+  return (
+    //  eslint-disable-next-line @next/next/no-img-element
+    <img alt="thumb" src={routes.images.thumb} width="240px" height="240px" />
+  );
+};
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,7 +47,6 @@ export default async function handler(
 ) {
   try {
     const pollId = req.query["id"];
-    // const fid = parseInt(req.query['fid']?.toString() || '')
     if (!pollId) {
       return res.status(400).send("Missing poll ID");
     }
@@ -60,52 +91,81 @@ export default async function handler(
     const svg = await satori(
       <div
         style={{
-          justifyContent: "flex-start",
+          justifyContent: "center",
           alignItems: "center",
           display: "flex",
+          flexDirection: "column",
           width: "100%",
           height: "100%",
-          backgroundColor: "f4f4f4",
-          padding: 50,
-          lineHeight: 1.2,
+          backgroundColor: "#F9F9F9",
           fontSize: 24,
+          marginTop: 0,
         }}
       >
         <div
+          style={{ position: "absolute", display: "flex", left: 180, top: 20 }}
+        >
+          <StarIcon />
+        </div>
+        <div
+          style={{ position: "absolute", display: "flex", left: 50, top: 82 }}
+        >
+          <OPSmileIcon />
+        </div>
+        <div
+          style={{ position: "absolute", display: "flex", right: 30, top: 20 }}
+        >
+          <ThumbIcon />
+        </div>
+        <ChatIcon />
+
+        <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            padding: 20,
+            color: "#404040",
           }}
         >
-          <h2 style={{ textAlign: "center", color: "lightgray" }}>
-            {poll.title}
-          </h2>
-          {pollData.options.map((opt, index) => {
-            return (
-              <div
-                key={opt.text}
-                style={{
-                  backgroundColor: showResults ? "#007bff" : "",
-                  color: "#fff",
-                  padding: 10,
-                  marginBottom: 10,
-                  borderRadius: 4,
-                  width: `${showResults ? opt.percentOfTotal : 100}%`,
-                  whiteSpace: "nowrap",
-                  overflow: "visible",
-                }}
-              >
-                {opt.text}
-              </div>
-            );
-          })}
-          {/*{showResults ? <h3 style={{color: "darkgray"}}>Total votes: {totalVotes}</h3> : ''}*/}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              paddingLeft: "40px",
+              paddingRight: "40px",
+            }}
+          >
+            <h2
+              style={{
+                textAlign: "center",
+                marginTop: "-40px",
+              }}
+            >
+              {showResults ? "Thank you. here are the results" : poll.title}
+            </h2>
+            {showResults &&
+              pollData.options.map((opt, index) => {
+                return (
+                  <div
+                    key={opt.text}
+                    style={{
+                      backgroundColor: showResults ? "#7764FD" : "",
+                      padding: 10,
+                      marginBottom: 10,
+                      borderRadius: 4,
+                      width: `${showResults ? opt.percentOfTotal : 100}%`,
+                      whiteSpace: "nowrap",
+                      overflow: "visible",
+                    }}
+                  >
+                    {opt.text}
+                  </div>
+                );
+              })}
+          </div>
         </div>
       </div>,
       {
-        width: 600,
-        height: 400,
+        width: frameWidth,
+        height: frameHeight,
         fonts: [
           {
             data: fontData,

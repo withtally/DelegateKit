@@ -14,7 +14,7 @@ test("fetches delegate data for lefteris.eth", async (t) => {
   //   true,
   // );
 
-  assert.equal(has1MOPOrMore(data.votingPower), true);
+  assert.equal(has1MOPOrMore(data.votingPower.total), true);
 });
 
 /**
@@ -35,5 +35,5 @@ test("fetches delegate data for 0x3d2d722b443a5cae8e41877bb7cd649f3650937c", asy
 
   assert.equal(data.address, address);
   // assert.equal(data.statement?.includes("We are the PoolCollective"), true);
-  assert.equal(has1MOPOrMore(data.votingPower), true);
+  assert.equal(has1MOPOrMore(data.votingPower.total), true);
 });

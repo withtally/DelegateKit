@@ -1,4 +1,4 @@
-import { POLL_EXPIRY, Poll } from "@/app/polls/types";
+import { POLL_EXPIRY, Poll } from "@/app/polls/new/types";
 import { Message, getSSLHubRpcClient } from "@farcaster/hub-nodejs";
 import { kv } from "@vercel/kv";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -107,6 +107,7 @@ export default async function handler(
           <meta property="og:title" content="Vote Recorded">
           <meta property="og:image" content="${imageUrl}">
           <meta name="fc:frame" content="vNext">
+          <meta name="fc:frame:image:aspect_ratio" content="1:1" />
           <meta name="fc:frame:image" content="${imageUrl}">
           <meta name="fc:frame:post_url" content="${publicEnv.NEXT_PUBLIC_HOST}/api/polls/vote?id=${
             poll.id

@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { routes } from "../../../app/routes";
+import { frameHeight } from "../../../pages/api/frame-config";
 
 export default function DelegateImageContainer({
   children,
@@ -9,45 +9,15 @@ export default function DelegateImageContainer({
       style={{
         display: "flex",
         flexDirection: "column",
-        height: "100%",
+        // alignItems: "center",
+        // justifyContent: "center",
+        fontFamily: "sans-serif",
+        height: frameHeight,
         width: "100%",
-        background: "white",
-        padding: "50px",
+        backgroundColor: "white",
       }}
     >
-      <span>
-        <img
-          src={routes.images.op}
-          alt="op logo"
-          width="50px"
-          height="50px"
-          style={{ position: "absolute", left: "60px", top: "60px" }}
-        />
-        <img
-          src={routes.images.tally}
-          alt="tally logo"
-          width="50px"
-          height="50px"
-          style={{
-            position: "absolute",
-            left: "120px",
-            top: "60px",
-            borderRadius: "5px",
-          }}
-        />
-      </span>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontFamily: "sans-serif",
-          height: "100%",
-          width: "100%",
-        }}
-      >
-        {children}
-      </div>
+      {children}
     </div>
   );
 }

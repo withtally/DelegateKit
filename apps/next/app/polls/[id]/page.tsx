@@ -1,18 +1,21 @@
-import { PollVoteForm } from "@/app/polls/form";
-import { Poll } from "@/app/polls/types";
+import { PollVoteForm } from "@/app/polls/new/form";
+import { Poll } from "@/app/polls/new/types";
 import { kv } from "@vercel/kv";
 import { Metadata, ResolvingMetadata } from "next";
-import Head from "next/head";
+import { Address } from "viem";
 import { publicEnv } from "../../next-public-env";
 
 async function getPoll(id: string): Promise<Poll> {
-  const nullPoll = {
+  const creatorEthAddress: Address = "0xdead";
+  const nullPoll: Poll = {
     id: "",
+    creatorEthAddress,
     title: "No poll found",
     option1: "",
     option2: "",
     option3: "",
     option4: "",
+    isPrivate: true,
     votes1: 0,
     votes2: 0,
     votes3: 0,
@@ -49,6 +52,7 @@ export async function generateMetadata(
 
   const fcMetadata: Record<string, string> = {
     "fc:frame": "vNext",
+    "fc:frame:image:aspect_ratio": "1:1",
     "fc:frame:post_url": `${publicEnv.NEXT_PUBLIC_HOST}/api/polls/vote?id=${id}`,
     "fc:frame:image": `${publicEnv.NEXT_PUBLIC_HOST}/api/polls/image?id=${id}`,
   };
@@ -69,15 +73,6 @@ export async function generateMetadata(
     },
     metadataBase: new URL(publicEnv.NEXT_PUBLIC_HOST),
   };
-}
-function getMeta(poll: Poll) {
-  // This didn't work for some reason
-  return (
-    <Head>
-      <meta property="og:image" content="" key="test"></meta>
-      <meta property="og:title" content="My page title" key="title" />
-    </Head>
-  );
 }
 
 export default async function Page({ params }: { params: { id: string } }) {

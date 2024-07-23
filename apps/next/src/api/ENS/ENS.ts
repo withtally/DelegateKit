@@ -1,5 +1,6 @@
 import { Address, isAddress } from "viem";
 import { normalize } from "viem/ens";
+import { routes } from "../../../app/routes";
 import { publicMainnetClient } from "../viem";
 
 export class ENS {
@@ -16,13 +17,22 @@ export class ENS {
     return address as Address;
   }
 
-  public static async getENSAvatar(ensName: string): Promise<string | null> {
+  public static async getENSAvatar(ensName: string): Promise<string> {
+    let name = ensName;
+    if (!name.includes(".")) {
+      // reverse loookup ens
+      name =
+        (await publicMainnetClient.getEnsName({
+          address: ensName as Address,
+        })) || ensName;
+    }
+    if (!name.includes(".")) return routes.images.oPsmile;
     try {
-      const avatar = await publicMainnetClient.getEnsAvatar({ name: ensName });
-      return avatar;
+      const avatar = await publicMainnetClient.getEnsAvatar({ name });
+      return avatar || routes.images.oPsmile;
     } catch (error) {
       console.error("Error fetching ENS avatar:", error);
-      return null;
+      return routes.images.oPsmile;
     }
   }
 }
