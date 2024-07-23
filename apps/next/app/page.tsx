@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { Button } from "./components/Button";
 import { Logo } from "./components/Logo";
 
 export const metadata = {
@@ -15,6 +17,9 @@ export default async function Page() {
       <h1 className="text-lg sm:text-2xl font-bold mb-2">{metadata.title}</h1>
       <h2 className="text-md sm:text-xl mx-4">{metadata.description}</h2>A new
       tool to enhance Optimism governance using Farcaster.
+      <Link href="/settings" className="py-8">
+        <Button>Login</Button>
+      </Link>
     </main>
     // </div>
   );

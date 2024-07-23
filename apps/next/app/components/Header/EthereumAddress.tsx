@@ -6,7 +6,11 @@ import { useAddress } from "../../hooks/use-address";
 export const EthereumAddress = () => {
   const { address } = useAddress();
   if (!address) {
-    return <>Login</>;
+    return (
+      <Link href="/settings">
+        <b>Login</b>
+      </Link>
+    );
   }
 
   // a nice little eth avatar library https://github.com/snapshot-labs/stamp
