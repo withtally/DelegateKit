@@ -9,7 +9,6 @@ export const metadata = {
 
 export default async function Page() {
   return (
-    // <div className="flex flex-col min-h-screen py-2">
     <main className="flex flex-col items-center justify-center flex-1 px-4 sm:px-20 text-center">
       <div className="flex justify-center items-center bg-black rounded-full w-16 sm:w-24 h-16 sm:h-24 my-8">
         <Logo />
@@ -21,6 +20,5 @@ export default async function Page() {
         <Button>Login</Button>
       </Link>
     </main>
-    // </div>
   );
 }
