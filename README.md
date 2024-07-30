@@ -8,12 +8,9 @@ Track our progress on [Charmverse](https://app.charmverse.io/op-grants/delegatek
 
 ### Features
 
-- **Gasless Delegation and Voting**: Utilize the latest Optimism Governance smart contracts to enable gasless delegation and voting directly from Farcaster frames.
 - **Delegate Frames**: Campaign for delegations by sharing interactive frames with dynamic information based on your participation history in the DAO.
 - **Proposal Frames**: Bring the homepage of the DAO to the social layer of Farcaster by posting interactive proposal frames and vote directly without leaving Farcaster or spending gas.
-- **NFT Badges**: Mint NFT badges directly from Frames to build your on-chain reputation for governance participation.
 - **Delegate Messaging Frame**: Poll your constituents for feedback and receive kudos for your contributions.
-- **Analytics**: Gain insights into your DelegateKit performance through analytics on casts, reactions, and replies.
 
 ### Getting Started
 
@@ -28,32 +25,28 @@ To get started with DelegateKit, follow these steps:
 2. Install the necessary dependencies:
 
    ```
-   cd delegatekit
+   cd DelegateKit/apps/next
    npm install
    ```
 
 3. Set up your environment variables:
 
-   - Create a `.env` file in the root directory.
+   - Create a `.env` file with `cp .env.example .env`
    - Add the required environment variables (e.g., API keys, contract addresses).
 
-4. Deploy the DelegateKit smart contracts:
+4. Start ngrok proxy
+
+`ngrok http 3000`
+
+5. Copy ngrok url to `.env` value "`NEXT_PUBLIC_HOST`"
+
+6. Start the NextJS app:
 
    ```
-   npm run deploy
+   npm run dev
    ```
 
-5. Start the DelegateKit backend:
-
-   ```
-   npm run start
-   ```
-
-6. Access the DelegateKit frontend by opening `http://localhost:3000` in your web browser.
-
-### Smart Contracts
-
-TBD: DelegateKit utilizes a smart contract factory for secure Account Abstraction enabled "kits" specifically designed for gasless participation in governance. These kits are non-custodial, do not require holding funds, and offer a safer way to participate in governance. They integrate directly with the DelegateKit backend to power the gasless Farcaster participation experience.
+7. Access the DelegateKit frontend by opening `http://localhost:3000` in your web browser.
 
 ### Builder Support
 
@@ -79,9 +72,3 @@ If you have any questions, suggestions, or feedback, please reach out to us at:
 - Farcaster: [Dawson](https://warpcast.com/daws)
 
 We appreciate your interest in DelegateKit and look forward to building a more accessible and transparent governance experience together!
-
-### Frames
-
-- `/optimism/delegates/lefteris.eth`
-- `/optimism/proposals/0004537769538885163906898768401836322976193114338273264147746088063279656611139`
-- `/polls/52e29c73-b3a1-416f-a92b-6e7141f2a484`
