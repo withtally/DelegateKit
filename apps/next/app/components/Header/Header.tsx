@@ -2,9 +2,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { useAddress } from "../../hooks/use-address";
 import { EthereumAddress } from "./EthereumAddress";
+import { HamburgerMenu } from "./HamburgerMenu";
 import { ProfileIcon } from "./icons/ProfileIcon";
 import { ProposalIcon } from "./icons/ProposalIcon";
 
@@ -39,10 +40,10 @@ const HeaderElement = ({
   return (
     <Link
       href={href}
+      className="px-2 lg:px-8 py-2"
       style={{
         display: "flex",
         alignItems: "center",
-        padding: "8px 24px",
         borderRadius: "7px",
         ...(active ? { backgroundColor } : {}),
       }}
@@ -81,39 +82,56 @@ const HeaderElement = ({
 };
 const Header = () => {
   const { address } = useAddress();
+  const [mobileMenuExpanded, setMobileMenuExpanded] = useState(false);
+
+  // on nextjs router navigation, close the mobile menu
+  const pathname = usePathname();
+  useEffect(() => {
+    setMobileMenuExpanded(false);
+  }, [pathname]);
+
   return (
-    <header className="bg-white shadow py-3 px-6 flex justify-between items-center">
-      <Link href="/">DelegateKit</Link>
-      {address && (
-        <div className="flex items-center">
-          <HeaderElement color="#7F6BFF" text="Polls" href="/polls/new">
-            <Image
-              src="/images/chat-bubble.svg"
-              width={80}
-              height={80}
-              alt="chat-bubble"
-            />
-          </HeaderElement>
-          <HeaderElement
-            color="#70EEFF"
-            text="Share Profile"
-            href={`/delegates/${address}`}
-          >
-            <ProfileIcon />
-          </HeaderElement>
-          <HeaderElement
-            color="#FF84FF"
-            text="Share Proposal"
-            href={`/proposals`}
-          >
-            <ProposalIcon />
-          </HeaderElement>
+    <>
+      <header className="bg-white shadow py-3 px-6 flex justify-between items-center">
+        <Link href="/">DelegateKit</Link>
+        {address && (
+          <div className="hidden md:flex items-center">
+            <HeaderElement color="#7F6BFF" text="Polls" href="/polls/new">
+              <Image
+                src="/images/chat-bubble.svg"
+                width={80}
+                height={80}
+                alt="chat-bubble"
+              />
+            </HeaderElement>
+            <HeaderElement
+              color="#70EEFF"
+              text="Profile"
+              href={`/delegates/${address}`}
+            >
+              <ProfileIcon />
+            </HeaderElement>
+            <HeaderElement color="#FF84FF" text="Proposal" href={`/proposals`}>
+              <ProposalIcon />
+            </HeaderElement>
+          </div>
+        )}
+        <div className="flex justify-end">
+          <HamburgerMenu expandMenu={() => setMobileMenuExpanded(true)} />
+          <span className="hidden md:block">
+            <EthereumAddress />
+          </span>
+        </div>
+      </header>
+      {mobileMenuExpanded && (
+        <div className="px-6 py-4 bg-white flex flex-col md:hidden">
+          <Link href="/polls/new">Polls</Link>
+          <Link href={`/delegates/${address}`}>Profile</Link>
+          <Link href={`/proposals`}>Proposals</Link>
+          <Link href={`/settings`}>Settings</Link>
         </div>
       )}
-      <div className="flex justify-end">
-        <EthereumAddress />
-      </div>
-    </header>
+    </>
   );
 };
 export default Header;

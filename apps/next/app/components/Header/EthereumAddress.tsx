@@ -14,7 +14,7 @@ export const EthereumAddress = () => {
   }
 
   // a nice little eth avatar library https://github.com/snapshot-labs/stamp
-  const addressImage = `https://cdn.stamp.fyi/avatar/${address}?s=30`;
+  const addressImage = `https://cdn.stamp.fyi/avatar/${address}?s=60`;
   const printableAddress = address.slice(0, 4) + "..." + address.slice(-4);
   return (
     <Link href="/settings" className="flex items-center">
@@ -24,6 +24,8 @@ export const EthereumAddress = () => {
           src={addressImage}
           alt={"Ethereum address avatar"}
           style={{ borderRadius: "3px" }}
+          width="30"
+          height="30"
         />
         <code>{printableAddress}</code>
       </div>
