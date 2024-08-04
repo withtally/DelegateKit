@@ -32,7 +32,7 @@ export const Home = () => {
           src={MobileTopImageSrc}
           alt="backdrop"
           style={{ width: "100%", borderRadius: "24px" }}
-          className="mb-[-100px] md:mb-0"
+          className="mb-[-100px] md:mb-0 lg:h-[800px]"
         />
       </RightColumn>
     </div>
