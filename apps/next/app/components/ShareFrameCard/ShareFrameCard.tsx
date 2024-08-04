@@ -33,9 +33,9 @@ export const ShareFrameCard = ({ frameUrl, frameImgSrc }: ShareFrameProps) => {
               <path
                 d="M15.8337 10.4993H4.16699M4.16699 10.4993L10.0003 16.3327M4.16699 10.4993L10.0003 4.66602"
                 stroke="black"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </g>
           </svg>
@@ -57,9 +57,9 @@ export const ShareFrameCard = ({ frameUrl, frameImgSrc }: ShareFrameProps) => {
               <path
                 d="M8.00033 14.6673H6.33366C4.03247 14.6673 2.16699 12.8018 2.16699 10.5007C2.16699 8.19946 4.03247 6.33398 6.33366 6.33398H8.00033M13.0003 14.6673H14.667C16.9682 14.6673 18.8337 12.8018 18.8337 10.5007C18.8337 8.19946 16.9682 6.33398 14.667 6.33398H13.0003M6.33366 10.5007L14.667 10.5007"
                 stroke="black"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </g>
           </svg>

@@ -15,14 +15,14 @@ export function ProfileIcon() {
           height="12"
           rx="6"
           fill="white"
-          shape-rendering="crispEdges"
+          shapeRendering="crispEdges"
         />
         <path
           d="M10.7553 9.16004L10.7553 6.05859M10.7553 6.05859H7.65388M10.7553 6.05859L7.05372 9.52901"
           stroke="#4DCBE5"
-          stroke-width="1.19798"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.19798"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
       <defs>
@@ -33,9 +33,9 @@ export function ProfileIcon() {
           width="18"
           height="18"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
