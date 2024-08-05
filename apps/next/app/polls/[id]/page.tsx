@@ -1,9 +1,9 @@
 import { PollVoteForm } from "@/app/polls/new/form";
 import { Poll } from "@/app/polls/new/types";
-import { kv } from "@vercel/kv";
 import { Metadata, ResolvingMetadata } from "next";
 import { Address } from "viem";
 import { publicEnv } from "../../next-public-env";
+import { PollRepository } from "../PollRepository";
 
 async function getPoll(id: string): Promise<Poll> {
   const creatorEthAddress: Address = "0xdead";
@@ -24,7 +24,7 @@ async function getPoll(id: string): Promise<Poll> {
   };
 
   try {
-    const poll: Poll | null = await kv.hgetall(`poll:${id}`);
+    const poll = await PollRepository.getPoll(id);
 
     if (!poll) {
       return nullPoll;

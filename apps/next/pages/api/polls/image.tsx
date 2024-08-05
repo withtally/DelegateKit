@@ -1,10 +1,11 @@
 import { Poll } from "@/app/polls/new/types";
-import { kv } from "@vercel/kv";
 import * as fs from "fs";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { join } from "path";
 import satori from "satori";
 import sharp from "sharp";
+import { z } from "zod";
+import { PollRepository } from "../../../app/polls/PollRepository";
 import { routes } from "../../../app/routes";
 import { frameHeight, frameWidth } from "../frame-config";
 
@@ -47,14 +48,14 @@ export default async function handler(
 ) {
   try {
     const pollId = req.query["id"];
-    if (!pollId) {
+    if (!z.string().safeParse(pollId).success) {
       return res.status(400).send("Missing poll ID");
     }
 
-    const poll: Poll | null = await kv.hgetall(`poll:${pollId}`);
+    const poll: Poll | null = await PollRepository.getPoll(pollId);
 
     if (!poll) {
-      return res.status(400).send("Missing poll ID");
+      return res.status(400).send("Missing poll in db");
     }
 
     const showResults = req.query["results"] === "true";
