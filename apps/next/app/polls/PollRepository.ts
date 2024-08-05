@@ -36,7 +36,7 @@ export class PollRepository {
 	  RETURNING *;`,
         [
           title,
-          creatorAddress,
+          creatorAddress.toLowerCase(),
           options[0],
           options[1],
           options[2],
@@ -64,5 +64,24 @@ export class PollRepository {
       option4: row.option_4,
       isPrivate: row.hide_results,
     };
+  }
+  public static async selectAllPolls(creatorAddress: string) {
+    const rows = await pool
+      .query(`SELECT * FROM polls WHERE creator_address = $1`, [
+        creatorAddress.toLowerCase(),
+      ])
+      .then((res) => {
+        return res.rows as Array<DBPoll>;
+      });
+    return rows.map((row) => ({
+      id: row.id,
+      creatorEthAddress: row.creator_address as Address,
+      title: row.title,
+      option1: row.option_1,
+      option2: row.option_2,
+      option3: row.option_3,
+      option4: row.option_4,
+      isPrivate: row.hide_results,
+    }));
   }
 }

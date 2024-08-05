@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PropsWithChildren } from "react";
+import { useAddress } from "../../hooks/use-address";
 import NewPollIcon from "./icons/NewPoll";
 import PollHistoryIcon from "./icons/PollHistoryIcon";
 
@@ -25,9 +26,10 @@ function PollElement({ href, children }: PollElementProps) {
     </Link>
   );
 }
-export function PollHeader() {
+export default function PollHeader() {
+  const { address } = useAddress();
   const newPollHref = "/polls/new";
-  const pollHistoryHref = "/polls/history";
+  const pollHistoryHref = `/polls/history?address=${address}`;
   const pathname = usePathname();
   return (
     <div className="flex  items-center justify-center flex-1 px-4 sm:px-20 border-b-2">
