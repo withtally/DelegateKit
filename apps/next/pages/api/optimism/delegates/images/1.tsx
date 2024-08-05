@@ -15,6 +15,7 @@ export default async function Frame1(req: NextApiRequest) {
   const avatar = (await ENS.getENSAvatar(address)) || "";
   const opDelegate = new OPDelegate(address);
   const delegateData = await opDelegate.fetchAgoraData();
+  // reverse lookup
   if (isAddress(address)) {
     address = await ENS.getENSName(address);
   }

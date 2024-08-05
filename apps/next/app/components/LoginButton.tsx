@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useAddress } from "../hooks/use-address";
 import { Button } from "./Button";
 
-export const LoginButton = () => {
+const LoginButton = () => {
   const { address } = useAddress();
   return (
     !address && (
@@ -14,3 +14,5 @@ export const LoginButton = () => {
     )
   );
 };
+
+export default LoginButton;

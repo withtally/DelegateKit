@@ -1,6 +1,12 @@
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import { LoginButton } from "../components/LoginButton";
 import MobileTopImageSrc from "./mobile-top.svg";
+const LoginButtonWithNoSSR = dynamic(
+  () => import("../components/LoginButton"),
+  {
+    ssr: false,
+  },
+);
 const LeftColumn = ({ children }: { children: React.ReactNode }) => {
   return <div className="">{children}</div>;
 };
@@ -13,7 +19,7 @@ export const Home = () => {
     <div>
       <section className="px-0 md:px-24 flex text-left flex-col-reverse lg:flex-row justify-between">
         <LeftColumn>
-          <div style={{ zIndex: 1 }} className="w-full pt-10">
+          <div style={{ zIndex: 1 }} className="w-full pt-[100px]">
             <h1
               style={{ fontSize: "84px", fontWeight: 500, marginTop: "-20px" }}
             >
@@ -32,7 +38,7 @@ export const Home = () => {
             <p>
               The missing connection between Optimism Governance and Farcaster
             </p>
-            <LoginButton />
+            <LoginButtonWithNoSSR />
           </div>
         </LeftColumn>
         <RightColumn>
