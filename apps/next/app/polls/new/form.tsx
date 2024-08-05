@@ -266,7 +266,7 @@ export function PollVoteForm({
             });
 
             await redirectToPolls();
-            // await votePoll(newPoll, selectedOption);
+            await votePoll(newPoll, selectedOption);
           });
         }}
       >

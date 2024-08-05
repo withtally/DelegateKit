@@ -47,12 +47,13 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   try {
-    const pollId = req.query["id"];
+    const pollId = z.string().parse(req.query["id"]);
     if (!z.string().safeParse(pollId).success) {
       return res.status(400).send("Missing poll ID");
     }
 
     const poll: Poll | null = await PollRepository.getPoll(pollId);
+    console.dir({ poll });
 
     if (!poll) {
       return res.status(400).send("Missing poll in db");
