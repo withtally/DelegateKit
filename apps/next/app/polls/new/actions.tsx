@@ -1,6 +1,5 @@
 "use server";
 
-import { kv } from "@vercel/kv";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { PollRepository } from "../PollRepository";
@@ -17,16 +16,5 @@ export async function savePoll(poll: Poll, formData: FormData) {
   );
 
   revalidatePath("/polls");
-  redirect(`/polls/${newPoll.id}`);
-}
-
-export async function votePoll(poll: Poll, optionIndex: number) {
-  await kv.hincrby(`poll:${poll.id}`, `votes${optionIndex}`, 1);
-
-  revalidatePath(`/polls/${poll.id}`);
-  redirect(`/polls/${poll.id}?results=true`);
-}
-
-export async function redirectToPolls() {
-  redirect("/polls");
+  redirect(`/polls/${poll.id}`);
 }

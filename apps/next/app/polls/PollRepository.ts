@@ -1,15 +1,14 @@
 import { Pool } from "pg";
+import { env } from "process";
 import { Address } from "viem";
-import { z } from "zod";
+import { Poll } from "./new/types";
 
-const DATABASE_URL = z.string().parse(process.env.DATABASE_URL);
 const pool = new Pool({
-  connectionString: DATABASE_URL,
+  connectionString: env.DATABASE_URL,
 });
 
 type DBPoll = {
   creator_address: string;
-  created_at: any;
   id: string;
   title: string;
   option_1: string;
@@ -48,7 +47,7 @@ export class PollRepository {
     return row;
   }
 
-  public static async getPoll(id: string) {
+  public static async getPoll(id: string): Promise<Poll> {
     const [poll, pollVotes] = await Promise.all([
       pool
         .query(

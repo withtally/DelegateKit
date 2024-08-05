@@ -2,7 +2,8 @@
 import { useAddress } from "../../hooks/use-address";
 import { Poll } from "../new/types";
 
-export default function AllMyPolls({ polls }: { polls: Poll[] }) {
+type AllPolls = Array<Partial<Poll>>;
+export default function AllMyPolls({ polls }: { polls: AllPolls }) {
   const { address } = useAddress();
   return (
     <div className="flex-1 flex-wrap items-center justify-around max-w-4xl my-8 sm:w-full bg-white rounded-md shadow-xl h-full border border-gray-100">

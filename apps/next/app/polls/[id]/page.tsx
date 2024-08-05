@@ -20,7 +20,6 @@ async function getPoll(id: string): Promise<Poll> {
     votes2: 0,
     votes3: 0,
     votes4: 0,
-    created_at: 0,
   };
 
   try {

@@ -72,7 +72,6 @@ export default async function handler(
       const voteExists = await PollRepository.voteExists(pollId, fid);
       voted = voted || voteExists;
 
-      console.log({ fid, buttonId, results, voted });
       if (fid > 0 && buttonId > 0 && buttonId < 5 && !results && !voted) {
         await PollRepository.voteOnPoll({
           pollId,
