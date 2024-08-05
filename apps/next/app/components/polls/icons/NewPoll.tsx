@@ -12,8 +12,8 @@ export default function NewPollIcon({ isActive }: { isActive: boolean }) {
       <path
         d="M5.99967 3.58398V9.41732M3.08301 6.50065H8.91634"
         stroke="#F7F6F6"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
