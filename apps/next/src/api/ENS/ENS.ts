@@ -17,6 +17,16 @@ export class ENS {
     return address as Address;
   }
 
+  /**
+   * Reverse lookup from 0x address to ENS
+   */
+  public static async getENSName(address: string): Promise<string> {
+    return (
+      (await publicMainnetClient.getEnsName({
+        address: address as Address,
+      })) || address
+    );
+  }
   public static async getENSAvatar(ensName: string): Promise<string> {
     let name = ensName;
     if (!name.includes(".")) {

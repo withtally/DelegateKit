@@ -11,7 +11,7 @@ const RightColumn = ({ children }: { children: React.ReactNode }) => {
 export const Home = () => {
   return (
     <div>
-      <section className="px-0 md:px-24 flex text-left flex-col-reverse lg:flex-row">
+      <section className="px-0 md:px-24 flex text-left flex-col-reverse lg:flex-row justify-between">
         <LeftColumn>
           <div style={{ zIndex: 1 }} className="w-full pt-10">
             <h1

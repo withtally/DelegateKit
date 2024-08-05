@@ -1,3 +1,4 @@
+import { ENS } from "../../../src/api/ENS/ENS";
 import { Logo } from "../../components/Logo";
 import { DelegateFrame } from "./DelegateFrame";
 
@@ -7,7 +8,10 @@ export const metadata = {
 };
 
 export default async function Page(req: { params: { address: string } }) {
-  const { address } = req.params;
+  let { address } = req.params;
+  if (address.includes(".")) {
+    address = await ENS.resolve(address);
+  }
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <main className="flex flex-col items-center flex-1 px-4 sm:px-20 text-center">
