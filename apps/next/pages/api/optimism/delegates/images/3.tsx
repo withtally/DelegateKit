@@ -51,6 +51,13 @@ export default async function Frame2(req: NextApiRequest) {
           style={{ position: "absolute", right: "80px", bottom: "100px" }}
         />
         <img
+          alt="thumb"
+          src={routes.images.thumb}
+          width="240px"
+          height="240px"
+          style={{ position: "absolute", right: "30px", top: "10px" }}
+        />
+        <img
           alt="star"
           src={routes.images.star}
           width="20px"
@@ -94,6 +101,9 @@ export default async function Frame2(req: NextApiRequest) {
               padding: "6px 18px",
               alignSelf: "flex-start",
               fontSize: "20px",
+              position: "absolute",
+              right: "-80px",
+              top: "59px",
             }}
           >
             <div
