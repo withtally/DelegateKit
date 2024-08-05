@@ -84,7 +84,7 @@ export default async function Frame2(req: NextApiRequest) {
             style={{
               border: "1px solid grey",
               borderRadius: "6px",
-              padding: "6px 18px",
+              padding: "7px 26px",
               alignSelf: "flex-start",
               fontSize: "20px",
             }}
@@ -98,11 +98,11 @@ export default async function Frame2(req: NextApiRequest) {
             style={{
               border: "1px solid grey",
               borderRadius: "6px",
-              padding: "6px 18px",
+              padding: "7px 26px",
               alignSelf: "flex-start",
               fontSize: "20px",
               position: "absolute",
-              right: "-80px",
+              right: "0px",
               top: "59px",
             }}
           >
@@ -120,7 +120,7 @@ export default async function Frame2(req: NextApiRequest) {
             style={{
               border: "1px solid grey",
               borderRadius: "6px",
-              padding: "6px 18px",
+              padding: "7px 26px",
               alignSelf: "flex-start",
               fontSize: "20px",
             }}
@@ -128,13 +128,64 @@ export default async function Frame2(req: NextApiRequest) {
             <div
               style={{ color: "grey", display: "flex", paddingRight: "8px" }}
             >
-              Delegated from
+              delegated from
             </div>
             {Number(delegateData.numOfDelegators).toLocaleString("en-US")}{" "}
             <div style={{ color: "grey", display: "flex", paddingLeft: "8px" }}>
               OP holders
             </div>
           </h3>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "460px",
+            }}
+          >
+            <h3
+              style={{
+                borderRadius: "6px",
+                padding: "7px 26px",
+                alignSelf: "flex-start",
+                fontSize: "20px",
+                backgroundColor: "rgba(105, 185, 126, 0.15)",
+                color: "#69B97E",
+              }}
+            >
+              {delegateData.votedFor}
+              <div style={{ display: "flex", paddingLeft: "8px" }}>for</div>
+            </h3>
+            <h3
+              style={{
+                borderRadius: "6px",
+                padding: "7px 26px",
+                alignSelf: "flex-start",
+                fontSize: "20px",
+                color: "#E46E6A",
+                backgroundColor: "rgba(228, 110, 106, 0.15)",
+              }}
+            >
+              {delegateData.votedAgainst}
+              <div style={{ display: "flex", paddingLeft: "8px" }}>against</div>
+            </h3>
+            <h3
+              style={{
+                color: "#807AA1",
+                borderRadius: "6px",
+                padding: "7px 26px",
+                alignSelf: "flex-start",
+                fontSize: "20px",
+                backgroundColor: "rgba(128, 122, 161, 0.15)",
+              }}
+            >
+              {delegateData.votedAbstain}
+              <div
+                style={{ color: "grey", display: "flex", paddingLeft: "8px" }}
+              >
+                abstain
+              </div>
+            </h3>
+          </div>
         </div>
       </DelegateImageContainer>
     ),
