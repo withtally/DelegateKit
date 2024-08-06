@@ -1,10 +1,14 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import Link from "next/link";
-import { Button } from "../components/Button";
 import MobileTopImageSrc from "./mobile-top.svg";
 const LoginButtonWithNoSSR = dynamic(
   () => import("../components/LoginButton"),
+  {
+    ssr: false,
+  },
+);
+const AddressRequiredButtonWithNoSSR = dynamic(
+  () => import("../components/AddressRequiredButton"),
   {
     ssr: false,
   },
@@ -134,9 +138,10 @@ export const Home = () => {
             Represent your followers best on-chain by first polling for their
             opinions!
           </p>
-          <Link href="/polls/new">
-            <Button secondary>Create a Poll</Button>
-          </Link>
+          <AddressRequiredButtonWithNoSSR
+            href="/polls/new"
+            text="Create a Poll"
+          />
         </RightColumn>
       </section>
       <section className="py-14 px-0 md:px-24 flex text-left flex-col-reverse lg:flex-row justify-between">
@@ -155,9 +160,10 @@ export const Home = () => {
           <p className="py-6">
             Gathering delegated OP is easier when you have a sleek profile!
           </p>
-          <Link href="/polls/new">
-            <Button secondary>Share your profile</Button>
-          </Link>
+          <AddressRequiredButtonWithNoSSR
+            href="/delegates"
+            text="Share your profile"
+          />
         </LeftColumn>
         <RightColumn>
           <Image
@@ -201,9 +207,10 @@ export const Home = () => {
             Want to tell Farcaster all about a proposal? Share it with
             DelegateKit!
           </p>
-          <Link href="/proposals">
-            <Button secondary>Share proposals</Button>
-          </Link>
+          <AddressRequiredButtonWithNoSSR
+            href="/proposals"
+            text="Share proposals"
+          />
         </RightColumn>
       </section>
     </div>
