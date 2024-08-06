@@ -1,10 +1,11 @@
-import { POLL_EXPIRY, Poll } from "@/app/polls/new/types";
+import { Poll } from "@/app/polls/new/types";
 import { Message, getSSLHubRpcClient } from "@farcaster/hub-nodejs";
-import { kv } from "@vercel/kv";
 import type { NextApiRequest, NextApiResponse } from "next";
 import * as v from "valibot";
+import { z } from "zod";
 import { env } from "../../../app/env";
 import { publicEnv } from "../../../app/next-public-env";
+import { PollRepository } from "../../../app/polls/PollRepository";
 
 const client = getSSLHubRpcClient(env.HUB_URL);
 
@@ -16,7 +17,7 @@ export default async function handler(
     // Process the vote
     // For example, let's assume you receive an option in the body
     try {
-      const pollId = req.query["id"];
+      const pollId = z.string().parse(req.query["id"]);
       const results = req.query["results"] === "true";
       let voted = req.query["voted"] === "true";
       if (!pollId) {
@@ -68,22 +69,21 @@ export default async function handler(
           .send("Redirecting to create poll");
       }
 
-      const voteExists = await kv.sismember(`poll:${pollId}:voted`, fid);
-      voted = voted || !!voteExists;
+      const voteExists = await PollRepository.voteExists(pollId, fid);
+      voted = voted || voteExists;
 
       if (fid > 0 && buttonId > 0 && buttonId < 5 && !results && !voted) {
-        const multi = kv.multi();
-        multi.hincrby(`poll:${pollId}`, `votes${buttonId}`, 1);
-        multi.sadd(`poll:${pollId}:voted`, fid);
-        multi.expire(`poll:${pollId}`, POLL_EXPIRY);
-        multi.expire(`poll:${pollId}:voted`, POLL_EXPIRY);
-        await multi.exec();
+        await PollRepository.voteOnPoll({
+          pollId,
+          optionIndex: buttonId,
+          fromFid: fid,
+        });
       }
 
-      const poll: Poll | null = await kv.hgetall(`poll:${pollId}`);
+      const poll: Poll | null = await PollRepository.getPoll(pollId);
 
       if (!poll) {
-        return res.status(400).send("Missing poll ID");
+        return res.status(400).send("Missing poll in db");
       }
       const imageUrl = `${publicEnv.NEXT_PUBLIC_HOST}/api/polls/image?id=${poll.id}&results=${
         results ? "false" : "true"

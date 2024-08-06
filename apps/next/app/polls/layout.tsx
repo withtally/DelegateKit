@@ -1,5 +1,9 @@
-import { PollHeader } from "../components/polls/PollHeader";
+import dynamic from "next/dynamic";
 
+const PollHeaderNoSSR = dynamic(
+  () => import("../components/polls/PollHeader"),
+  { ssr: false },
+);
 export default function PollsLayout({
   children,
 }: {
@@ -7,7 +11,7 @@ export default function PollsLayout({
 }) {
   return (
     <div>
-      <PollHeader />
+      <PollHeaderNoSSR />
       {children}
     </div>
   );
