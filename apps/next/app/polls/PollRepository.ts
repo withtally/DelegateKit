@@ -154,4 +154,20 @@ export class PollRepository {
       )
       .then((res) => res.rows.length > 0);
   }
+
+  public static insertPollFeedback({
+    pollId,
+    message,
+    fromFid,
+  }: {
+    pollId: string;
+    message: string;
+    fromFid: number;
+  }) {
+    return pool.query(
+      `INSERT INTO poll_feedback(poll_id, message, from_fid)
+      VALUES ($1, $2, $3)`,
+      [pollId, message, fromFid],
+    );
+  }
 }
