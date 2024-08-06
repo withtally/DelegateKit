@@ -42,6 +42,7 @@ export const ThumbIcon = () => {
   );
 };
 
+export const runtime = "edge";
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -60,10 +61,6 @@ export default async function handler(
     }
 
     const showResults = req.query["results"] === "true";
-    // let votedOption: number | null = null
-    // if (showResults && fid > 0) {
-    //     votedOption = await kv.hget(`poll:${pollId}:votes`, `${fid}`) as number
-    // }
 
     const pollOptions = [
       poll.option1,
