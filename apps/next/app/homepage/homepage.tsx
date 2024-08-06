@@ -9,8 +9,14 @@ const LoginButtonWithNoSSR = dynamic(
     ssr: false,
   },
 );
-const LeftColumn = ({ children }: { children: React.ReactNode }) => {
-  return <div className="">{children}</div>;
+const LeftColumn = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return <div className={className}>{children}</div>;
 };
 const RightColumn = ({ children }: { children: React.ReactNode }) => {
   return <div className="lg:w-1/2 py-12">{children}</div>;
@@ -95,14 +101,22 @@ export const Home = () => {
           </h2>
         </div>
       </section>
-      <section className="py-24 px-0 md:px-24 flex text-left flex-col-reverse lg:flex-row justify-between">
-        <LeftColumn>
-          <Image
-            src="/images/homepage/polls-demo.svg"
-            width={500}
-            height={500}
-            alt="polls demo"
-          />
+      <section className="py-24 px-0 md:px-24 flex text-left flex-col-reverse lg:flex-row">
+        <LeftColumn className="flex-1">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "right",
+              marginRight: "40px",
+            }}
+          >
+            <Image
+              src="/images/homepage/polls-demo.svg"
+              width={500}
+              height={500}
+              alt="polls demo"
+            />
+          </div>
         </LeftColumn>
         <RightColumn>
           <Image
@@ -112,7 +126,6 @@ export const Home = () => {
             alt="chat-bubble"
           />
           <h2 style={{ fontSize: "48px" }}>
-            {" "}
             Get feedback
             <br />
             quickly and easily.
@@ -123,6 +136,73 @@ export const Home = () => {
           </p>
           <Link href="/polls/new">
             <Button secondary>Create a Poll</Button>
+          </Link>
+        </RightColumn>
+      </section>
+      <section className="py-14 px-0 md:px-24 flex text-left flex-col-reverse lg:flex-row justify-between">
+        <LeftColumn>
+          <Image
+            src="/images/homepage/profile.svg"
+            width={120}
+            height={120}
+            alt="chat-bubble"
+          />
+          <h2 style={{ fontSize: "48px" }}>
+            Get more views
+            <br />
+            with a slick profile.
+          </h2>
+          <p className="py-6">
+            Gathering delegated OP is easier when you have a sleek profile!
+          </p>
+          <Link href="/polls/new">
+            <Button secondary>Share your profile</Button>
+          </Link>
+        </LeftColumn>
+        <RightColumn>
+          <Image
+            src="/images/homepage/profile-demo.svg"
+            width={500}
+            height={500}
+            alt="polls demo"
+          />
+        </RightColumn>
+      </section>
+      <section className="py-14 px-0 md:px-24 flex text-left flex-col-reverse lg:flex-row">
+        <LeftColumn className="flex-1">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "right",
+              marginRight: "60px",
+            }}
+          >
+            <Image
+              src="/images/homepage/proposals-demo.svg"
+              width={500}
+              height={500}
+              alt="polls demo"
+            />
+          </div>
+        </LeftColumn>
+        <RightColumn>
+          <Image
+            src="/images/homepage/proposal.svg"
+            width={120}
+            height={120}
+            alt="chat-bubble"
+          />
+          <h2 style={{ fontSize: "48px" }}>
+            Share proposals
+            <br />
+            in seconds.
+          </h2>
+          <p className="py-6">
+            Want to tell Farcaster all about a proposal? Share it with
+            DelegateKit!
+          </p>
+          <Link href="/proposals">
+            <Button secondary>Share proposals</Button>
           </Link>
         </RightColumn>
       </section>
