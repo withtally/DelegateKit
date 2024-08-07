@@ -3,6 +3,7 @@ import { Poll } from "@/app/polls/new/types";
 import { Metadata, ResolvingMetadata } from "next";
 import { Address } from "viem";
 import { publicEnv } from "../../next-public-env";
+import { routes } from "../../routes";
 import { PollRepository } from "../PollRepository";
 
 async function getPoll(id: string): Promise<Poll> {
@@ -49,11 +50,12 @@ export async function generateMetadata(
   const id = params.id;
   const poll = await getPoll(id);
 
+  const fcFrameImage = routes.v1.api.polls.images["1"].buildUrl(id);
   const fcMetadata: Record<string, string> = {
     "fc:frame": "vNext",
     "fc:frame:image:aspect_ratio": "1:1",
     "fc:frame:post_url": `${publicEnv.NEXT_PUBLIC_HOST}/api/polls/vote?id=${id}`,
-    "fc:frame:image": `${publicEnv.NEXT_PUBLIC_HOST}/api/polls/image?id=${id}`,
+    "fc:frame:image": fcFrameImage,
   };
   [poll.option1, poll.option2, poll.option3, poll.option4]
     .filter((o) => o !== "")
@@ -65,6 +67,7 @@ export async function generateMetadata(
     title: poll.title,
     openGraph: {
       title: poll.title,
+      // TODO: Replace end of this
       images: [`/api/polls/image?id=${id}`],
     },
     other: {
