@@ -92,11 +92,10 @@ const Header = () => {
 
   return (
     <>
-      <header className="bg-white shadow py-3 px-6 flex justify-between items-center">
+      <nav className="bg-white shadow py-3 px-6 flex justify-between items-center">
         <Link href="/">
           <svg
-            width="166"
-            height="39"
+            width="120"
             viewBox="0 0 166 39"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -204,7 +203,7 @@ const Header = () => {
             <EthereumAddress />
           </span>
         </div>
-      </header>
+      </nav>
       {mobileMenuExpanded && (
         <div className="px-6 py-4 bg-white flex flex-col md:hidden">
           <Link href="/polls/new">Polls</Link>
