@@ -38,7 +38,7 @@ export const Home = () => {
                 fontWeight: 500,
                 marginTop: "-20px",
                 overflowX: "hidden",
-                lineHeight: 1.2,
+                lineHeight: 1.3,
               }}
             >
               Frames
@@ -61,6 +61,7 @@ export const Home = () => {
         <RightColumn>
           <Image
             src={MobileTopImageSrc}
+            priority
             alt="backdrop"
             style={{ width: "100%", borderRadius: "24px" }}
             className="mb-[-100px] md:mb-0 lg:h-[600px]"
@@ -115,8 +116,8 @@ export const Home = () => {
             style={{
               display: "flex",
               justifyContent: "right",
-              marginRight: "40px",
             }}
+            className="lg:pr-16"
           >
             <Image
               src="/images/homepage/polls-demo.svg"
@@ -184,8 +185,8 @@ export const Home = () => {
             style={{
               display: "flex",
               justifyContent: "right",
-              marginRight: "60px",
             }}
+            className="lg:pr-16"
           >
             <Image
               src="/images/homepage/proposals-demo.svg"
@@ -219,7 +220,7 @@ export const Home = () => {
       </section>
       {/* loved by our end users */}
       {/* <section className="px-8 md:px-24 py-14 bg-[#eae7fa] rounded-3xl flex justify-center flex-col lg:flex-row"> */}
-      <section className="px-8 md:px-24 py-14 bg-gradient-to-br from-[#eae1fa] to-[#f0f0f0] rounded-3xl flex justify-center flex-col lg:flex-row">
+      <section className="px-8 md:px-24 py-14 my-14 bg-gradient-to-br from-[#eae1fa] to-[#f0f0f0] rounded-3xl flex justify-center flex-col lg:flex-row">
         <LeftColumn className="flex items-center">
           <h1 style={{ fontSize: "48px" }}>
             Loved by our
@@ -229,7 +230,7 @@ export const Home = () => {
         <RightColumn>
           <div className="flex">
             <Image
-              src="https://avatars.githubusercontent.com/u/3408480?v=4"
+              src="/images/homepage/demo-profile.png"
               width={64}
               height={64}
               alt="user"
