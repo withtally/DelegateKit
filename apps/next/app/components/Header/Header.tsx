@@ -199,7 +199,9 @@ const Header = () => {
           </div>
         )}
         <div className="flex justify-end">
-          <HamburgerMenu expandMenu={() => setMobileMenuExpanded(true)} />
+          <HamburgerMenu
+            expandMenu={() => setMobileMenuExpanded(!mobileMenuExpanded)}
+          />
           <span className="hidden md:block">
             <EthereumAddress />
           </span>

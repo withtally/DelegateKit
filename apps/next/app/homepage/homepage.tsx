@@ -1,5 +1,7 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import opLogoSrc from "../../public/images/op.png";
+import { Button } from "../components/Button";
 import MobileTopImageSrc from "./mobile-top.svg";
 const LoginButtonWithNoSSR = dynamic(
   () => import("../components/LoginButton"),
@@ -30,7 +32,7 @@ export const Home = () => {
   return (
     <div>
       <section className="px-0 md:px-24 flex text-left flex-col-reverse lg:flex-row justify-between">
-        <LeftColumn className="flex items-center">
+        <LeftColumn className="flex items-center mb-20 lg:mb-0">
           <div style={{ zIndex: 1 }} className="w-full">
             <h1
               style={{
@@ -68,6 +70,45 @@ export const Home = () => {
           />
         </RightColumn>
       </section>
+
+      <div className="flex mb-20 lg:mx-24 space-x-4 items-center justify-between">
+        <div className="flex">
+          <Image
+            src={opLogoSrc}
+            alt="OP"
+            width={26}
+            height={26}
+            className="mr-4"
+            style={{ height: "26px", width: "26px" }}
+          />
+          <b className="mr-2">DelegateKit receives $50k OP Grant</b>
+          <p className="hidden lg:block">Bringing OP governance to Farcaster</p>
+        </div>
+        <div>
+          <a
+            href="https://app.charmverse.io/op-grants/delegatekit-a-complete-farcaster-dao-toolkit-5127535289761294"
+            target="_blank"
+          >
+            <Button secondary>
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1.33301 5.80744H10.6663M10.6663 5.80744L5.99967 1.14078M10.6663 5.80744L5.99967 10.4741"
+                  stroke="black"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </Button>
+          </a>
+        </div>
+      </div>
       {/* three column section */}
       <section className="pb-0 lg:pb-12 flex px-0 md:px-24 flex-col lg:flex-row lg:space-x-10 space-y-10 lg:space-y-0">
         <div className="lg:w-1/3 pt-16 lg:pt-0">
