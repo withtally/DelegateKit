@@ -20,7 +20,7 @@ const LeftColumn = ({
   children: React.ReactNode;
   className?: string;
 }) => {
-  return <div className={className}>{children}</div>;
+  return <div className={"lg:w-1/2 " + className}>{children}</div>;
 };
 const RightColumn = ({ children }: { children: React.ReactNode }) => {
   return <div className="lg:w-1/2 py-12">{children}</div>;
@@ -31,7 +31,7 @@ export const Home = () => {
     <div>
       <section className="px-0 md:px-24 flex text-left flex-col-reverse lg:flex-row justify-between">
         <LeftColumn>
-          <div style={{ zIndex: 1 }} className="w-full pt-[100px]">
+          <div style={{ zIndex: 1 }} className="w-full pt-20 lg:pt-[100px]">
             <h1
               style={{
                 fontSize: "4em",
@@ -149,7 +149,7 @@ export const Home = () => {
           />
         </RightColumn>
       </section>
-      <section className="py-14 px-0 md:px-24 flex text-left flex-col-reverse lg:flex-row justify-between">
+      <section className="py-14 px-0 md:px-24 flex text-left flex-col lg:flex-row justify-between">
         <LeftColumn>
           <Image
             src="/images/homepage/profile.svg"
@@ -216,6 +216,39 @@ export const Home = () => {
             href="/proposals"
             text="Share proposals"
           />
+        </RightColumn>
+      </section>
+      {/* loved by our end users */}
+      <section className="px-8 md:px-24 py-14 bg-[#eae7fa] rounded-3xl flex justify-center flex-col lg:flex-row">
+        <LeftColumn className="flex items-center">
+          <h1 style={{ fontSize: "48px" }}>
+            Loved by our
+            <br /> early users.
+          </h1>
+        </LeftColumn>
+        <RightColumn>
+          <div className="flex">
+            <Image
+              src="https://avatars.githubusercontent.com/u/3408480?v=4"
+              width={64}
+              height={64}
+              alt="user"
+              style={{ borderRadius: "100%", width: 64, height: 64 }}
+              className="mr-8"
+            />
+            <div>
+              <div className="bg-white rounded-3xl px-6 py-2 mb-2 inline-block">
+                This is insane!
+              </div>
+              <div className="bg-white rounded-3xl px-6 py-2 my-2">
+                The amount of hours this will save me!
+              </div>
+              <div className="bg-white rounded-3xl px-6 py-2 my-4">
+                Thanks for building this frens
+              </div>
+              <p className="pt-4">Dawson, a web3 developer</p>
+            </div>
+          </div>
         </RightColumn>
       </section>
     </div>

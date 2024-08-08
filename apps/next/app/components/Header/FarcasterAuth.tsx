@@ -41,7 +41,7 @@ const FarcasterAuth = () => {
             options={selectOptions}
             onChange={onChange}
           />
-          <p>
+          <p className="pt-5">
             Don&apos;t see your delegate address here?{" "}
             <a
               href="https://warpcast.com/~/settings/verified-addresses"
