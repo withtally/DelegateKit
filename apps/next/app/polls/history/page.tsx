@@ -23,14 +23,12 @@ const Page: NextPage<{ searchParams: URLSearchParams }> = async ({
   const polls = await getPolls(creatorAddress);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-80 py-2">
-      <main className="flex flex-col items-center justify-center flex-1 px-4 sm:px-20 text-center">
-        <h1 className="text-lg sm:text-2xl font-bold mb-2">
-          Created Polls ({polls.length})
-        </h1>
-        <AllMyPollsNoSSR polls={polls} />
-      </main>
-    </div>
+    <main className="flex flex-col items-center justify-center flex-1 px-4 sm:px-20 text-center min-h-80 py-2">
+      <h1 className="text-lg sm:text-2xl font-bold mb-2">
+        Created Polls ({polls.length})
+      </h1>
+      <AllMyPollsNoSSR polls={polls} />
+    </main>
   );
 };
 

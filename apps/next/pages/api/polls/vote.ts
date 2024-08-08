@@ -6,6 +6,7 @@ import { z } from "zod";
 import { env } from "../../../app/env";
 import { publicEnv } from "../../../app/next-public-env";
 import { PollRepository } from "../../../app/polls/PollRepository";
+import { routes } from "../../../app/routes";
 
 const client = getSSLHubRpcClient(env.HUB_URL);
 
@@ -85,7 +86,7 @@ export default async function handler(
       if (!poll) {
         return res.status(400).send("Missing poll in db");
       }
-      const imageUrl = `${publicEnv.NEXT_PUBLIC_HOST}/api/polls/image?id=${poll.id}&results=${
+      const imageUrl = `${routes.v1.api.polls.images["1"].buildUrl(poll.id)}&results=${
         results ? "false" : "true"
       }&date=${Date.now()}${fid > 0 ? `&fid=${fid}` : ""}`;
       let button1Text = "View Results";

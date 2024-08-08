@@ -1,16 +1,10 @@
 import { Poll } from "@/app/polls/new/types";
-import * as fs from "fs";
-import type { NextApiRequest, NextApiResponse } from "next";
-import { join } from "path";
-import satori from "satori";
-import sharp from "sharp";
+import type { NextApiResponse } from "next";
+import { ImageResponse } from "next/og";
+import { NextRequest } from "next/server";
 import { z } from "zod";
-import { PollRepository } from "../../../app/polls/PollRepository";
-import { routes } from "../../../app/routes";
-import { frameHeight, frameWidth } from "../frame-config";
-
-const fontPath = join(process.cwd(), "Roboto-Regular.ttf");
-const fontData = fs.readFileSync(fontPath);
+import { routes } from "../../../../app/routes";
+import { frameHeight, frameWidth } from "../../frame-config";
 
 const StarIcon = () => {
   return (
@@ -43,51 +37,52 @@ export const ThumbIcon = () => {
 };
 
 export const runtime = "edge";
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
-  try {
-    const pollId = z.string().parse(req.query["id"]);
-    if (!z.string().safeParse(pollId).success) {
-      return res.status(400).send("Missing poll ID");
-    }
 
-    const poll: Poll | null = await PollRepository.getPoll(pollId);
-    console.dir({ poll });
+export default async function handler(req: NextRequest, res: NextApiResponse) {
+  const url = new URL(req.url);
+  const searchParams = url.searchParams;
+  const pollId = z.string().parse(searchParams.get("id"));
+  if (!z.string().safeParse(pollId).success) {
+    return res.status(400).send("Missing poll ID");
+  }
 
-    if (!poll) {
-      return res.status(400).send("Missing poll in db");
-    }
+  const poll: Poll | null = await fetch(
+    routes.v1.api.polls.dbHelpers.getPoll(pollId),
+  ).then((_res) => _res.json());
 
-    const showResults = req.query["results"] === "true";
+  if (!poll) {
+    return res.status(400).send("Missing poll in db");
+  }
 
-    const pollOptions = [
-      poll.option1,
-      poll.option2,
-      poll.option3,
-      poll.option4,
-    ].filter((option) => option !== "");
-    const totalVotes = pollOptions
+  const showResults = searchParams.get("results") === "true";
+
+  const pollOptions = [
+    poll.option1,
+    poll.option2,
+    poll.option3,
+    poll.option4,
+  ].filter((option) => option !== "");
+  const totalVotes = pollOptions
+    // @ts-ignore
+    .map((option, index) => parseInt(poll[`votes${index + 1}`]))
+    .reduce((a, b) => a + b, 0);
+  const pollData = {
+    question: showResults ? `Results for ${poll.title}` : poll.title,
+    options: pollOptions.map((option, index) => {
       // @ts-ignore
-      .map((option, index) => parseInt(poll[`votes${index + 1}`]))
-      .reduce((a, b) => a + b, 0);
-    const pollData = {
-      question: showResults ? `Results for ${poll.title}` : poll.title,
-      options: pollOptions.map((option, index) => {
-        // @ts-ignore
-        const votes = poll[`votes${index + 1}`];
-        const percentOfTotal = totalVotes
-          ? Math.round((votes / totalVotes) * 100)
-          : 0;
-        const text = showResults
-          ? `${percentOfTotal}%: ${option} (${votes} votes)`
-          : `${index + 1}. ${option}`;
-        return { option, votes, text, percentOfTotal };
-      }),
-    };
+      const votes = poll[`votes${index + 1}`];
+      const percentOfTotal = totalVotes
+        ? Math.round((votes / totalVotes) * 100)
+        : 0;
+      const text = showResults
+        ? `${percentOfTotal}%: ${option} (${votes} votes)`
+        : `${index + 1}. ${option}`;
+      return { option, votes, text, percentOfTotal };
+    }),
+  };
 
-    const svg = await satori(
+  return new ImageResponse(
+    (
       <div
         style={{
           justifyContent: "center",
@@ -96,13 +91,18 @@ export default async function handler(
           flexDirection: "column",
           width: "100%",
           height: "100%",
-          backgroundColor: "#F9F9F9",
+          backgroundColor: "white",
           fontSize: 24,
           marginTop: 0,
         }}
       >
         <div
-          style={{ position: "absolute", display: "flex", left: 180, top: 20 }}
+          style={{
+            position: "absolute",
+            display: "flex",
+            left: 180,
+            top: 20,
+          }}
         >
           <StarIcon />
         </div>
@@ -112,7 +112,12 @@ export default async function handler(
           <OPSmileIcon />
         </div>
         <div
-          style={{ position: "absolute", display: "flex", right: 30, top: 20 }}
+          style={{
+            position: "absolute",
+            display: "flex",
+            right: 30,
+            top: 20,
+          }}
         >
           <ThumbIcon />
         </div>
@@ -161,30 +166,11 @@ export default async function handler(
               })}
           </div>
         </div>
-      </div>,
-      {
-        width: frameWidth,
-        height: frameHeight,
-        fonts: [
-          {
-            data: fontData,
-            name: "Roboto",
-            style: "normal",
-            weight: 400,
-          },
-        ],
-      },
-    );
-
-    // Convert SVG to PNG using Sharp
-    const pngBuffer = await sharp(Buffer.from(svg)).toFormat("png").toBuffer();
-
-    // Set the content type to PNG and send the response
-    res.setHeader("Content-Type", "image/png");
-    res.setHeader("Cache-Control", "max-age=10");
-    res.send(pngBuffer);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Error generating image");
-  }
+      </div>
+    ),
+    {
+      width: frameWidth,
+      height: frameHeight,
+    },
+  );
 }

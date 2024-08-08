@@ -33,7 +33,12 @@ export const Home = () => {
         <LeftColumn>
           <div style={{ zIndex: 1 }} className="w-full pt-[100px]">
             <h1
-              style={{ fontSize: "84px", fontWeight: 500, marginTop: "-20px" }}
+              style={{
+                fontSize: "4em",
+                fontWeight: 500,
+                marginTop: "-20px",
+                overflowX: "hidden",
+              }}
             >
               Frames
               <br style={{ height: "10px" }} />

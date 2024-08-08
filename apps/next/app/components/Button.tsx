@@ -23,6 +23,8 @@ export const Button = ({
   const sharedClasses = ["py-2.5", "px-6", "rounded-full", "shadow-md"];
   if (primary) {
     sharedClasses.push("bg-purple", "text-white");
+  } else {
+    sharedClasses.push("bg-white");
   }
   sharedClasses.push(...(customClasses || []));
   return (

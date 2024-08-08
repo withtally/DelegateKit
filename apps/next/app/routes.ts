@@ -11,6 +11,10 @@ export const routes = {
   v1: {
     api: {
       polls: {
+        dbHelpers: {
+          getPoll: (pollId: string) =>
+            `${publicEnv.NEXT_PUBLIC_HOST}/api/polls/${pollId}`,
+        },
         // delegates: {
         frame: {
           "1": {
@@ -21,7 +25,7 @@ export const routes = {
         images: {
           "1": {
             buildUrl: (pollId: string) =>
-              `${publicEnv.NEXT_PUBLIC_HOST}/api/polls/image?id=${pollId}`,
+              `${publicEnv.NEXT_PUBLIC_HOST}/api/polls/image/${pollId}`,
           },
         },
       },
