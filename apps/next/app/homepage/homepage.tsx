@@ -30,29 +30,28 @@ export const Home = () => {
   return (
     <div>
       <section className="px-0 md:px-24 flex text-left flex-col-reverse lg:flex-row justify-between">
-        <LeftColumn>
-          <div style={{ zIndex: 1 }} className="w-full pt-20 lg:pt-[100px]">
+        <LeftColumn className="flex items-center">
+          <div style={{ zIndex: 1 }} className="w-full">
             <h1
               style={{
                 fontSize: "4em",
                 fontWeight: 500,
                 marginTop: "-20px",
                 overflowX: "hidden",
+                lineHeight: 1.2,
               }}
             >
               Frames
-              <br style={{ height: "10px" }} />
+              <br />
               <i
                 style={{
                   color: "#7764FD",
-                  marginTop: "0px",
-                  paddingTop: "0px",
                 }}
               >
                 Simplified.
               </i>
             </h1>
-            <p>
+            <p className="pt-4">
               The missing connection between Optimism Governance and Farcaster
             </p>
             <div className="pt-8"></div>
@@ -219,7 +218,8 @@ export const Home = () => {
         </RightColumn>
       </section>
       {/* loved by our end users */}
-      <section className="px-8 md:px-24 py-14 bg-[#eae7fa] rounded-3xl flex justify-center flex-col lg:flex-row">
+      {/* <section className="px-8 md:px-24 py-14 bg-[#eae7fa] rounded-3xl flex justify-center flex-col lg:flex-row"> */}
+      <section className="px-8 md:px-24 py-14 bg-gradient-to-br from-[#eae1fa] to-[#f0f0f0] rounded-3xl flex justify-center flex-col lg:flex-row">
         <LeftColumn className="flex items-center">
           <h1 style={{ fontSize: "48px" }}>
             Loved by our
