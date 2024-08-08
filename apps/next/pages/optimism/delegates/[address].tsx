@@ -32,7 +32,7 @@ export default function Home(props: ServerHydratedProps) {
       <meta name="fc:frame:button:3:action" content="link" />
       <meta
         name="fc:frame:button:3:target"
-        content={`https://www.tally.xyz/gov/optimism/delegate/${address}`}
+        content={`https://vote.optimism.io/delegates/${address}`}
       />
     </Head>
   );

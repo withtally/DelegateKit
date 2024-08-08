@@ -25,7 +25,7 @@ export class DelegateFrameFactory {
 		<meta name="fc:frame:button:3:action" content="link" />
 		<meta
 		name="fc:frame:button:3:target"
-		content="https://www.tally.xyz/profile/${this.#address}"
+		content="https://vote.optimism.io/delegates/${this.#address}"
 		/>
 		</head>
 		</html
