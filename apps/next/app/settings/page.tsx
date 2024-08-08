@@ -20,7 +20,7 @@ const config = {
 };
 export default function Page() {
   return (
-    <div className="px-10 lg:px-60">
+    <div className="lg:px-[340px]">
       <AuthKitProvider config={config}>
         <FarcasterAuth />
       </AuthKitProvider>
