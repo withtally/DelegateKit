@@ -149,26 +149,28 @@ export const Home = () => {
           />
         </RightColumn>
       </section>
-      <section className="py-14 px-0 md:px-24 flex text-left flex-col lg:flex-row justify-between">
-        <LeftColumn>
-          <Image
-            src="/images/homepage/profile.svg"
-            width={120}
-            height={120}
-            alt="chat-bubble"
-          />
-          <h2 style={{ fontSize: "48px" }}>
-            Get more views
-            <br />
-            with a slick profile.
-          </h2>
-          <p className="py-6">
-            Gathering delegated OP is easier when you have a sleek profile!
-          </p>
-          <AddressRequiredButtonWithNoSSR
-            href="/delegates"
-            text="Share your profile"
-          />
+      <section className="py-14 px-0 md:px-24 flex text-left flex-col lg:flex-row">
+        <LeftColumn className="flex justify-end lg:pr-16">
+          <div className="inline-block">
+            <Image
+              src="/images/homepage/profile.svg"
+              width={120}
+              height={120}
+              alt="chat-bubble"
+            />
+            <h2 style={{ fontSize: "48px" }}>
+              Get more views
+              <br />
+              with a slick profile.
+            </h2>
+            <p className="py-6">
+              Gathering delegated OP is easier when you have a sleek profile!
+            </p>
+            <AddressRequiredButtonWithNoSSR
+              href="/delegates"
+              text="Share your profile"
+            />
+          </div>
         </LeftColumn>
         <RightColumn>
           <Image
