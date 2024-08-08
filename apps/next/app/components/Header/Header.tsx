@@ -179,6 +179,7 @@ const Header = () => {
           <div className="hidden md:flex items-center">
             <HeaderElement color="#7F6BFF" text="Polls" href="/polls/new">
               <Image
+                priority
                 src="/images/chat-bubble.svg"
                 width={80}
                 height={80}
