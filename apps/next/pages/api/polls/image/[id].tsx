@@ -91,7 +91,7 @@ export default async function handler(req: NextRequest, res: NextApiResponse) {
           flexDirection: "column",
           width: "100%",
           height: "100%",
-          backgroundColor: "#F9F9F9",
+          backgroundColor: "white",
           fontSize: 24,
           marginTop: 0,
         }}
