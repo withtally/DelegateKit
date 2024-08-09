@@ -21,38 +21,42 @@ const FarcasterAuth = () => {
 
   return (
     <>
-      <div className="py-5">
+      <div className="flex justify-center">
         <SignInButton />
       </div>
       {address && (
-        <>
-          Selected address:
-          <Select
-            className="basic-single"
-            defaultValue={selectOptions.find(
-              (option) => option.value === address,
-            )}
-            classNamePrefix="select"
-            isDisabled={false}
-            isClearable={false}
-            isRtl={false}
-            isSearchable={false}
-            name="color"
-            options={selectOptions}
-            onChange={onChange}
-          />
-          <p className="pt-5">
-            Don&apos;t see your delegate address here?{" "}
-            <a
-              href="https://warpcast.com/~/settings/verified-addresses"
-              target="_blank"
-              className="underline"
-            >
-              Verify your address on Warpcast
-            </a>
-            , return here, and sign in to refresh addresses.
-          </p>
-        </>
+        <div className="pt-8">
+          <hr />
+          <div className="pt-6">
+            <div className="pb-2">Selected address:</div>
+            <Select
+              className="basic-single"
+              defaultValue={selectOptions.find(
+                (option) => option.value === address,
+              )}
+              classNamePrefix="select"
+              isDisabled={false}
+              isClearable={false}
+              isRtl={false}
+              isSearchable={false}
+              name="color"
+              options={selectOptions}
+              onChange={onChange}
+            />
+            <p className="pt-5">
+              <b>Don&apos;t see your address? </b>
+              <br />
+              <a
+                href="https://warpcast.com/~/settings/verified-addresses"
+                target="_blank"
+                className="underline"
+              >
+                Verify your address on Warpcast
+              </a>
+              , return here, and sign in to refresh addresses.
+            </p>
+          </div>
+        </div>
       )}
     </>
   );

@@ -36,12 +36,12 @@ export const Home = () => {
           <div style={{ zIndex: 1 }} className="w-full">
             <h1
               style={{
-                fontSize: "4em",
                 fontWeight: 500,
                 marginTop: "-20px",
                 overflowX: "hidden",
                 lineHeight: 1.3,
               }}
+              className="text-6xl lg:text-8xl"
             >
               Frames
               <br />
