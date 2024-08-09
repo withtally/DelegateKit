@@ -35,7 +35,8 @@ const HeaderElement = ({
 }: { color: string; text: string; href: string } & PropsWithChildren) => {
   const pathname = usePathname();
   const rootHref = href.split("/")[1]; // works for both /polls/new and /polls/history
-  const active = pathname?.includes(rootHref);
+  console.log({ pathname, rootHref });
+  const active = pathname !== "/settings" && pathname?.includes(rootHref);
   const backgroundColor = hexToRgbA(color);
   return (
     <Link
@@ -95,7 +96,7 @@ const Header = () => {
       <nav className="bg-white shadow py-3 px-6 flex justify-between items-center">
         <Link href="/">
           <svg
-            width="120"
+            width="150"
             viewBox="0 0 166 39"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -175,29 +176,31 @@ const Header = () => {
             </defs>
           </svg>
         </Link>
-        {address && (
-          <div className="hidden md:flex items-center">
-            <HeaderElement color="#7F6BFF" text="Polls" href="/polls/new">
-              <Image
-                priority
-                src="/images/chat-bubble.svg"
-                width={80}
-                height={80}
-                alt="chat-bubble"
-              />
-            </HeaderElement>
-            <HeaderElement
-              color="#70EEFF"
-              text="Profile"
-              href={`/delegates/${address}`}
-            >
-              <ProfileIcon />
-            </HeaderElement>
-            <HeaderElement color="#FF84FF" text="Proposal" href={`/proposals`}>
-              <ProposalIcon />
-            </HeaderElement>
-          </div>
-        )}
+        <div className="hidden md:flex items-center">
+          <HeaderElement
+            color="#7F6BFF"
+            text="Polls"
+            href={address ? "/polls/new" : "/settings"}
+          >
+            <Image
+              priority
+              src="/images/chat-bubble.svg"
+              width={80}
+              height={80}
+              alt="chat-bubble"
+            />
+          </HeaderElement>
+          <HeaderElement
+            color="#70EEFF"
+            text="Profile"
+            href={address ? `/delegates/${address}` : "/settings"}
+          >
+            <ProfileIcon />
+          </HeaderElement>
+          <HeaderElement color="#FF84FF" text="Proposal" href={`/proposals`}>
+            <ProposalIcon />
+          </HeaderElement>
+        </div>
         <div className="flex justify-end">
           <HamburgerMenu
             expandMenu={() => setMobileMenuExpanded(!mobileMenuExpanded)}
