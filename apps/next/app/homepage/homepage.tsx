@@ -1,8 +1,10 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import FooterCardsSrc from "../../public/images/homepage/footer-cards.svg";
 import opLogoSrc from "../../public/images/op.png";
 import { Button } from "../components/Button";
 import MobileTopImageSrc from "./mobile-top.svg";
+
 const LoginButtonWithNoSSR = dynamic(
   () => import("../components/LoginButton"),
   {
@@ -43,7 +45,7 @@ export const Home = () => {
               }}
               className="text-6xl lg:text-8xl"
             >
-              Frames
+              <span className="font-bold">Frames</span>
               <br />
               <i
                 style={{
@@ -294,6 +296,14 @@ export const Home = () => {
             </div>
           </div>
         </RightColumn>
+      </section>
+      <section className="flex justify-center flex-col items-center pt-16">
+        <h2 className="text-6xl text-center mb-16">
+          <span className="font-bold">Build your first</span>
+          <br />
+          <i style={{ color: "#7764FD" }}>Frame today.</i>
+        </h2>
+        <Image src={FooterCardsSrc} alt="cards" />
       </section>
     </div>
   );

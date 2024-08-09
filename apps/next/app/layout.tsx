@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en" className={plusJakartaSans.className}>
       <body>
         <HeaderWithNoSSR />
-        <div className="px-8 lg:py-10">{children}</div>
+        <div className="px-8 lg:pt-10">{children}</div>
       </body>
     </html>
   );
