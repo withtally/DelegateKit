@@ -193,8 +193,17 @@ function PollOptions({
   );
 }
 
-export function PollVoteForm({ poll }: { poll: Poll }) {
+export function PollVoteForm({
+  poll,
+  showResults,
+}: {
+  poll: Poll;
+  showResults: boolean;
+}) {
   const frameUrl = routes.v1.api.polls.frame["1"].buildUrl(poll.id);
-  const frameImageSrc = routes.v1.api.polls.images["1"].buildUrl(poll.id);
+  let frameImageSrc = routes.v1.api.polls.images["1"].buildUrl(poll.id);
+  if (showResults) {
+    frameImageSrc += "?results=true";
+  }
   return <ShareFrameCard frameUrl={frameUrl} frameImgSrc={frameImageSrc} />;
 }
