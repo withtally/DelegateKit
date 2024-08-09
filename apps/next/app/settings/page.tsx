@@ -20,10 +20,12 @@ const config = {
 };
 export default function Page() {
   return (
-    <div className="lg:px-[340px]">
-      <AuthKitProvider config={config}>
-        <FarcasterAuth />
-      </AuthKitProvider>
+    <div className="flex justify-center py-8">
+      <div className="outer shadow-xl p-2 flex flex-col rounded-3xl bg-white w-[500px] p-8">
+        <AuthKitProvider config={config}>
+          <FarcasterAuth />
+        </AuthKitProvider>
+      </div>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { Address } from "viem";
 import { publicEnv } from "../../next-public-env";
 import { routes } from "../../routes";
 import { PollRepository } from "../PollRepository";
+import ViewResultsButton from "./ViewResultsButton";
 
 async function getPoll(id: string): Promise<Poll> {
   const creatorEthAddress: Address = "0xdead";
@@ -77,14 +78,25 @@ export async function generateMetadata(
   };
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page({
+  params,
+  searchParams: searchParamsProp,
+}: {
+  params: { id: string };
+  searchParams: any;
+}) {
   const poll = await getPoll(params.id);
+  const searchParams = new URLSearchParams(searchParamsProp);
+
+  const search = searchParams?.get("results");
+  const showResults = search === "true";
 
   return (
     <>
       <div className="flex flex-col items-center justify-center min-h-screen py-2">
         <main className="flex flex-col items-center flex-1 px-4 sm:px-20 text-center py-20">
-          <PollVoteForm poll={poll} />
+          {!showResults && <ViewResultsButton showResults={showResults} />}
+          <PollVoteForm poll={poll} showResults={showResults} />
         </main>
       </div>
     </>

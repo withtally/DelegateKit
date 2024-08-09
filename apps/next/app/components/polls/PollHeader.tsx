@@ -39,7 +39,7 @@ export default function PollHeader() {
       </PollElement>
       <PollElement href={pollHistoryHref}>
         <PollHistoryIcon isActive={pathname === pollHistoryHref} />
-        <span>Poll history</span>
+        <span>My polls</span>
       </PollElement>
     </div>
   );
